@@ -5,6 +5,7 @@ on:
     paths:
       - "**/Manuscript.md"
       - "**/cover.jpg"
+  workflow_dispatch:
 
 jobs:
   build-epubs:
