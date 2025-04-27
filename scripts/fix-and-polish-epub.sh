@@ -29,3 +29,15 @@ rm "$EPUB_FILE"
 mv "${BASENAME}-fixed.epub" "${BASENAME}.epub"
 
 echo "✅ EPUB polished successfully: ${BASENAME}.epub"
+
+# Ensure output folder exists
+mkdir -p ../output
+
+# Move polished EPUB and any generated print PDF to output
+if [ -f "${BASENAME}.epub" ]; then
+  mv "${BASENAME}.epub" ../output/
+fi
+
+if [ -f "${BASENAME}-print.pdf" ]; then
+  mv "${BASENAME}-print.pdf" ../output/
+fi
