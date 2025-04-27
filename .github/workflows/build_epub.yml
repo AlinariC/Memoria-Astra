@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "**/Manuscript.md"
+      - "**/cover.jpg"
   workflow_dispatch:
 
 permissions:
