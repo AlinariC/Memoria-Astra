@@ -14,7 +14,6 @@ pandoc Manuscript.md \
   --css=../assets/styles.css \
   --variable=epub-chapter-level=1 \
   --toc \
-  --epub-metadata=content.opf \
   -o "${SAFE_TITLE}.epub"
 
 echo "✅ EPUB created successfully: ${SAFE_TITLE}.epub"
