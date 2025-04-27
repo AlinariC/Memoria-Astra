@@ -48,6 +48,13 @@ jobs:
       run: |
         sudo apt-get install -y gh
 
+    - name: Prepare release name
+      run: |
+        RELEASE_TITLE="$(cat release_title.txt)"
+        RELEASE_DATE="$(date +'%Y-%m-%d')"
+        echo "RELEASE_TITLE=$RELEASE_TITLE" >> $GITHUB_ENV
+        echo "RELEASE_DATE=$RELEASE_DATE" >> $GITHUB_ENV
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -55,7 +62,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: "epub-${{ github.run_id }}"
-        release_name: "$(cat release_title.txt) – v1.0.${{ github.run_number }} ($(date +'%Y-%m-%d'))"
+        release_name: "${{ env.RELEASE_TITLE }} – v1.0.${{ github.run_number }} (${{ env.RELEASE_DATE }})"
         body_path: release_notes.md
         draft: false
         prerelease: false
