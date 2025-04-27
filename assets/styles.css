@@ -1,0 +1,38 @@
+body {
+    font-family: "Garamond", "Palatino", "Georgia", serif;
+    font-size: 1.05em;
+    line-height: 1.7;
+    margin: 4% 6%;
+}
+
+h1 {
+    font-size: 1.6em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+    margin-top: 2.5em;
+    margin-bottom: 1.5em;
+}
+
+h2 {
+    font-size: 1.3em;
+    font-variant: small-caps;
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 1.2em;
+}
+
+h3 {
+    font-size: 1.1em;
+    font-variant: small-caps;
+    text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+}
+
+img {
+    display: block;
+    margin: 3em auto;
+    max-width: 85%;
+    height: auto;
+}
