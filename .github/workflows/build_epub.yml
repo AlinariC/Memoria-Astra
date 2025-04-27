@@ -28,6 +28,9 @@ jobs:
         mkdir -p output
         echo "### Books Published" > release_notes.md
         echo "" >> release_notes.md
+        echo "## 📚 eBook Editions" >> release_notes.md
+        echo "" >> release_notes.md
+
         for dir in */; do
           if [ -f "${dir}Manuscript.md" ]; then
             echo "📖 Processing $dir..."
@@ -41,6 +44,17 @@ jobs:
             echo "- ${SAFE_BOOK}" >> ../release_notes.md
             mv *.epub ../output/
             cd ..
+          fi
+        done
+
+        echo "" >> release_notes.md
+        echo "## 🖨️ Print Editions" >> release_notes.md
+        echo "" >> release_notes.md
+
+        for dir in */; do
+          if [ -f "${dir}Manuscript.md" ]; then
+            SAFE_BOOK=$(ls "${dir}"*.pdf | sed 's:.*/::; s/.pdf$//; s/-/ /g')
+            echo "- ${SAFE_BOOK}" >> release_notes.md
           fi
         done
 
@@ -70,9 +84,16 @@ jobs:
     - name: Upload EPUB Files to Release
       run: |
         TAG_NAME="epub-${{ github.run_id }}"
-        for file in output/*.epub; do
-          echo "Uploading $file..."
-          gh release upload "$TAG_NAME" "$file" --clobber
+        for file in output/*.epub output/*.pdf; do
+          if [ -f "$file" ]; then
+            echo "Uploading $file..."
+            BASENAME=$(basename "$file")
+            if [[ "$file" == *.epub ]]; then
+              gh release upload "$TAG_NAME" "$file#${BASENAME/.epub/}-eBook.epub" --clobber
+            elif [[ "$file" == *.pdf ]]; then
+              gh release upload "$TAG_NAME" "$file#${BASENAME/.pdf/}-Print.pdf" --clobber
+            fi
+          fi
         done
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

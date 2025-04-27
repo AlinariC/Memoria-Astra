@@ -17,6 +17,12 @@ pandoc Combined.md \
   --toc \
   -o "${SAFE_TITLE}.epub"
 
+# Build the Print PDF
+pandoc Combined.md \
+  --pdf-engine=xelatex \
+  --variable=geometry:margin=1in \
+  -o "${SAFE_TITLE}-print.pdf"
+
 rm Combined.md
 
 echo "✅ EPUB created successfully: ${SAFE_TITLE}.epub"

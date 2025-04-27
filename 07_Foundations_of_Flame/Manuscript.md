@@ -4,7 +4,7 @@ subtitle: "Book Seven of the Memoria Astra Cycle"
 author: "Alinari Campbell"
 language: "en"
 rights: "© 2025 Alinari Campbell. All rights reserved."
-identifier: "urn:uuid:2c9f4a9d-ff45-45b7-9e5c-7f2db8fcf19c"
+identifier: "urn:isbn:9798281667579"
 publisher: "PixelPacific"
 cover-image: cover.jpg
 ---
