@@ -15,15 +15,15 @@ cat Manuscript.md ../assets/Colophon.md > Combined.md
 pandoc Combined.md \
   --metadata title="$TITLE" \
   --epub-cover-image=cover.jpg \
+  --css=../assets/styles.css \
   --toc \
   --output="$OUTPUT_DIR/${TITLE// /_}.epub"
 
 # Build the Print PDF (no TOC)
 pandoc Combined.md \
   --pdf-engine=xelatex \
-  --variable papersize="6in x 9in" \
-  --variable geometry=margin=0.75in \
+  --include-in-header="../assets/pdf-header.tex" \
   --output="$OUTPUT_DIR/${TITLE// /_}-Print.pdf"
-
+  
 # Cleanup
 rm Combined.md
