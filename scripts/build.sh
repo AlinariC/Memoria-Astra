@@ -11,7 +11,6 @@ cat Manuscript.md ../assets/Colophon.md > Combined.md
 
 # Build the EPUB
 pandoc Combined.md \
-  --metadata-file=metadata.yaml \
   --epub-cover-image=cover.jpg \
   --css=../assets/styles.css \
   --variable=epub-chapter-level=1 \
