@@ -5,7 +5,7 @@
 [![EPUBs Ready](https://img.shields.io/badge/epubs-ready-blue.svg?style=flat-square)]()
 [![Publisher: PixelPacific](https://img.shields.io/badge/publisher-PixelPacific-8a2be2.svg?style=flat-square)](https://pixelpacific.com)
 [![Universe: Memoria Astra](https://img.shields.io/badge/universe-Memoria%20Astra-8a2be2.svg?style=flat-square)]()
-![GitHub Release](https://img.shields.io/github/v/release/AlinariC/Memoria-Astra?include_prereleases&sort=date&display_name=release&style=flat-square&link=https%3A%2F%2Fgithub.com%2FAlinariC%2FMemoria-Astra%2Freleases)
+[![GitHub Release](https://img.shields.io/github/v/release/AlinariC/Memoria-Astra?include_prereleases&sort=date&display_name=release&style=flat-square)](https://github.com/AlinariC/Memoria-Astra/releases)
 
 This repository automates the EPUB generation process for the **Memoria Astra** book series.
 
