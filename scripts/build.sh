@@ -1,33 +1,28 @@
 #!/bin/bash
 
-# Stop if any command fails
+# build.sh — Updated version to generate EPUB and Print PDF
+
 set -e
 
-# Extract title from Manuscript.md
-TITLE=$(awk '/^---/{flag=1;next}/^---/{flag=0}flag && /^title:/{gsub(/^title: *"/,""); gsub(/"$/,""); print; exit}' Manuscript.md)
-SAFE_TITLE=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g' | sed 's/[^a-z0-9_-]//g')
+TITLE="$(basename $(pwd) | tr '_' ' ' | sed 's:/: :g')"
+OUTPUT_DIR="../output"
+mkdir -p "$OUTPUT_DIR"
 
-cat Manuscript.md ../assets/Colophon.md > Combined.md
+# Generate Combined.md including Manuscript.md and Colophon.md
+cat Manuscript.md Colophon.md > Combined.md
 
 # Build the EPUB
 pandoc Combined.md \
+  --metadata title="$TITLE" \
   --epub-cover-image=cover.jpg \
-  --css=../assets/styles.css \
-  --variable=epub-chapter-level=1 \
   --toc \
-  -o "${SAFE_TITLE}.epub"
+  --output="$OUTPUT_DIR/${TITLE// /_}.epub"
 
-# Build the Print PDF
+# Build the Print PDF (no TOC)
 pandoc Combined.md \
   --pdf-engine=xelatex \
-  --variable=geometry:margin=1in \
-  -o "${SAFE_TITLE}-print.pdf"
+  --variable geometry=margin=1in \
+  --output="$OUTPUT_DIR/${TITLE// /_}-Print.pdf"
 
-
+# Cleanup
 rm Combined.md
-
-# Move output files to ../output/ for GitHub upload
-mv "${SAFE_TITLE}.epub" ../output/
-mv "${SAFE_TITLE}-print.pdf" ../output/
-
-echo "✅ EPUB created successfully: ${SAFE_TITLE}.epub"

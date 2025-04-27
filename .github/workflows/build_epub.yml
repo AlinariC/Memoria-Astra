@@ -1,4 +1,4 @@
-name: Build EPUBs
+name: Build and Release EPUBs and PDFs
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  build-epubs:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,78 +21,46 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y pandoc zip unzip imagemagick texlive-xetex
+        sudo apt-get install -y pandoc zip unzip imagemagick texlive-xetex gh
 
-    - name: Build and Polish EPUBs
+    - name: Build Books
       run: |
         mkdir -p output
         echo "### Books Published" > release_notes.md
         echo "" >> release_notes.md
-        echo "## 📚 eBook Editions" >> release_notes.md
-        echo "" >> release_notes.md
 
         for dir in */; do
-          if [ -f "${dir}Manuscript.md" ]; then
-            echo "📖 Processing $dir..."
+          if [ -f "$dir/Manuscript.md" ]; then
+            echo "Processing $dir..."
             cd "$dir"
             bash ../scripts/build.sh
-            bash ../scripts/fix-and-polish-epub.sh
-            BOOK_NAME=$(basename "$dir" | sed 's:/$::' | sed 's/_/ /g')
-            if [ ! -f ../release_title.txt ]; then
-              echo "${BOOK_NAME}" > ../release_title.txt
-            fi
-            echo "- ${BOOK_NAME}" >> ../release_notes.md
             cd ..
           fi
         done
 
+        bash scripts/fix-and-polish-epub.sh
+
+        echo "## 📚 eBook Editions" >> release_notes.md
+        for file in output/*.epub; do
+          NAME=$(basename "$file" .epub | tr '_' ' ')
+          echo "- $NAME (eBook Edition)" >> release_notes.md
+        done
+
         echo "" >> release_notes.md
         echo "## 🖨️ Print Editions" >> release_notes.md
-        echo "" >> release_notes.md
-
-        for dir in */; do
-          if [ -f "${dir}Manuscript.md" ]; then
-            SAFE_BOOK=$(ls "${dir}"*.pdf | sed 's:.*/::; s/.pdf$//; s/-/ /g')
-            echo "- ${SAFE_BOOK}" >> release_notes.md
-          fi
+        for file in output/*-Print.pdf; do
+          NAME=$(basename "$file" -Print.pdf | tr '_' ' ')
+          echo "- $NAME (Print Edition)" >> release_notes.md
         done
-
-    - name: Install GitHub CLI
-      run: |
-        sudo apt-get install -y gh
-
-    - name: Prepare release name
-      run: |
-        RELEASE_TITLE="$(cat release_title.txt)"
-        RELEASE_DATE="$(date +'%Y-%m-%d')"
-        echo "RELEASE_TITLE=$RELEASE_TITLE" >> $GITHUB_ENV
-        echo "RELEASE_DATE=$RELEASE_DATE" >> $GITHUB_ENV
 
     - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v2
       with:
-        tag_name: "epub-${{ github.run_id }}"
-        release_name: "${{ env.RELEASE_TITLE }} – v1.0.${{ github.run_number }} (${{ env.RELEASE_DATE }})"
+        tag_name: "release-${{ github.run_id }}"
+        name: "Automated Release ${{ github.run_id }}"
         body_path: release_notes.md
-        draft: false
-        prerelease: false
-
-    - name: Upload EPUB Files to Release
-      run: |
-        TAG_NAME="epub-${{ github.run_id }}"
-        for file in output/*.epub output/*.pdf; do
-          if [ -f "$file" ]; then
-            echo "Uploading $file..."
-            BASENAME=$(basename "$file")
-            if [[ "$file" == *.epub ]]; then
-              gh release upload "$TAG_NAME" "$file#${BASENAME/.epub/}-eBook.epub" --clobber
-            elif [[ "$file" == *.pdf ]]; then
-              gh release upload "$TAG_NAME" "$file#${BASENAME/.pdf/}-Print.pdf" --clobber
-            fi
-          fi
-        done
+        files: |
+          output/*.epub
+          output/*.pdf
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
