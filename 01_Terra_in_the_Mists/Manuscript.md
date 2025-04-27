@@ -4,7 +4,7 @@ subtitle: "Book One in the Memoria Astra Cycle"
 author: "Alinari Campbell"
 language: "en"
 rights: "© 2025 Alinari Campbell. All rights reserved."
-identifier: "urn:uuid:fb7c1aa9-4d07-4dc3-9d4c-ec7b2e5b7c9a"
+identifier: "urn:isbn:9798280601932"
 publisher: "PixelPacific"
 cover-image: cover.jpg
 ---
