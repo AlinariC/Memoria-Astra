@@ -54,9 +54,10 @@ jobs:
 
     - name: Upload EPUB Files to Release
       run: |
+        TAG_NAME="epub-${{ github.run_id }}"
         for file in output/*.epub; do
           echo "Uploading $file..."
-          gh release upload ${{ steps.create_release.outputs.tag_name }} "$file" --clobber
+          gh release upload "$TAG_NAME" "$file" --clobber
         done
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
