@@ -2,13 +2,13 @@
 
 # Colophon
 
-*Foundations of Flame* was written by Alinari Campbell.
+*The Memoria Astra Cycle* was written by Alinari Campbell.
 
 Cover design, typography, and layout were developed in-house by PixelPacific.
 
-This book was typeset using the Garamond and Palatino font families to maintain a mythic, timeless aesthetic befitting the themes of memory, survival, and forging destiny.
+This series was typeset using the Garamond and Palatino font families to maintain a mythic, timeless aesthetic befitting the themes of memory, survival, and forging destiny.
 
-The Ashforged Covenant and Memoria Astra Cycle are trademarks of Alinari Campbell. All rights reserved.
+Memoria Astra and associated trademarks are property of Alinari Campbell. All rights reserved.
 
 ---
 
