@@ -1,4 +1,5 @@
 # Memoria Astra - Automated Book Publishing
+## “Memoria Astra — A Song Woven Across the Stars.”
 
 [![License: PPPL v1.0](https://img.shields.io/badge/license-PPPL%20v1.0-purple.svg?style=flat-square)](/LICENSE)
 [![Build: Passing](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)]()
