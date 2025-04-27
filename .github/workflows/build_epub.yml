@@ -37,13 +37,18 @@ jobs:
             cd "$dir"
             bash ../scripts/build.sh
             bash ../scripts/fix-and-polish-epub.sh
-            EPUB_FILE=$(ls *.epub)
-            SAFE_BOOK=$(echo "$EPUB_FILE" | sed 's/.epub$//; s/-/ /g')
-            if [ ! -f ../release_title.txt ]; then
-              echo "${SAFE_BOOK}" > ../release_title.txt
+            EPUB_FILE=$(ls *.epub 2>/dev/null || true)
+
+            if [ -n "$EPUB_FILE" ]; then
+              SAFE_BOOK=$(echo "$EPUB_FILE" | sed 's/.epub$//; s/-/ /g')
+              if [ ! -f ../release_title.txt ]; then
+                echo "${SAFE_BOOK}" > ../release_title.txt
+              fi
+              echo "- ${SAFE_BOOK}" >> ../release_notes.md
+              mv "$EPUB_FILE" ../output/
+            else
+              echo "⚠️ No EPUB found for $dir"
             fi
-            echo "- ${SAFE_BOOK}" >> ../release_notes.md
-            mv "$EPUB_FILE" ../output/
             cd ..
           fi
         done
