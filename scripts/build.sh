@@ -23,6 +23,11 @@ pandoc Combined.md \
   --variable=geometry:margin=1in \
   -o "${SAFE_TITLE}-print.pdf"
 
+
 rm Combined.md
+
+# Move output files to ../output/ for GitHub upload
+mv "${SAFE_TITLE}.epub" ../output/
+mv "${SAFE_TITLE}-print.pdf" ../output/
 
 echo "✅ EPUB created successfully: ${SAFE_TITLE}.epub"
