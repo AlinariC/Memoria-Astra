@@ -22,7 +22,7 @@ pandoc Combined.md \
 pandoc Combined.md \
   --pdf-engine=xelatex \
   --variable papersize="6in x 9in" \
-  --variable geometry=0.75in \
+  --variable geometry=margin=0.75in \
   --output="$OUTPUT_DIR/${TITLE// /_}-Print.pdf"
 
 # Cleanup
