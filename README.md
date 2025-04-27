@@ -2,10 +2,10 @@
 
 [![License: PPPL v1.0](https://img.shields.io/badge/license-PPPL%20v1.0-purple.svg?style=flat-square)](/LICENSE)
 [![Build: Passing](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)]()
-[![EPUBs Ready](https://img.shields.io/badge/epubs-ready-blue.svg?style=flat-square)]()<br>
-[![PixelPacific](https://img.shields.io/badge/publisher-PixelPacific-8a2be2.svg?style=flat-square)](https://pixelpacific.com)
-[![Memoria Astra Universe](https://img.shields.io/badge/universe-Memoria%20Astra-8a2be2.svg?style=flat-square)](/)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/AlinariC/Memoria-Astra?sort=semver&style=flat-square)](https://github.com/AlinariC/Memoria-Astra/releases)
+[![EPUBs Ready](https://img.shields.io/badge/epubs-ready-blue.svg?style=flat-square)]()
+[![Publisher: PixelPacific](https://img.shields.io/badge/publisher-PixelPacific-8a2be2.svg?style=flat-square)](https://pixelpacific.com)
+[![Universe: Memoria Astra](https://img.shields.io/badge/universe-Memoria%20Astra-8a2be2.svg?style=flat-square)](/)
+[![GitHub Release](https://img.shields.io/github/v/release/AlinariC/Memoria-Astra?sort=semver&style=flat-square)](https://github.com/AlinariC/Memoria-Astra/releases)
 
 This repository automates the EPUB generation process for the **Memoria Astra** book series.
 
