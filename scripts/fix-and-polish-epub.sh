@@ -3,6 +3,9 @@
 # Stop if any command fails
 set -e
 
+# Go into output directory
+cd output
+
 # Find the generated EPUB file
 EPUB_FILE=$(ls *.epub)
 
@@ -13,7 +16,15 @@ BASENAME="${EPUB_FILE%.epub}"
 mkdir -p temp
 unzip -q "$EPUB_FILE" -d temp
 
-# Fix the content.opf metadata if needed (future automation possible)
+# Insert <meta name="cover" content="cover-image" /> into content.opf
+opf_file="temp/OEBPS/content.opf"
+if [ -f "$opf_file" ]; then
+  if ! grep -q 'name="cover"' "$opf_file"; then
+    sed -i '/<metadata/a \
+    <meta name="cover" content="file0_jpg"/>' "$opf_file"
+    echo "✅ Inserted cover metadata into content.opf"
+  fi
+fi
 
 # Rebuild the EPUB properly
 cd temp
@@ -29,15 +40,3 @@ rm "$EPUB_FILE"
 mv "${BASENAME}-fixed.epub" "${BASENAME}.epub"
 
 echo "✅ EPUB polished successfully: ${BASENAME}.epub"
-
-# Ensure output folder exists
-mkdir -p ../output
-
-# Move polished EPUB and any generated print PDF to output
-if [ -f "${BASENAME}.epub" ]; then
-  mv "${BASENAME}.epub" ../output/
-fi
-
-if [ -f "${BASENAME}-print.pdf" ]; then
-  mv "${BASENAME}-print.pdf" ../output/
-fi
