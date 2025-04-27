@@ -11,7 +11,7 @@ cover-image: cover.jpg
 
 # Prologue — Before the Silence
 
-Before the silence, there was song.
+Before the silence, there was song. 
 
 It echoed not from mouths, but from memory—from roots coiled deep within the living stone, from skies heavy with vapor and gold, from beasts whose wings sang harmony with the breath of the world. This was not the Earth as you know it. This was Terra, shrouded in mists, free of moons, and alive with rhythm older than stars.
 
