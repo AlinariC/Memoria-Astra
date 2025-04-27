@@ -8,6 +8,7 @@ identifier: "urn:uuid:fb7c1aa9-4d07-4dc3-9d4c-ec7b2e5b7c9a"
 publisher: "PixelPacific"
 cover-image: cover.jpg
 ---
+
 # Prologue — Before the Silence
 
 Before the silence, there was song.
@@ -722,3 +723,7 @@ In the soil around the vault, new growth stirred. Flowers no one had seen since 
 It had begun again.
 
 And it would not end here.
+
+---
+
+

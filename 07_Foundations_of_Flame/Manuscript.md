@@ -3176,3 +3176,7 @@ And with flame.
 
 Thus ended the First Breath of the Ashforged.  
 Thus began the next song of the Spiral.
+
+---
+
+
