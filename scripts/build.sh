@@ -21,7 +21,8 @@ pandoc Combined.md \
 # Build the Print PDF (no TOC)
 pandoc Combined.md \
   --pdf-engine=xelatex \
-  --variable geometry=margin=1in \
+  -V papersize=6in x 9in \
+  -V geometry=0.75in \
   --output="$OUTPUT_DIR/${TITLE// /_}-Print.pdf"
 
 # Cleanup
