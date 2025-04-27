@@ -37,12 +37,13 @@ jobs:
             cd "$dir"
             bash ../scripts/build.sh
             bash ../scripts/fix-and-polish-epub.sh
-            SAFE_BOOK=$(ls *.epub | sed 's/.epub$//; s/-/ /g')
+            EPUB_FILE=$(ls *.epub)
+            SAFE_BOOK=$(echo "$EPUB_FILE" | sed 's/.epub$//; s/-/ /g')
             if [ ! -f ../release_title.txt ]; then
               echo "${SAFE_BOOK}" > ../release_title.txt
             fi
             echo "- ${SAFE_BOOK}" >> ../release_notes.md
-            mv *.epub ../output/
+            mv "$EPUB_FILE" ../output/
             cd ..
           fi
         done
