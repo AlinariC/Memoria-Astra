@@ -26,12 +26,16 @@ jobs:
     - name: Build and Polish EPUBs
       run: |
         mkdir -p output
+        echo "### Books Published" > release_notes.md
+        echo "" >> release_notes.md
         for dir in */; do
           if [ -f "${dir}Manuscript.md" ]; then
             echo "📖 Processing $dir..."
             cd "$dir"
             bash ../scripts/build.sh
             bash ../scripts/fix-and-polish-epub.sh
+            SAFE_BOOK=$(ls *.epub | sed 's/.epub$//; s/-/ /g')
+            echo "- ${SAFE_BOOK}" >> ../release_notes.md
             mv *.epub ../output/
             cd ..
           fi
@@ -48,7 +52,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: "epub-${{ github.run_id }}"
-        release_name: "EPUB Build ${{ github.run_number }}"
+        release_name: "EPUB Build - ${{ github.run_number }}"
+        body_path: release_notes.md
         draft: false
         prerelease: false
 
