@@ -9,7 +9,7 @@ OUTPUT_DIR="../output"
 mkdir -p "$OUTPUT_DIR"
 
 # Generate Combined.md including Manuscript.md and Colophon.md
-cat Manuscript.md Colophon.md > Combined.md
+cat Manuscript.md ../assets/Colophon.md > Combined.md
 
 # Build the EPUB
 pandoc Combined.md \
