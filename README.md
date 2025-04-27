@@ -4,6 +4,7 @@
 [![Build: Passing](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
 [![EPUBs Ready](https://img.shields.io/badge/epubs-ready-blue.svg)]()
 [![PixelPacific](https://img.shields.io/badge/publisher-PixelPacific-8a2be2.svg?style=for-the-badge)](https://pixelpacific.com)
+[![Memoria Astra Universe](https://img.shields.io/badge/universe-Memoria%20Astra-8a2be2.svg?style=for-the-badge)](/)
 
 This repository automates the EPUB generation process for the **Memoria Astra** book series.
 
