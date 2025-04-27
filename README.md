@@ -16,7 +16,6 @@ This repository automates the EPUB generation process for the **Memoria Astra** 
 /
 ├── 01_Terra_in_the_Mists/
 │    ├── Manuscript.md
-│    ├── metadata.yaml
 │    ├── cover.jpg
 ├── 02_Before_the_Mists/
 │    └── (similar structure)
