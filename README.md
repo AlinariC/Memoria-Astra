@@ -5,6 +5,7 @@
 [![EPUBs Ready](https://img.shields.io/badge/epubs-ready-blue.svg?style=for-the-badge)]()
 [![PixelPacific](https://img.shields.io/badge/publisher-PixelPacific-8a2be2.svg?style=for-the-badge)](https://pixelpacific.com)
 [![Memoria Astra Universe](https://img.shields.io/badge/universe-Memoria%20Astra-8a2be2.svg?style=for-the-badge)](/)
+[![Latest Release](https://img.shields.io/github/v/release/alinaricampbell/memoria-astra-site?style=for-the-badge)](https://github.com/alinaricampbell/memoria-astra-site/releases)
 
 This repository automates the EPUB generation process for the **Memoria Astra** book series.
 
@@ -25,7 +26,7 @@ This repository automates the EPUB generation process for the **Memoria Astra** 
 │    ├── build.sh
 │    ├── fix-and-polish-epub.sh
 ├── output/
-│    └── (final EPUBs placed here)
+│    └── (temporary EPUBs before upload to Releases)
 ├── .github/
 │    └── workflows/
 │         └── build-epub.yml
@@ -40,7 +41,7 @@ This repository automates the EPUB generation process for the **Memoria Astra** 
   - Run `build.sh` to compile a clean EPUB
   - Run `fix-and-polish-epub.sh` to polish and finalize the EPUB
   - Move the final `.epub` into `/output/`
-  - Upload the EPUB(s) as artifacts in the GitHub Actions tab
+  - Publish the EPUB(s) to the GitHub Releases tab for easy download
 
 ## 🛠 Scripts
 
