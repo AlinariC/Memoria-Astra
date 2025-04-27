@@ -1,11 +1,11 @@
 # Memoria Astra - Automated Book Publishing
 
-[![License: PPPL v1.0](https://img.shields.io/badge/license-PPPL%20v1.0-purple.svg?style=for-the-badge)](/LICENSE)
-[![Build: Passing](https://img.shields.io/badge/build-passing-brightgreen.svg?style=for-the-badge)]()
-[![EPUBs Ready](https://img.shields.io/badge/epubs-ready-blue.svg?style=for-the-badge)]()
-[![PixelPacific](https://img.shields.io/badge/publisher-PixelPacific-8a2be2.svg?style=for-the-badge)](https://pixelpacific.com)
-[![Memoria Astra Universe](https://img.shields.io/badge/universe-Memoria%20Astra-8a2be2.svg?style=for-the-badge)](/)
-[![Latest Release](https://img.shields.io/github/v/release/alinaricampbell/memoria-astra-site?style=for-the-badge)](https://github.com/alinaricampbell/memoria-astra-site/releases)
+[![License: PPPL v1.0](https://img.shields.io/badge/license-PPPL%20v1.0-purple.svg?style=flat-square)](/LICENSE)
+[![Build: Passing](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)]()
+[![EPUBs Ready](https://img.shields.io/badge/epubs-ready-blue.svg?style=flat-square)]()
+[![PixelPacific](https://img.shields.io/badge/publisher-PixelPacific-8a2be2.svg?style=flat-square)](https://pixelpacific.com)
+[![Memoria Astra Universe](https://img.shields.io/badge/universe-Memoria%20Astra-8a2be2.svg?style=flat-square)](/)
+[![Latest Release](https://img.shields.io/github/v/release/alinaricampbell/memoria-astra-site?style=flat-square)](https://github.com/alinaricampbell/memoria-astra-site/releases)
 
 This repository automates the EPUB generation process for the **Memoria Astra** book series.
 
