@@ -20,21 +20,18 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y pandoc zip unzip imagemagick
 
-    - name: Detect changed books
-      id: detect
-      run: |
-        echo "changed_dirs=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep -E 'Manuscript.md|cover.jpg' | awk -F/ '{print $1}' | uniq | paste -sd ' ' -)" >> $GITHUB_ENV
-
     - name: Build and Polish EPUBs
       run: |
         mkdir -p output
-        for dir in ${{ env.changed_dirs }}; do
-          echo "📖 Processing $dir..."
-          cd "$dir"
-          bash ../scripts/build.sh
-          bash ../scripts/fix-and-polish-epub.sh
-          mv *.epub ../output/
-          cd ..
+        for dir in */; do
+          if [ -f "${dir}Manuscript.md" ]; then
+            echo "📖 Processing $dir..."
+            cd "$dir"
+            bash ../scripts/build.sh
+            bash ../scripts/fix-and-polish-epub.sh
+            mv *.epub ../output/
+            cd ..
+          fi
         done
 
     - name: Upload EPUBs as Artifacts
