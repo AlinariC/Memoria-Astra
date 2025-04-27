@@ -35,6 +35,9 @@ jobs:
             bash ../scripts/build.sh
             bash ../scripts/fix-and-polish-epub.sh
             SAFE_BOOK=$(ls *.epub | sed 's/.epub$//; s/-/ /g')
+            if [ ! -f ../release_title.txt ]; then
+              echo "${SAFE_BOOK}" > ../release_title.txt
+            fi
             echo "- ${SAFE_BOOK}" >> ../release_notes.md
             mv *.epub ../output/
             cd ..
@@ -52,7 +55,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: "epub-${{ github.run_id }}"
-        release_name: "EPUB Build - ${{ github.run_number }}"
+        release_name: "$(cat release_title.txt) – v1.0.${{ github.run_number }} ($(date +'%Y-%m-%d'))"
         body_path: release_notes.md
         draft: false
         prerelease: false
