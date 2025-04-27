@@ -3192,6 +3192,6 @@ The Ashforged Covenant and Memoria Astra Cycle are trademarks of Alinari Campbel
 © 2025 Alinari Campbell. All rights reserved.  
 First digital edition published by PixelPacific.
 
-No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form by any means without prior written permission from the publisher, except for brief quotations used in reviews or scholarly works. 
+No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form by any means without prior written permission from the publisher, except for brief quotations used in reviews or scholarly works.
 
 ---
