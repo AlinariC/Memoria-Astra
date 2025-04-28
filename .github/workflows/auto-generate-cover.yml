@@ -65,9 +65,9 @@ jobs:
       if: env.needs-cover == 'true'
       id: metadata
       run: |
-        TITLE=$(yq '.title' "$MANUSCRIPT_DIR/Manuscript.md")
-        SUBTITLE=$(yq '.subtitle' "$MANUSCRIPT_DIR/Manuscript.md")
-        AUTHOR=$(yq '.author' "$MANUSCRIPT_DIR/Manuscript.md")
+        TITLE=$(yq '.title' "$MANUSCRIPT_PATH")
+        SUBTITLE=$(yq '.subtitle' "$MANUSCRIPT_PATH")
+        AUTHOR=$(yq '.author' "$MANUSCRIPT_PATH")
 
         echo "TITLE=$TITLE" >> $GITHUB_ENV
         echo "SUBTITLE=$SUBTITLE" >> $GITHUB_ENV
