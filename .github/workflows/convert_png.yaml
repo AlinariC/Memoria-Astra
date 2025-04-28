@@ -1,0 +1,31 @@
+name: Process Cover PNGs
+
+on:
+  push:
+    paths:
+      - '**/cover.png'
+  workflow_dispatch:
+
+jobs:
+  convert-covers:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install ImageMagick
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y imagemagick
+
+    - name: Process Covers
+      run: |
+        for dir in */; do
+          if [ -f "$dir/cover.png" ]; then
+            echo "Processing cover in $dir..."
+            cd "$dir"
+            bash ../scripts/process-cover.sh
+            cd ..
+          fi
+        done
