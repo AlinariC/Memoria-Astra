@@ -27,6 +27,8 @@ $if(beamerarticle)$
 $endif$
 \usepackage{xcolor}
 \usepackage{hyperref}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 $if(geometry)$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
