@@ -22,6 +22,7 @@ pandoc Combined.md \
 # Build the Print PDF (with TOC)
 pandoc Combined.md \
   --pdf-engine=xelatex \
+  --lua-filter="../assets/unnumber-specials.lua" \
   --include-in-header="../assets/pdf-header.tex" \
   --toc \
   --toc-depth=1 \
