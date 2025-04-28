@@ -2,6 +2,13 @@ name: Auto-Generate Cover if Missing
 
 on:
   push:
+    branches:
+      - main
+    paths:
+      - "**/Manuscript.md"
+  pull_request:
+    branches:
+      - main
     paths:
       - "**/Manuscript.md"
   workflow_dispatch:
@@ -43,13 +50,19 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y curl jq
 
+    - name: Install yq
+      if: env.needs-cover == 'true'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y yq
+
     - name: Extract Title, Subtitle, Author from Manuscript
       if: env.needs-cover == 'true'
       id: metadata
       run: |
-        TITLE=$(grep '^title:' "$MANUSCRIPT_DIR/Manuscript.md" | sed 's/title:[ ]*//;s/"//g')
-        SUBTITLE=$(grep '^subtitle:' "$MANUSCRIPT_DIR/Manuscript.md" | sed 's/subtitle:[ ]*//;s/"//g')
-        AUTHOR=$(grep '^author:' "$MANUSCRIPT_DIR/Manuscript.md" | sed 's/author:[ ]*//;s/"//g')
+        TITLE=$(yq '.title' "$MANUSCRIPT_DIR/Manuscript.md")
+        SUBTITLE=$(yq '.subtitle' "$MANUSCRIPT_DIR/Manuscript.md")
+        AUTHOR=$(yq '.author' "$MANUSCRIPT_DIR/Manuscript.md")
 
         echo "TITLE=$TITLE" >> $GITHUB_ENV
         echo "SUBTITLE=$SUBTITLE" >> $GITHUB_ENV
