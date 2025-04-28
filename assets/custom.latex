@@ -49,7 +49,6 @@ $endif$
 $for(header-includes)$
 $header-includes$
 $endfor$
-$after-header-includes.latex()$
 $hypersetup.latex()$
 
 $if(title)$
