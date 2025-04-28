@@ -23,7 +23,6 @@ pandoc Combined.md \
 pandoc Combined.md \
   --pdf-engine=xelatex \
   --template="../assets/custom.latex" \
-  --include-in-header="../assets/pdf-header.tex" \
   --lua-filter="../assets/unnumber-specials.lua" \
   --lua-filter="../assets/format-chapter-numbers.lua" \
   --toc \

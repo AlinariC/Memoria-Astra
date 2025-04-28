@@ -23,7 +23,15 @@ $endif$
 $if(geometry)$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
-\usepackage{amsmath,amssymb}
+$\usepackage{amsmath,amssymb}$
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Schola}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{TeX Gyre Cursor}
+\usepackage[paperwidth=6in, paperheight=9in, margin=0.75in]{geometry}
+\linespread{1.3}
+\fontsize{11pt}{17pt}\selectfont
+\pagestyle{plain}
 $--
 $-- section numbering
 $--
@@ -32,8 +40,6 @@ $if(numbersections)$
 $else$
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 $endif$
-$fonts.latex()$
-$font-settings.latex()$
 $common.latex()$
 $for(header-includes)$
 $header-includes$
