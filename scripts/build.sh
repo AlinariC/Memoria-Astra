@@ -25,6 +25,12 @@ pandoc Combined.md \
   --include-in-header="../assets/pdf-header.tex" \
   --toc \
   --toc-depth=1 \
+  --variable documentclass=book \
+  --variable classoption=oneside \
+  --variable colorlinks=false \
+  --variable linkcolor=black \
+  --variable numbersections=true \
+  --variable secnumdepth=1 \
   --output="$OUTPUT_DIR/${TITLE// /_}-Print.pdf"
   
 # Cleanup
