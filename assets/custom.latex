@@ -39,7 +39,7 @@ $endif$
 \setmonofont{TeX Gyre Cursor}
 \usepackage[paperwidth=6in, paperheight=9in, margin=0.75in]{geometry}
 \linespread{1.3}
-\fontsize{13pt}{17pt}\selectfont
+\fontsize{14pt}{20pt}\selectfont
 \pagestyle{plain}
 \setlength{\parindent}{1.5em}
 \setlength{\parskip}{0.75em}
