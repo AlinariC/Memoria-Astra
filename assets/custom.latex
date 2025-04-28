@@ -1,4 +1,3 @@
-$passoptions.latex()$
 \documentclass[
 $for(babel-otherlangs)$
   $babel-otherlangs$,
@@ -16,6 +15,13 @@ $for(classoption)$
   $classoption$$sep$,
 $endfor$
 ]{$documentclass$}
+
+% ----------------------------------------------------------
+% Custom LaTeX template for Pandoc output
+% Maintained and polished for clarity and independence from
+% Pandoc's default macro setup. See below for customizations.
+% ----------------------------------------------------------
+
 $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
 $endif$
@@ -23,7 +29,7 @@ $endif$
 $if(geometry)$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
-$\usepackage{amsmath,amssymb}$
+\usepackage{amsmath,amssymb}
 \usepackage{fontspec}
 \setmainfont{TeX Gyre Schola}
 \setsansfont{TeX Gyre Heros}
@@ -40,7 +46,6 @@ $if(numbersections)$
 $else$
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 $endif$
-$common.latex()$
 $for(header-includes)$
 $header-includes$
 $endfor$
