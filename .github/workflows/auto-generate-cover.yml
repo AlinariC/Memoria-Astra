@@ -25,15 +25,20 @@ jobs:
       id: find_manuscript
       run: |
         echo "Looking for changed Manuscript.md..."
-        MANUSCRIPT_PATH=$(echo "${{ github.event.head_commit.modified }}" | grep -o '[^ ]*/Manuscript\.md' | head -n 1)
-        if [ -z "$MANUSCRIPT_PATH" ]; then
-          echo "No Manuscript.md modified. Skipping."
-          exit 0
+        if [ -f "$GITHUB_EVENT_PATH" ]; then
+          MANUSCRIPT_PATH=$(jq -r '.head_commit.modified[]?' "$GITHUB_EVENT_PATH" | grep 'Manuscript.md' | head -n 1)
+          if [ -z "$MANUSCRIPT_PATH" ]; then
+            echo "No Manuscript.md modified. Skipping."
+            exit 0
+          fi
+          echo "Found Manuscript: $MANUSCRIPT_PATH"
+          echo "MANUSCRIPT_PATH=$MANUSCRIPT_PATH" >> $GITHUB_ENV
+          MANUSCRIPT_DIR=$(dirname "$MANUSCRIPT_PATH")
+          echo "MANUSCRIPT_DIR=$MANUSCRIPT_DIR" >> $GITHUB_ENV
+        else
+          echo "No event payload found."
+          exit 1
         fi
-        echo "Found Manuscript: $MANUSCRIPT_PATH"
-        echo "MANUSCRIPT_PATH=$MANUSCRIPT_PATH" >> $GITHUB_ENV
-        MANUSCRIPT_DIR=$(dirname "$MANUSCRIPT_PATH")
-        echo "MANUSCRIPT_DIR=$MANUSCRIPT_DIR" >> $GITHUB_ENV
 
     - name: Check if cover.png is missing
       id: cover_check
