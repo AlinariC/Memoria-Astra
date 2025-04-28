@@ -29,3 +29,11 @@ jobs:
             cd ..
           fi
         done
+
+    - name: Commit and Push Updated Covers
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add .
+        git commit -m "Auto-generated cover.jpg and cover-300dpi.jpg"
+        git push
