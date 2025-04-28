@@ -1,9 +1,26 @@
 \usepackage{fontspec}
 \usepackage{setspace}
+\usepackage{fancyhdr}
 \setmainfont{TeX Gyre Schola}
 \setsansfont{TeX Gyre Heros}
 \setmonofont{TeX Gyre Cursor}
 \usepackage[paperwidth=6in, paperheight=9in, margin=0.75in]{geometry}
 \linespread{1.3}
 \fontsize{11pt}{17pt}\selectfont
-\pagestyle{plain}
+
+% Fancy header/footer setup
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+
+\fancyhead[L]{\leftmark}  % Top left: Chapter title
+\fancyhead[R]{}           % Top right: empty (or section title if you want later)
+\fancyfoot[C]{\thepage}   % Bottom center: page number
+
+\renewcommand{\headrulewidth}{0pt} % No horizontal lines
+\renewcommand{\footrulewidth}{0pt}
+
+% Customize what shows in the header
+\makeatletter
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\makeatother
