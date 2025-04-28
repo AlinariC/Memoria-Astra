@@ -49,7 +49,6 @@ $endif$
 $for(header-includes)$
 $header-includes$
 $endfor$
-$hypersetup.latex()$
 
 $if(title)$
 \title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
