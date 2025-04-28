@@ -68,7 +68,7 @@ $endif$
 \author{$for(author)$$author$$sep$ \and $endfor$}
 \date{$date$}
 
-$usepackage{titlesec}
+\usepackage{titlesec}
 
 \titleformat{\chapter}[block]
   {\normalfont\huge\bfseries\centering}
