@@ -13,7 +13,6 @@ cat Manuscript.md ../assets/Colophon.md > Combined.md
 
 # Build the EPUB
 pandoc Combined.md \
-  --metadata title="$TITLE" \
   --epub-cover-image="cover.jpg" \
   --css="../assets/styles.css" \
   --toc \
