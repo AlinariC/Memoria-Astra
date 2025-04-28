@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "**/Manuscript.md"
+    workflow_dispatch:
 
 jobs:
   generate-cover:
