@@ -14,11 +14,17 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Find Manuscript Folder
-      id: find_folder
+    - name: Find Changed Manuscript Path
+      id: find_manuscript
       run: |
-        MANUSCRIPT_PATH=$(find . -type f -path "*/Manuscript.md" | head -n 1)
-        echo "Manuscript path: $MANUSCRIPT_PATH"
+        echo "Looking for changed Manuscript.md..."
+        MANUSCRIPT_PATH=$(echo "${{ github.event.head_commit.modified }}" | grep -o '[^ ]*/Manuscript\.md' | head -n 1)
+        if [ -z "$MANUSCRIPT_PATH" ]; then
+          echo "No Manuscript.md modified. Skipping."
+          exit 0
+        fi
+        echo "Found Manuscript: $MANUSCRIPT_PATH"
+        echo "MANUSCRIPT_PATH=$MANUSCRIPT_PATH" >> $GITHUB_ENV
         MANUSCRIPT_DIR=$(dirname "$MANUSCRIPT_PATH")
         echo "MANUSCRIPT_DIR=$MANUSCRIPT_DIR" >> $GITHUB_ENV
 
