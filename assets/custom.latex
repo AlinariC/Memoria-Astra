@@ -68,6 +68,14 @@ $endif$
 \author{$for(author)$$author$$sep$ \and $endfor$}
 \date{$date$}
 
+$usepackage{titlesec}
+
+\titleformat{\chapter}[block]
+  {\normalfont\huge\bfseries\centering}
+  {Chapter \ifnum\value{chapter}<10 0\fi\thechapter.}
+  {1em}
+  {}
+
 \begin{document}
 $if(has-frontmatter)$
 \frontmatter

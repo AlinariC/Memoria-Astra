@@ -24,7 +24,6 @@ pandoc Combined.md \
   --pdf-engine=xelatex \
   --template="../assets/custom.latex" \
   --lua-filter="../assets/unnumber-specials.lua" \
-  --lua-filter="../assets/format-chapter-numbers.lua" \
   --toc \
   --toc-depth=1 \
   --variable documentclass=book \
