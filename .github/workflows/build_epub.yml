@@ -32,7 +32,7 @@ jobs:
         echo "" >> release_notes.md
 
         for dir in */; do
-          if [ -f "$dir/Manuscript.md" ]; then
+          if [ -f "$dir/Manuscript.md" ] && [ -f "$dir/cover.jpg" ]; then
             echo "Processing $dir..."
             cd "$dir"
             bash ../scripts/build.sh
