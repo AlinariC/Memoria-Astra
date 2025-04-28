@@ -39,3 +39,9 @@ jobs:
         git add .
         git commit -m "Auto-generated cover.jpg and cover-300dpi.jpg" || echo "No changes to commit"
         git push https://x-access-token:${GITHUB_TOKEN}@github.com/AlinariC/Memoria-Astra.git HEAD:main
+
+    - name: Trigger Build EPUB Workflow
+      uses: peter-evans/repository-dispatch@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        event-type: cover-updated

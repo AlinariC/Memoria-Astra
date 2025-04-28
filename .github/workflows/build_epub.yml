@@ -6,6 +6,8 @@ on:
       - "**/Manuscript.md"
       - "**/cover.jpg"
   workflow_dispatch:
+  repository_dispatch:
+    types: [cover-updated]
 
 permissions:
   contents: write
