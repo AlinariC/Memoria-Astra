@@ -1,5 +1,5 @@
 function Header(elem)
-  if elem.level == 1 and elem.number then
+  if elem.level == 1 and elem.number and not elem.classes:includes('unnumbered') then
     local num = tostring(elem.number[1])
     if tonumber(num) < 10 then
       num = "0" .. num
