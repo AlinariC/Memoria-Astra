@@ -14,17 +14,18 @@ cat Manuscript.md ../assets/Colophon.md > Combined.md
 # Build the EPUB
 pandoc Combined.md \
   --metadata title="$TITLE" \
-  --epub-cover-image=cover.jpg \
-  --css=../assets/styles.css \
+  --epub-cover-image="cover.jpg" \
+  --css="../assets/styles.css" \
   --toc \
   --output="$OUTPUT_DIR/${TITLE// /_}.epub"
 
 # Build the Print PDF (with TOC)
 pandoc Combined.md \
   --pdf-engine=xelatex \
+  --template="../assets/custom.latex" \
+  --include-in-header="../assets/pdf-header.tex" \
   --lua-filter="../assets/unnumber-specials.lua" \
   --lua-filter="../assets/format-chapter-numbers.lua" \
-  --include-in-header="../assets/pdf-header.tex" \
   --toc \
   --toc-depth=1 \
   --variable documentclass=book \
