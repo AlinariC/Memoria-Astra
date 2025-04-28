@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - "**/Manuscript.md"
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   generate-cover:
@@ -14,10 +14,18 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Find Manuscript Folder
+      id: find_folder
+      run: |
+        MANUSCRIPT_PATH=$(find . -type f -path "*/Manuscript.md" | head -n 1)
+        echo "Manuscript path: $MANUSCRIPT_PATH"
+        MANUSCRIPT_DIR=$(dirname "$MANUSCRIPT_PATH")
+        echo "MANUSCRIPT_DIR=$MANUSCRIPT_DIR" >> $GITHUB_ENV
+
     - name: Check if cover.png is missing
       id: cover_check
       run: |
-        if [ ! -f "cover.png" ]; then
+        if [ ! -f "$MANUSCRIPT_DIR/cover.png" ]; then
           echo "needs-cover=true" >> $GITHUB_ENV
         else
           echo "needs-cover=false" >> $GITHUB_ENV
@@ -33,9 +41,12 @@ jobs:
       if: env.needs-cover == 'true'
       id: metadata
       run: |
-        TITLE=$(grep '^title:' Manuscript.md | sed 's/title:[ ]*//')
-        AUTHOR=$(grep '^author:' Manuscript.md | sed 's/author:[ ]*//')
+        TITLE=$(grep '^title:' "$MANUSCRIPT_DIR/Manuscript.md" | sed 's/title:[ ]*//;s/"//g')
+        SUBTITLE=$(grep '^subtitle:' "$MANUSCRIPT_DIR/Manuscript.md" | sed 's/subtitle:[ ]*//;s/"//g')
+        AUTHOR=$(grep '^author:' "$MANUSCRIPT_DIR/Manuscript.md" | sed 's/author:[ ]*//;s/"//g')
+
         echo "TITLE=$TITLE" >> $GITHUB_ENV
+        echo "SUBTITLE=$SUBTITLE" >> $GITHUB_ENV
         echo "AUTHOR=$AUTHOR" >> $GITHUB_ENV
 
     - name: Request Cover Art from OpenAI
@@ -46,7 +57,7 @@ jobs:
         -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
         -d '{
           "model": "gpt-image-1",
-          "prompt": "Create a beautiful science fiction/fantasy book cover for the novel titled '"${TITLE}"' by '"${AUTHOR}"'. No text overlay. Cosmic themes, vibrant, sophisticated.",
+          "prompt": "Create a stunning science fiction/fantasy book cover for a novel titled \"'"${TITLE}"'\" with subtitle \"'"${SUBTITLE}"'\" by author \"'"${AUTHOR}"'\". No text overlay. Vibrant cosmic themes.",
           "n": 1,
           "size": "1024x1536"
         }' > response.json
@@ -55,13 +66,13 @@ jobs:
       if: env.needs-cover == 'true'
       run: |
         URL=$(jq -r '.data[0].url' response.json)
-        curl -o cover.png "$URL"
+        curl -o "$MANUSCRIPT_DIR/cover.png" "$URL"
 
     - name: Commit generated cover
       if: env.needs-cover == 'true'
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git add cover.png
-        git commit -m "Auto-generated cover.png using OpenAI"
+        git add "$MANUSCRIPT_DIR/cover.png"
+        git commit -m "Auto-generated cover.png for ${TITLE}"
         git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
