@@ -19,10 +19,12 @@ pandoc Combined.md \
   --toc \
   --output="$OUTPUT_DIR/${TITLE// /_}.epub"
 
-# Build the Print PDF (no TOC)
+# Build the Print PDF (with TOC)
 pandoc Combined.md \
   --pdf-engine=xelatex \
   --include-in-header="../assets/pdf-header.tex" \
+  --toc \
+  --toc-depth=1 \
   --output="$OUTPUT_DIR/${TITLE// /_}-Print.pdf"
   
 # Cleanup
