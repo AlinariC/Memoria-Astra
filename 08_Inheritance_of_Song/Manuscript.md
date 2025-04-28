@@ -4,7 +4,7 @@ subtitle: "Book Eight in the Memoria Astra Cycle"
 author: "Alinari Campbell"
 series: "Memoria Astra"
 isbn: "978-1-234567-890-8"
-release_date: "2025-04-01"
+release_date: "2025-04-28"
 formats:
   - ebook
   - paperback
