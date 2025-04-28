@@ -39,7 +39,7 @@ But because survival itself is the first song the Spiral ever sang.
 
 And survival, once kindled, can burn into something far greater than memory.
 
-# Chapter One – Ashfields of Orun Prime
+# Ashfields of Orun Prime
 
 Kaelen Vey crouched behind the half-buried frame of a collapsed atmospheric extractor, his hands sinking into the cold ash. The dust was so fine it climbed into his throat with every breath, filling his mouth with the taste of iron and old sorrow.
 
@@ -99,7 +99,7 @@ The world shuddered.
 
 Above them, unseen beneath the creeping clouds, the stars shifted — and somewhere deep within the Wells, the Spiral remembered a spark.
 
-# Chapter Two – Wells of Broken Breath
+# Wells of Broken Breath
 
 The machine was older than memory.
 
@@ -182,7 +182,7 @@ But he was smiling.
 Above them, the ashfields of Orun Prime shivered —  
 and for the first time in countless seasons, something stirred beneath the broken sky.
 
-# Chapter Three – Hunger Carved from Stone
+# Hunger Carved from Stone
 
 The days after the binding were a blur of frantic motion.
 
@@ -304,7 +304,7 @@ Or the beginning of the end.
 
 Only the stars could say.
 
-# Chapter Four – The Forge Without Flame
+# The Forge Without Flame
 
 The gates moaned as they opened.
 
@@ -446,7 +446,7 @@ And survival was never the end of the story.
 
 Only the beginning.
 
-# Chapter Five – Threnody of Cinders
+# Threnody of Cinders
 
 The forge sang now.
 
@@ -546,7 +546,7 @@ A whisper in the ash.
 And beyond the cairn, past the sleeping camps and the reawakening machines, the Spiral turned silently, indifferent —  
 but perhaps, just perhaps, not entirely without memory.
 
-# Chapter Six – Binding the Breath of Stars
+# Binding the Breath of Stars
 
 They found the spires by accident.
 
@@ -677,7 +677,7 @@ And far above, beyond the veil of the ash-choked skies, the Spiral turned on.
 
 Waiting to see what they would become.
 
-# Chapter Seven – The Machine That Dreamed
+# The Machine That Dreamed
 
 The forge heart pulsed slower now.
 
@@ -826,7 +826,7 @@ not indifferent this time, but listening.
 
 Waiting.
 
-# Chapter Eight – Leviathans of Metal
+# Leviathans of Metal
 
 The first ship was born from scrap and song.
 
@@ -984,7 +984,7 @@ Kaelen nodded slowly.
 
 "We’ll claim the Spiral itself."
 
-# Chapter Nine – Blood in the Wells
+# Blood in the Wells
 
 It began with a single scream.
 
@@ -1171,7 +1171,7 @@ Watching.
 
 And somewhere deep within the Wells, the Forge dreamed — but now, it dreamed of war.
 
-# Chapter Ten – Covenant of the Molten Throne
+# Covenant of the Molten Throne
 
 The Corehold was reborn in fire.
 
@@ -1357,7 +1357,7 @@ He carried.
 
 And far above, beyond the veil of ash and broken stars, the Spiral turned, waiting to see if he — if they — could truly ascend.
 
-# Chapter Eleven – When Suns Weep
+# When Suns Weep
 
 The first harvest was a death sentence.
 
@@ -1551,7 +1551,7 @@ Would *bind* the breath of dying suns into the heart of a new dawn.
 
 And when the suns wept, they would drink of that sorrow — and grow stronger.
 
-# Chapter Twelve – Iron Choirs
+# Iron Choirs
 
 The Ashforged learned quickly that to hold the stars,  
 they needed more than ships.
@@ -1677,7 +1677,7 @@ the Spiral listened.
 
 And the Ashforged answered.
 
-# Chapter Thirteen – Echoes of the First Breathers
+# Echoes of the First Breathers
 
 It began with a whisper from the edge of known space.
 
@@ -1877,7 +1877,7 @@ The Spiral listened.
 
 And somewhere, beyond the reaches of known space, something else — something ancient — stirred in response.
 
-# Chapter Fourteen – A Throne is Forged
+# A Throne is Forged
 
 The Forgefields no longer whispered survival.
 
@@ -2029,7 +2029,7 @@ The age of forging alone had ended.
 
 The age of forging *together* had begun.
 
-# Chapter Fifteen – Crowned in Breachfire
+# Crowned in Breachfire
 
 The breach came without warning.
 
@@ -2241,7 +2241,7 @@ And the Spiral, vast and pitiless, watched.
 
 Waiting for the next note in the Ashforged song.
 
-# Chapter Sixteen – Embers in the Veil
+# Embers in the Veil
 
 The veil was always there, just beyond the maps.
 
@@ -2391,7 +2391,7 @@ Not all breath was life.
 
 Some fires burned only to consume.
 
-# Chapter Seventeen – A Breath Bound in Chains
+# A Breath Bound in Chains
 
 The forge-world was a tomb.
 
@@ -2595,7 +2595,7 @@ Memory reforged.
 
 And somewhere, far beyond the dying light, new songs began to stir.
 
-# Chapter Eighteen – Wells Beneath the Iron
+# Wells Beneath the Iron
 
 Orun Prime had changed.
 
@@ -2760,7 +2760,7 @@ Endurance would be tested anew.
 
 And far beyond the Veil, ancient embers began to burn once more.
 
-# Chapter Nineteen – Castles on Silent Rivers
+# Castles on Silent Rivers
 
 The Wells remembered how to move.
 
@@ -2909,7 +2909,7 @@ The Spiral listened.
 
 And somewhere beyond the furthest reaches, it began to hum along.
 
-# Chapter Twenty – The Flame Remembers Itself
+# The Flame Remembers Itself
 
 The Wells sang.
 

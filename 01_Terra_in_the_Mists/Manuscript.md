@@ -33,7 +33,7 @@ I was there when the sky still breathed. And I am here now, walking the silence,
 
 This is the story of Terra—not as it was, but as it remembers itself.
 
-# Chapter 01 — When the Sky Began to Fall
+# When the Sky Began to Fall
 
 My name is Aru-Solien, and I remember the sky before it fell.
 
@@ -83,7 +83,7 @@ If you have found this record, it means you, too, remember something. Even if yo
 
 The mists have thinned, but they have not vanished. The breath of Terra still lingers, waiting to be drawn. And the sky... it may yet sing again.
 
-# Chapter 02 — The Weight of Air
+# The Weight of Air
 
 There was no thunder when the sky began to fall. No fire. No divine herald. The first sign was something smaller—so subtle that most among us would not have noticed at all. But I did.
 
@@ -149,7 +149,7 @@ But make no mistake.
 
 The sky fell.
 
-# Chapter 03 — The Awakening Ground
+# The Awakening Ground
 
 I awoke to silence.
 
@@ -210,7 +210,7 @@ Terra had not died. She had survived. And so had I.
 
 And survival, I realized, was its own kind of song.
 
-# Chapter 04 — Those Who Remained
+# Those Who Remained
 
 They were not supposed to survive.
 
@@ -284,7 +284,7 @@ The grove did not sing. But it remembered.
 
 And so did I.
 
-# Chapter 05 — The First Fire
+# The First Fire
 
 It began with fire.
 
@@ -350,7 +350,7 @@ And they listened. And they believed.
 
 And I remained.
 
-# Chapter 06 — In the Silence Between Stars
+# In the Silence Between Stars
 
 Time had ceased to move for me in the way it did for others. I no longer marked years by harvests or moons or migrations. My rhythm was slower now, stretched thin and threadbare like old silk. I moved with the world, but I was no longer of it. That truth settled on me like dust in the ruins of Babel, where the last echo of sky-ambition had fallen into silence.
 
@@ -392,7 +392,7 @@ The seasons turned. The stars shifted. The world moved on.
 
 And still, I remained.
 
-# Chapter 07 — Outliers
+# Outliers
 
 There is a kind of forgetting so complete, it wraps back around to become belief.
 
@@ -444,7 +444,7 @@ For what, I did not know. A sign. A sound. A spark.
 
 Something is always coming.
 
-# Chapter 08 — The Signal
+# The Signal
 
 The return did not begin with trumpets or thunder.
 
@@ -504,7 +504,7 @@ The signal had not merely called to her—it had chosen her. Memory was looking 
 
 Somewhere in the cold pulse of the lattice, the breath of Terra stirred—and a new kind of echo began to form.
 
-# Chapter 09 — The Breath Returns
+# The Breath Returns
 
 The wind changed first.
 
@@ -574,7 +574,7 @@ She looked at me then—not as a student to a teacher, but as a mirror. As kin.
 
 I smiled. “Now… you listen. And then, you remember out loud.”
 
-# Chapter 10 — The New Harmony
+# The New Harmony
 
 The mists returned on a Tuesday.
 
