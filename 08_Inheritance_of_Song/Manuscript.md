@@ -3,7 +3,7 @@ title: "Inheritance of Song"
 subtitle: "Book Eight in the Memoria Astra Cycle"
 author: "Alinari Campbell"
 series: "Memoria Astra"
-isbn: "978-1-234567-890-7"
+isbn: "978-1-234567-890-8"
 release_date: "2025-04-01"
 formats:
   - ebook
