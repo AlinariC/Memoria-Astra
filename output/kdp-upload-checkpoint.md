@@ -1,0 +1,128 @@
+# KDP Upload Checkpoint
+
+Last updated: 2026-05-17 21:36 MST.
+
+Purpose: durable handoff for the live Amazon KDP asset-replacement run. Update this file after every KDP title/format so the exact state survives compaction, browser interruption, or session restart.
+
+## Current Pass Reset
+
+- Treat all previous KDP upload claims as untrusted until rechecked in the live KDP UI.
+- User explicitly wants every Amazon/KDP draft refreshed: all Kindle ebooks and paperbacks for titles `00` through `08`, plus hardcovers for the larger eligible titles, with drafts saved for manual final submission.
+- This pass is actively refreshing KDP drafts from the rebuilt and validated local upload assets.
+- Codex stopped at saved drafts. On 2026-05-17 21:36 MST, the user reported all KDP drafts had been manually published/submitted and are awaiting review.
+
+## Current Local Package State
+
+- Fixed the package generator so Kindle/digital covers are full-size front-cover art with no padded border.
+- Fixed paperback front wraps so the front cover uses the full source artwork with no generated border. Hardcover layout was left unchanged because it already looked good.
+- Rebuilt all 9 books with `python3 scripts/publish.py build --all`.
+- Ran `python3 scripts/publish.py audit-print`; all 18 print packages passed.
+- Ran a PDFKit text-boundary scan over all 18 paperback/hardcover interiors; all text stayed inside a 0.25 in safety margin.
+- Verified all 9 Kindle EPUBs with `unzip -t`.
+- Rendered a paperback cover contact sheet at `/tmp/memoria-paperback-contact-sheet.png`; all 9 front panels show full-size cover art without the previous generated border.
+- Rendered a hardcover cover contact sheet at `/tmp/memoria-hardcover-contact-sheet.png`; hardcover layouts remain visually intact.
+- Rebuilt upload staging files in `/tmp/memoria-kdp-upload-assets`.
+- Staging folder contains 54 real files, 0 symlinks, no empty files, and no ` 2`/copy-suffixed filenames.
+- Re-ran package sanity checks at 2026-05-17 21:17 MST after the final Bookshelf audit: `python3 scripts/publish.py audit-print` passed for all 18 print packages, `/tmp/memoria-kdp-upload-assets` still had 54 real files, 0 symlinks, no empty files, and all 9 EPUB ZIP tests passed.
+- Current print-wrap layout:
+  - Paperback front artwork: full source cover art, no generated border.
+  - Paperback back copy: 1.05 in safe inset.
+  - Hardcover front artwork: 0.72 in safe inset.
+  - Hardcover back copy: 1.25 in safe inset.
+- Current back copy is centered within the safe panel and narrowed to 54% of panel width.
+
+## Fresh Upload Assets
+
+Use these exact file names from `/tmp/memoria-kdp-upload-assets`:
+
+| Package | Kindle EPUB | Kindle cover | Paperback interior | Paperback cover | Hardcover interior | Hardcover cover |
+|---|---|---|---|---|---|---|
+| 00 | `00-the-first-spiral-ebook.epub` | `00-the-first-spiral-ebook-cover.jpg` | `00-the-first-spiral-paperback-interior.pdf` | `00-the-first-spiral-paperback-cover.pdf` | `00-the-first-spiral-hardcover-interior.pdf` | `00-the-first-spiral-hardcover-cover.pdf` |
+| 01 | `01-terra-in-the-mists-ebook.epub` | `01-terra-in-the-mists-ebook-cover.jpg` | `01-terra-in-the-mists-paperback-interior.pdf` | `01-terra-in-the-mists-paperback-cover.pdf` | `01-terra-in-the-mists-hardcover-interior.pdf` | `01-terra-in-the-mists-hardcover-cover.pdf` |
+| 02 | `02-before-the-mists-ebook.epub` | `02-before-the-mists-ebook-cover.jpg` | `02-before-the-mists-paperback-interior.pdf` | `02-before-the-mists-paperback-cover.pdf` | `02-before-the-mists-hardcover-interior.pdf` | `02-before-the-mists-hardcover-cover.pdf` |
+| 03 | `03-crimson-reliquary-ebook.epub` | `03-crimson-reliquary-ebook-cover.jpg` | `03-crimson-reliquary-paperback-interior.pdf` | `03-crimson-reliquary-paperback-cover.pdf` | `03-crimson-reliquary-hardcover-interior.pdf` | `03-crimson-reliquary-hardcover-cover.pdf` |
+| 04 | `04-children-of-the-divide-ebook.epub` | `04-children-of-the-divide-ebook-cover.jpg` | `04-children-of-the-divide-paperback-interior.pdf` | `04-children-of-the-divide-paperback-cover.pdf` | `04-children-of-the-divide-hardcover-interior.pdf` | `04-children-of-the-divide-hardcover-cover.pdf` |
+| 05 | `05-echoes-of-lyra-ebook.epub` | `05-echoes-of-lyra-ebook-cover.jpg` | `05-echoes-of-lyra-paperback-interior.pdf` | `05-echoes-of-lyra-paperback-cover.pdf` | `05-echoes-of-lyra-hardcover-interior.pdf` | `05-echoes-of-lyra-hardcover-cover.pdf` |
+| 06 | `06-harmonic-rebirth-ebook.epub` | `06-harmonic-rebirth-ebook-cover.jpg` | `06-harmonic-rebirth-paperback-interior.pdf` | `06-harmonic-rebirth-paperback-cover.pdf` | `06-harmonic-rebirth-hardcover-interior.pdf` | `06-harmonic-rebirth-hardcover-cover.pdf` |
+| 07 | `07-foundations-of-flame-ebook.epub` | `07-foundations-of-flame-ebook-cover.jpg` | `07-foundations-of-flame-paperback-interior.pdf` | `07-foundations-of-flame-paperback-cover.pdf` | `07-foundations-of-flame-hardcover-interior.pdf` | `07-foundations-of-flame-hardcover-cover.pdf` |
+| 08 | `08-inheritance-of-song-ebook.epub` | `08-inheritance-of-song-ebook-cover.jpg` | `08-inheritance-of-song-paperback-interior.pdf` | `08-inheritance-of-song-paperback-cover.pdf` | `08-inheritance-of-song-hardcover-interior.pdf` | `08-inheritance-of-song-hardcover-cover.pdf` |
+
+## Last Confirmed Browser State
+
+- 2026-05-17 21:11 MST: Safari is on KDP Bookshelf at `https://kdp.amazon.com/en_US/bookshelf?ref_=kdp_kdp_TAC_TN_bs` after final audit.
+- KDP Bookshelf displays the current saved changes as last modified on May 18, 2026, because KDP's displayed date has advanced while the local machine is still 2026-05-17 MST.
+- Next live task: none in Codex. User reported all KDP final publish/submission clicks are complete and the books are awaiting review.
+
+- Safari is authenticated on KDP Bookshelf at `https://kdp.amazon.com/en_US/bookshelf?ref_=kdp_kdp_TAC_TN_bs`.
+- Current-pass confirmed uploads are tracked under Completed In This Checkpoint; current Bookshelf state is tracked under Final Bookshelf Audit.
+
+## KDP IDs
+
+| Package | Title | Kindle ID | Paperback ID | Hardcover status |
+|---|---|---|---|---|
+| 00 | The First Spiral | `A2R67O6ZE1G9WV` | `JD0C286F3RB` | Existing hardcover under print flow; KDP ISBN `9798197379412`; current-pass hardcover content/pricing saved as draft at 19:09 MST |
+| 01 | Terra in the Mists | `A126YP4G76L3RN` | `AMQN3J87YA1` | Current-pass Kindle and paperback drafts saved at 20:30/20:37 MST; not hardcover eligible at 52 pages |
+| 02 | Before the Mists | `A3F4F3ET4VJ5G7` | `0YNACT7J8XQ` | Current-pass Kindle and paperback drafts saved at 20:16/20:25 MST; not hardcover eligible at 61 pages |
+| 03 | Crimson Reliquary | `A3PH4NFO6PS5S4` | `M48S9MNCCD7` | Current-pass Kindle and paperback drafts saved at 20:02/20:10 MST; no hardcover per pricing/worklist plan |
+| 04 | Children of the Divide | `AHDBN0822B9XC` | `ARB7VRQK7BW` | Current-pass Kindle and paperback drafts saved at 19:38/19:56 MST; no hardcover per pricing/worklist plan |
+| 05 | Echoes of Lyra | `AEFKLRCMCZEOO` | `R2H9PFPQYF8` | Current-pass Kindle and paperback drafts saved at 19:25/19:34 MST; not hardcover eligible at 74 pages |
+| 06 | Harmonic Rebirth | `A2N4A7BQSO603J` | `PDNK4MXK62V` | Hardcover draft created from the paperback flow at `/print-setup/hardcover/PDNK4MXK62V/pricing`; free KDP ISBN `9798197416933`; current-pass hardcover content/pricing saved as draft at 18:42 MST |
+| 07 | Foundations of Flame | `A2U7QROVLLCKF3` | `Y7CC1VE403X` | Current-pass Kindle and paperback drafts saved at 19:13/19:19 MST; no hardcover per pricing/worklist plan |
+| 08 | Inheritance of Song | `A1NE6AVK1RIKL2` | `TEX2F46X5RR`; KDP ISBN `9798197426697` | Current-pass Kindle draft saved at 20:54 MST; current-pass paperback content/pricing saved as draft at 21:09 MST; not hardcover eligible at 52 pages; no hardcover draft created |
+
+## Immediate Next Steps
+
+1. No Codex action remaining for KDP; user manually submitted the drafts after the saved-draft pass.
+2. Wait for KDP review results and respond only if KDP flags an issue.
+
+## Final Bookshelf Audit
+
+Captured in Safari on 2026-05-17 21:11 MST from the KDP Bookshelf, sorted by last modified.
+
+| Package | Title | Kindle state | Paperback state | Hardcover state |
+|---|---|---|---|---|
+| 08 | Inheritance of Song | Draft, `$0.99 USD`, last modified May 18, 2026 | Draft, `$5.99 USD`, last modified May 18, 2026 | Not created; Bookshelf only shows `+ Create hardcover`/link options |
+| 01 | Terra in the Mists: Aru-Solien | Live with unpublished changes, `$0.99 USD`, continue setup available | Live with unpublished changes, `$6.99 USD`, continue setup available | Not created; Bookshelf only shows `+ Create hardcover`/link options |
+| 02 | Before the Mists | Live with unpublished changes, `$0.99 USD`, continue setup available | Live with unpublished changes, `$6.99 USD`, continue setup available | Not created; Bookshelf only shows `+ Create hardcover`/link options |
+| 03 | Crimson Reliquary | Live with unpublished changes, `$0.99 USD`, continue setup available | Live with unpublished changes, `$7.99 USD`, continue setup available | Not created; Bookshelf only shows `+ Create hardcover`/link options |
+| 04 | Children of the Divide | Live with unpublished changes, `$0.99 USD`, continue setup available | Live with unpublished changes, `$6.99 USD`, continue setup available | Not created; Bookshelf only shows `+ Create hardcover`/link options |
+| 05 | Echoes of Lyra | Live with unpublished changes, `$0.99 USD`, continue setup available | Live with unpublished changes, `$6.99 USD`, continue setup available | Not created; Bookshelf only shows `+ Create hardcover`/link options |
+| 07 | Foundations of Flame | Live with unpublished changes, `$1.99 USD`, continue setup available | Live with unpublished changes, `$7.99 USD`, continue setup available | Not created; Bookshelf only shows `+ Create hardcover`/link options |
+| 00 | The First Spiral | Draft, `$3.99 USD`, last modified May 18, 2026 | Draft, `$16.99 USD`, last modified May 18, 2026 | Draft, `$24.99 USD`, last modified May 18, 2026 |
+| 06 | Harmonic Rebirth | Live with unpublished changes, `$3.99 USD`, continue setup available | Live with unpublished changes, `$14.99 USD`, continue setup available | Draft, `$22.99 USD`, last modified May 18, 2026 |
+
+Post-submission note: on 2026-05-17 21:36 MST, the user reported that everything had been published/submitted and is awaiting review.
+
+## Completed In This Checkpoint
+
+- 2026-05-17 17:04 MST local reset: removed the digital-cover padding behavior, removed the generated paperback front-cover border/inset, rebuilt all local packages, rebuilt `/tmp/memoria-kdp-upload-assets` as 54 real files, verified EPUB ZIP integrity, verified print cover MediaBoxes/page counts with `python3 scripts/publish.py audit-print`, and verified all interiors with a PDFKit text-boundary scan.
+- 03 Crimson Reliquary paperback: uploaded corrected `03-crimson-reliquary-paperback-cover.pdf`, confirmed AI attestation, launched KDP Print Previewer, verified `Cover / 86` with guides on, saw only the recurring font-embedding notice, approved the proof, and saved the draft.
+- 04 Children of the Divide paperback: uploaded corrected `04-children-of-the-divide-paperback-interior.pdf` and `04-children-of-the-divide-paperback-cover.pdf`, confirmed AI attestation, launched KDP Print Previewer, verified `Cover / 76` with guides on, saw only the recurring font-embedding notice, approved the proof, verified summary page count 76 and Amazon.com printing cost `$2.30`, and saved the draft at 16:21 MST.
+- 05 Echoes of Lyra paperback: uploaded corrected `05-echoes-of-lyra-paperback-interior.pdf` and `05-echoes-of-lyra-paperback-cover.pdf`, confirmed AI attestation, launched KDP Print Previewer, verified `Cover / 74` with guides on, saw only the recurring font-embedding notice, approved the proof, verified summary page count 74 and Amazon.com printing cost `$2.30`, and saved the draft at 16:28 MST.
+- 06 Harmonic Rebirth paperback: uploaded corrected `06-harmonic-rebirth-paperback-interior.pdf` and `06-harmonic-rebirth-paperback-cover.pdf`, confirmed AI attestation, launched KDP Print Previewer, verified `Cover / 327` with guides on, saw only the recurring font-embedding notice, approved the proof, verified summary page count 327 and Amazon.com printing cost `$4.92`, and saved the draft at 16:38 MST.
+- 06 Harmonic Rebirth Kindle eBook: uploaded `06-harmonic-rebirth-ebook.epub` and full-size no-border `06-harmonic-rebirth-ebook-cover.jpg`, confirmed both AI attestation checkboxes after upload, let KDP finish its Kindle conversion, verified pricing page still showed Amazon.com `$3.99` on the 70% royalty plan, and clicked **Save as Draft** only at 18:23 MST. Did not click **Publish Your Kindle eBook**.
+- 06 Harmonic Rebirth paperback confirmed-pass refresh: re-uploaded `06-harmonic-rebirth-paperback-interior.pdf` and no-border full-panel `06-harmonic-rebirth-paperback-cover.pdf`, confirmed the AI attestation, launched KDP Print Previewer, verified `Cover / 327` with guides on, saw only the recurring font-embedding notice, approved the proof, verified page count `327`, Amazon.com print cost `$4.92`, Amazon.com list price `$14.99`, and clicked **Save as Draft** only at 18:30 MST. Did not click **Publish Your Paperback Book**.
+- 06 Harmonic Rebirth hardcover: created the hardcover draft from the Bookshelf `+ Create hardcover` path after copying metadata from the existing paperback/ebook, cleared the copied one-sided reading-age value that blocked Details save, assigned free KDP ISBN `9798197416933`, set print options to `6 x 9`, black-and-white cream paper, no bleed, matte case laminate, uploaded `06-harmonic-rebirth-hardcover-interior.pdf` and `06-harmonic-rebirth-hardcover-cover.pdf`, set AI disclosure to text/images with translations `None`, launched KDP Print Previewer, verified `Cover / 327` with guides on and only the recurring font-embedding notice, approved the proof, verified summary page count `327`, Amazon.com print cost `$9.57`, Amazon.com list price `$22.99`, and clicked **Save as Draft** only at 18:42 MST. Did not click **Publish Your Hardcover Book**.
+- 00 The First Spiral Kindle eBook: uploaded `00-the-first-spiral-ebook.epub` and full-size no-border `00-the-first-spiral-ebook-cover.jpg`, confirmed both AI attestation checkboxes after KDP surfaced duplicate confirmations, let KDP finish conversion, noted the same non-blocking `29` possible spelling errors, verified pricing page showed Amazon.com `$3.99` on the 70% royalty plan, and clicked **Save as Draft** only at 18:49 MST. Did not click **Publish Your Kindle eBook**.
+- 00 The First Spiral paperback current-pass refresh: uploaded `00-the-first-spiral-paperback-interior.pdf` and no-border full-panel `00-the-first-spiral-paperback-cover.pdf`, confirmed the AI attestation, launched KDP Print Previewer, verified `Cover / 393` with guides on and only the recurring font-embedding notice, approved the proof, verified page count `393`, Amazon.com print cost `$5.72`, set Amazon.com list price to `$16.99`, verified Amazon royalty `$4.48` and Expanded Distribution unchecked, and confirmed KDP showed `Your changes have been saved as a draft.` at 18:59 MST. Did not click **Publish Your Paperback Book**.
+- 00 The First Spiral hardcover current-pass refresh: uploaded `00-the-first-spiral-hardcover-interior.pdf` and `00-the-first-spiral-hardcover-cover.pdf`, confirmed existing KDP ISBN `9798197379412`, confirmed black-and-white cream paper, no bleed, matte 6 x 9 case-laminate settings, confirmed the AI attestation, launched KDP Print Previewer, verified `Cover / 393` with guides on and only the recurring font-embedding notice, approved the proof, verified page count `393`, Amazon.com print cost `$10.37`, set Amazon.com list price to `$24.99`, corrected marketplace-derived pricing, verified Amazon.com royalty `$4.63`, and confirmed KDP showed `Your changes have been saved as a draft.` at 19:09 MST. Did not click **Publish Your Hardcover Book**.
+- 07 Foundations of Flame Kindle eBook current-pass refresh: uploaded `07-foundations-of-flame-ebook.epub` and full-size no-border `07-foundations-of-flame-ebook-cover.jpg`, confirmed both KDP AI/accuracy attestation checkboxes, let KDP finish conversion and quality check, verified KDP reported no spelling or image issues, verified 35% royalty with Amazon.com list price `$1.99`, and confirmed KDP showed `Save Successful!` after clicking **Save as Draft** only at 19:13 MST. Did not click **Publish Your Kindle eBook**.
+- 07 Foundations of Flame paperback current-pass refresh: uploaded `07-foundations-of-flame-paperback-interior.pdf` and no-border full-panel `07-foundations-of-flame-paperback-cover.pdf`, confirmed AI attestation, launched KDP Print Previewer, verified `Cover / 120` with guides on and only the recurring font-embedding notice, approved the proof, verified summary page count `120`, Amazon.com print cost `$2.44`, glossy finish remained selected from the existing listing, verified Amazon.com list price `$7.99`, and confirmed KDP showed `Your changes have been saved as a draft.` at 19:19 MST. Did not click **Publish Your Paperback Book**.
+- 05 Echoes of Lyra Kindle eBook current-pass refresh: uploaded `05-echoes-of-lyra-ebook.epub` and full-size no-border `05-echoes-of-lyra-ebook-cover.jpg`, confirmed both KDP AI/accuracy attestation checkboxes, let KDP finish conversion and quality check, verified KDP reported no spelling or image issues, verified 35% royalty with Amazon.com list price `$0.99`, and confirmed KDP showed `Save Successful!` after clicking **Save as Draft** only at 19:25 MST. Did not click **Publish Your Kindle eBook**.
+- 05 Echoes of Lyra paperback current-pass refresh: uploaded `05-echoes-of-lyra-paperback-interior.pdf` and no-border full-panel `05-echoes-of-lyra-paperback-cover.pdf`, confirmed AI attestation, launched KDP Print Previewer, verified `Cover / 74` with guides on and only the recurring font-embedding notice, approved the proof, verified summary page count `74`, Amazon.com print cost `$2.30`, glossy finish remained selected from the existing listing, verified Amazon.com list price `$6.99`, and clicked **Save as Draft** only at 19:34 MST with no KDP error. Did not click **Publish Your Paperback Book**.
+- 04 Children of the Divide Kindle eBook current-pass refresh: uploaded `04-children-of-the-divide-ebook.epub` and full-size no-border `04-children-of-the-divide-ebook-cover.jpg`, confirmed both KDP AI/accuracy attestation checkboxes, let KDP finish conversion and quality check, verified KDP reported no spelling or image issues, verified 35% royalty with Amazon.com list price `$0.99`, and confirmed KDP showed `Save Successful!` after clicking **Save as Draft** only at 19:38 MST. Did not click **Publish Your Kindle eBook**.
+- 04 Children of the Divide paperback current-pass refresh: uploaded `04-children-of-the-divide-paperback-interior.pdf` and no-border full-panel `04-children-of-the-divide-paperback-cover.pdf`, confirmed AI attestation, launched KDP Print Previewer, verified `Cover / 76` with guides on and only the recurring font-embedding notice, approved the proof, verified summary page count `76` and Amazon.com print cost `$2.30`, verified Amazon.com list price `$6.99`, and confirmed KDP showed `Your changes have been saved as a draft.` after clicking **Save as Draft** only at 19:56 MST. Did not click **Publish Your Paperback Book**.
+- 03 Crimson Reliquary Kindle eBook current-pass refresh: uploaded `03-crimson-reliquary-ebook.epub` and full-size no-border `03-crimson-reliquary-ebook-cover.jpg`, confirmed both KDP AI/accuracy attestation checkboxes, let KDP finish conversion and quality check, verified KDP reported no spelling or image issues, verified 35% royalty with Amazon.com list price `$0.99`, and confirmed KDP showed `Save Successful!` after clicking **Save as Draft** only at 20:02 MST. Did not click **Publish Your Kindle eBook**.
+- 03 Crimson Reliquary paperback current-pass refresh: uploaded `03-crimson-reliquary-paperback-interior.pdf` and no-border full-panel `03-crimson-reliquary-paperback-cover.pdf`, confirmed AI attestation, launched KDP Print Previewer, verified `Cover / 86` with guides on and only the recurring font-embedding notice, approved the proof, verified summary page count `86`, Amazon.com print cost `$2.30`, glossy finish, Amazon.com list price `$7.99`, and confirmed KDP showed `Your changes have been saved as a draft.` after clicking **Save as Draft** only at 20:10 MST. Did not click **Publish Your Paperback Book**.
+- 02 Before the Mists Kindle eBook current-pass refresh: uploaded `02-before-the-mists-ebook.epub` and full-size no-border `02-before-the-mists-ebook-cover.jpg`, confirmed both KDP AI/accuracy attestation checkboxes, let KDP finish conversion and quality check, verified KDP reported no spelling or image issues, verified 35% royalty with Amazon.com list price `$0.99`, and confirmed KDP showed `Save Successful!` after clicking **Save as Draft** only at 20:16 MST. Did not click **Publish Your Kindle eBook**.
+- 02 Before the Mists paperback current-pass refresh: uploaded `02-before-the-mists-paperback-interior.pdf` and no-border full-panel `02-before-the-mists-paperback-cover.pdf`, confirmed AI attestation, launched KDP Print Previewer, verified `Cover / 61` with guides on and only the recurring font-embedding notice, approved the proof, verified summary page count `61`, Amazon.com print cost `$2.30`, glossy finish, Amazon.com list price `$6.99`, Expanded Distribution checked from the existing listing, and clicked **Save as Draft** only at 20:25 MST with no KDP error. Did not click **Publish Your Paperback Book**.
+- 01 Terra in the Mists Kindle eBook current-pass refresh: uploaded `01-terra-in-the-mists-ebook.epub` and full-size no-border `01-terra-in-the-mists-ebook-cover.jpg`, confirmed both KDP AI/accuracy attestation checkboxes, let KDP finish conversion and quality check, verified KDP reported no spelling or image issues, verified 35% royalty with Amazon.com list price `$0.99`, and confirmed KDP showed `Save Successful!` after clicking **Save as Draft** only at 20:30 MST. Did not click **Publish Your Kindle eBook**.
+- 01 Terra in the Mists paperback current-pass refresh: uploaded `01-terra-in-the-mists-paperback-interior.pdf` and no-border full-panel `01-terra-in-the-mists-paperback-cover.pdf`, confirmed AI attestation, launched KDP Print Previewer, verified `Cover / 52` with guides on and only the recurring font-embedding notice, approved the proof, verified summary page count `52`, Amazon.com print cost `$2.30`, glossy finish, Expanded Distribution checked from the existing listing, Amazon.com list price `$6.99`, and confirmed KDP showed `Your changes have been saved as a draft.` after clicking **Save as Draft** only at 20:37 MST. Did not click **Publish Your Paperback Book**.
+- 08 Inheritance of Song Kindle eBook created/current-pass refresh: created new Kindle draft `A1NE6AVK1RIKL2`, filled Details metadata and categories, skipped series association because the KDP series confirmation button said it would publish title/series changes, uploaded `08-inheritance-of-song-ebook.epub` and full-size no-border `08-inheritance-of-song-ebook-cover.jpg`, set DRM to no, confirmed AI disclosure for text/images with translations `None`, entered publisher `PixelPacific`, let KDP finish conversion and quality check, noted non-blocking `5` possible spelling errors, set KDP Select off, worldwide rights, 35% royalty, Amazon.com Kindle list price `$0.99`, and confirmed KDP showed `Save Successful!` after clicking **Save as Draft** only at 20:54 MST. Did not click **Publish Your Kindle eBook**.
+- 08 Inheritance of Song paperback created/current-pass refresh: created new paperback draft `TEX2F46X5RR`, assigned free KDP ISBN `9798197426697` with imprint `Independently published`, set black-and-white cream paper, 6 x 9 in, no bleed, glossy finish, uploaded `08-inheritance-of-song-paperback-interior.pdf` and no-border full-panel `08-inheritance-of-song-paperback-cover.pdf`, confirmed AI disclosure for text/images with translations `None`, launched KDP Print Previewer, verified `Cover / 52` with guides on and only the recurring font-embedding notice, approved the proof, verified summary page count `52`, Amazon.com print cost `$2.30`, worldwide rights, Amazon.com paperback list price `$5.99`, and confirmed KDP showed `Your changes have been saved as a draft.` after clicking **Save as Draft** only at 21:09 MST. Did not click **Publish Your Paperback Book**. No `08` hardcover draft was created because the local page count is below KDP hardcover eligibility.
+- 2026-05-17 21:17 MST final local recheck: re-ran `python3 scripts/publish.py audit-print` successfully for all 18 print packages, confirmed `/tmp/memoria-kdp-upload-assets` has 54 real files, 0 symlinks, no empty files, and re-tested all 9 staged Kindle EPUBs with `unzip -t`.
+
+## Action-Time Confirmation Rule
+
+- User's 2026-05-17 instruction explicitly approves overwriting KDP manuscripts/covers and saving drafts for this refresh.
+- Do not click final public KDP publish/submit buttons; the user will do final submission manually.

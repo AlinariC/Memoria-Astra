@@ -1,80 +1,134 @@
-# Memoria Astra - Automated Book Publishing
-## “Memoria Astra — A Song Woven Across the Stars.”
+# Memoria Astra Publishing
 
-[![License: PPPL v1.0](https://img.shields.io/badge/license-PPPL%20v1.0-purple.svg?style=flat-square)](/LICENSE)
-[![Build: Passing](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)]()
-[![EPUBs Ready](https://img.shields.io/badge/epubs-ready-blue.svg?style=flat-square)]()
-[![Publisher: PixelPacific](https://img.shields.io/badge/publisher-PixelPacific-8a2be2.svg?style=flat-square)](https://pixelpacific.com)
-[![Universe: Memoria Astra](https://img.shields.io/badge/universe-Memoria%20Astra-8a2be2.svg?style=flat-square)]()
-[![GitHub Release](https://img.shields.io/github/v/release/AlinariC/Memoria-Astra?include_prereleases&sort=date&display_name=release&style=flat-square)](https://github.com/AlinariC/Memoria-Astra/releases)
+Memoria Astra is a 15-book science fiction cycle by Alinari Campbell, published
+by PixelPacific.
 
-This repository automates the EPUB and Print PDF generation process for the **Memoria Astra** book series.
+This repository is now organized around one simple workflow:
 
-## 📚 Repository Structure
+1. Put a finished `Manuscript.md` in a numbered book folder.
+2. Add a final `cover.jpg` beside it.
+3. Run one command from the repository root.
+4. Upload the generated platform folders to Apple Books, Google Play Books, and
+   Amazon KDP.
 
-```
-/
-├── 01_Terra_in_the_Mists/
-│    ├── Manuscript.md
-│    ├── cover.jpg
-├── 02_Before_the_Mists/
-│    └── (similar structure)
-├── assets/
-│    ├── styles.css
-│    ├── custom.latex
-│    ├── format-chapter-numbers.lua
-│    ├── unnumber-specials.lua
-├── scripts/
-│    ├── build.sh
-│    └── fix-and-polish-epub.sh
-├── output/
-│    └── (final EPUBs and PDFs)
-├── .github/
-│    └── workflows/
-│         └── build-epub.yml
-├── README.md
-├── LICENSE
+## Quick Start
+
+```bash
+python3 scripts/publish.py inventory
+python3 scripts/publish.py doctor
+python3 scripts/publish.py build --number 8
+python3 scripts/publish.py audit-print
 ```
 
-## 🚀 Automation Overview
+To rebuild the combined novel source before packaging:
 
-- Whenever a `Manuscript.md` or `cover.jpg` is updated in any book folder, GitHub Actions will:
-  - Detect the changed book(s)
-  - Run `build.sh` to compile clean EPUB and Print PDF files
-  - Apply Lua filters to format chapters and handle special sections
-  - Polish and finalize the EPUB
-  - Move the final `.epub` and `-Print.pdf` into `/output/`
-  - Publish the EPUB(s) and PDF(s) to the GitHub Releases tab for easy download
+```bash
+python3 scripts/build_first_spiral.py
+python3 scripts/publish.py build --all
+python3 scripts/build_apple_itmsp.py --all --provider AlinariCampbell
+```
 
-## 🛠 Scripts
+To build every numbered book folder that has a manuscript:
 
-- **build.sh** — Compiles Markdown + metadata + cover + styles into both `.epub` and `-Print.pdf` using Pandoc and Lua filters.
-- **fix-and-polish-epub.sh** — Finalizes EPUB structure, injects correct cover metadata, and repackages cleanly.
+```bash
+python3 scripts/publish.py build --all
+python3 scripts/publish.py audit-print
+```
 
-Both scripts live inside `/scripts/`.
+`audit-print` checks every generated KDP paperback and hardcover package against
+the recorded page count and wrap-cover size before you upload to KDP.
 
-## 🧰 How to Run Locally
+The generated package appears under `output/<book>/`:
 
-1. Install required tools:
-   ```bash
-   sudo apt-get install pandoc zip unzip imagemagick texlive-xetex
-   ```
+```text
+output/<book>/
+├── apple-books/
+│   ├── <book>.epub
+│   └── cover.jpg
+├── google-play-books/
+│   ├── <book>.epub
+│   ├── <book>.pdf
+│   └── cover.jpg
+├── amazon-kdp/
+│   ├── ebook/
+│   │   ├── <book>.epub
+│   │   └── cover.jpg
+│   └── print/
+│       ├── paperback/
+│       │   ├── <book>-paperback-interior.pdf
+│       │   ├── <book>-paperback-cover.pdf
+│       │   └── cover.jpg
+│       └── hardcover/
+│           ├── <book>-hardcover-interior.pdf
+│           ├── <book>-hardcover-cover.pdf
+│           └── cover.jpg
+├── metadata/
+│   ├── kdp-print-cover-specs.json
+│   ├── manifest.json
+│   └── publishing-checklist.md
+└── source/
+    └── manuscript-packaged.md
+```
 
-2. Build manually:
-   ```bash
-   cd [Book_Folder]
-   bash ../scripts/build.sh
-   bash ../scripts/fix-and-polish-epub.sh
-   ```
+## Book Folder Contract
 
-3. Final EPUB and PDF files will appear inside the `/output/` folder.
+Each publishable book folder should look like this:
 
-## ✨ Additional Features
+```text
+08_Inheritance_of_Song/
+├── Manuscript.md
+├── metadata.yaml
+└── cover.jpg
+```
 
-- Automatic chapter numbering and Prologue/Epilogue handling via Lua filters
-- Clean Table of Contents generation for both EPUB and Print PDF
-- KDP-ready 6x9 inch Print PDF outputs with proper margins, line spacing, and professional typography
+`Manuscript.md` should start with YAML front matter:
+
+```yaml
+---
+title: "Inheritance of Song"
+subtitle: "Book Eight in the Memoria Astra Cycle"
+author: "Alinari Campbell"
+language: "en"
+publisher: "PixelPacific"
+identifier: "urn:isbn:..."
+cover-image: cover.jpg
+---
+```
+
+The publisher app appends `assets/Colophon.md` automatically when the manuscript
+does not already include a colophon.
+
+## Local Dependencies
+
+The app can generate EPUB/PDF packages with Python alone. For best typography
+and closer-to-final print interiors, install the optional Pandoc toolchain:
+
+- `pandoc` for EPUB generation
+- `xelatex` for print PDF generation
+- `zip` and `unzip` for archive support
+On macOS:
+
+```bash
+brew install pandoc basictex
+```
+
+On GitHub Actions, `.github/workflows/build_epub.yml` installs the optional
+Linux packages and publishes one ZIP package per book in the release.
+
+## Notes
+
+- Amazon KDP ebook upload uses EPUB. Kindle Previewer should still be used as
+  the final preflight step.
+- KDP paperback and hardcover uploads include interior PDFs and full
+  back-spine-front cover PDFs. The publisher uses KDP's cover-calculator
+  measurements for the current page count and records them in
+  `metadata/kdp-print-cover-specs.json`.
+- Google Play Books can accept both EPUB and PDF; this workflow gives it both
+  when PDF generation is available.
+- Apple Books wants EPUB validation before upload; use EPUBCheck or Transporter.
+- Built-in fallback PDFs are useful for drafts and preflight packages. Install
+  Pandoc/XeLaTeX before final print upload when typography matters.
 
 ---
 
-© 2025 Alinari Campbell | Published by [PixelPacific](https://pixelpacific.com)
+© 2025 Alinari Campbell | Published by PixelPacific

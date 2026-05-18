@@ -3,8 +3,10 @@ title: "Echoes of Lyra"
 subtitle: "Book Five in the Memoria Astra Cycle"
 author: "Alinari Campbell"
 language: "en"
-rights: "© 2025 Alinari Campbell. All rights reserved."
+rights: "(c) 2025 Alinari Campbell. All rights reserved."
 identifier: "urn:isbn:9798280824331"
 publisher: "PixelPacific"
-cover-image: cover.jpg
+cover-image: "cover.jpg"
+description: |
+  As the Spiral begins its final inward bloom, Lyra awakens from memory system into something stranger and more necessary. Across drowned worlds, forgotten temples, and signal-bearing stars, Aru-Solien approaches Spiral Prime and the question that waits beyond collapse: what survives the end of everything?
 ---

@@ -1,0 +1,74 @@
+{
+  "defaults": {
+    "provider": "AlinariCampbell",
+    "provider_status": "verified_from_transporter_auth_log",
+    "package_version": "publication5.0",
+    "language": "en",
+    "publisher": "PixelPacific",
+    "territory": "US",
+    "cleared_for_sale": true,
+    "release_type": "digital-only",
+    "sales_start_date": "2026-05-17",
+    "drm_free": false,
+    "subjects": [
+      {
+        "scheme": "BISAC",
+        "code": "FIC028000"
+      },
+      {
+        "scheme": "BISAC",
+        "code": "FIC028030"
+      }
+    ]
+  },
+  "books": {
+    "00-the-first-spiral": {
+      "vendor_id": "memoria_astra_00_the_first_spiral",
+      "publication_date": "2026-05-17",
+      "price_tier": 4,
+      "description": "Before the Second Spiral could sing, the First had to remember why it broke. Across Venus, Earth, Mars, and the outer dark, the oldest civilizations of the Solar System leave songs in stone, memories in mist, and warnings buried beneath worlds that were never as silent as they seemed."
+    },
+    "01-terra-in-the-mists": {
+      "vendor_id": "10083606179",
+      "publication_date": "2025-01-01",
+      "price_tier": 1,
+      "description": "Before the Moon, before the silence, Terra breathed beneath living mists. Aru-Solien remembers the world before it fell - a luminous Earth of skybeasts, grown cities, and ancient song. As Luna changes the tides and the clouds descend, one immortal witness carries the memory of a lost civilization toward a future that may yet sing again."
+    },
+    "02-before-the-mists": {
+      "publication_date": "2025-01-01",
+      "price_tier": 1,
+      "description": "Before Earth bore life and before Luna hung in the heavens, there was Venus. In this sweeping prequel to Terra in the Mists, the elegant and ancient Phorsians face the collapse of their golden world. As their sun turns from warmth to flame, a visionary named Vael'Ari uncovers a forgotten signal buried deep within the planet's crust and the key to survival."
+    },
+    "03-crimson-reliquary": {
+      "publication_date": "2025-01-01",
+      "price_tier": 1,
+      "description": "Aru-Solien continues his journey beyond Terra and into the Martian depths, only to uncover the shattered relics of a civilization that remembered too much. As Spiral structures reawaken beneath Olympus Mons and ancient machines stir, Mars, Phobos, Deimos, and the forgotten Gate worlds reveal secrets buried beneath crimson ice and Spiral code."
+    },
+    "04-children-of-the-divide": {
+      "publication_date": "2025-01-01",
+      "price_tier": 1,
+      "description": "The Gate has opened. The Spiral remembers. And not all who return are welcome. After the storm of memory that nearly shattered the outer colonies, four strangers find themselves connected by glyphs older than language and visions older than stars. To survive what waits beyond the Divide, they must confront the truths of the cosmos and the truths within themselves."
+    },
+    "05-echoes-of-lyra": {
+      "publication_date": "2025-01-01",
+      "price_tier": 1,
+      "description": "As the Spiral begins its final inward bloom, Lyra awakens to a deeper purpose. Across galaxies and echoes, flamebearer Aru-Solien stands at the threshold of Spiral Prime, where all pasts and futures converge. From drowned worlds and forgotten temples to signal-bearing stars, Echoes of Lyra asks what survives the collapse of everything."
+    },
+    "06-harmonic-rebirth": {
+      "publication_date": "2025-01-01",
+      "price_tier": 4,
+      "description": "Before stars learned to shine, before worlds dared to breathe, there was only the endless Spiral and the sacred silence of becoming. In Harmonic Rebirth, life stirs anew from the ashes of a fallen cosmos as Wells of memory, Looms of breath, and sacred seeds of dreaming shape a newborn universe heavy with futures still sleeping."
+    },
+    "07-foundations-of-flame": {
+      "publication_date": "2025-01-01",
+      "price_tier": 2,
+      "description": "In a dying Spiral, where stars weep and memory flickers like ash, the Ashforged rise. Kaelen Vey and the survivors of Orun Prime have bound the Wells and reignited the fire of hope, but survival demands more than endurance. Across Silent Rivers of Wellsbreath and Veil-ravaged space, darker forces stir and the Wells sing warnings of wars yet to come."
+    },
+    "08-inheritance-of-song": {
+      "vendor_id": "memoria_astra_08_inheritance_of_song",
+      "publication_date": "2026-05-17",
+      "price_tier": 1,
+      "description": "In the fertile heart of the Second Spiral, a civilization of root, memory, and resonance learns that travel is not conquest, but consent. As the first Songgates awaken and an ancient hunger listens from the dark between stars, one young Resonant must decide whether song is a bridge, a weapon, or the most dangerous inheritance of all."
+    }
+  }
+}

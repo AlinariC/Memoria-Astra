@@ -26,7 +26,7 @@ Publisher: PixelPacific (pixelpacific.com)
     •    One built from science, technology, and conquest of stars.
     •    One woven from magic, song, and harmonic resonance across worlds.
     •    Their meeting is inevitable —
-    
+
 conflict and sorrow will tear the Spiral open again —
 but from that rupture will rise a transcendent union,
 fusing memory, breath, and dream into a new creation.

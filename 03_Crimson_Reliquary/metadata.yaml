@@ -3,8 +3,10 @@ title: "Crimson Reliquary"
 subtitle: "Book Three in the Memoria Astra Cycle"
 author: "Alinari Campbell"
 language: "en"
-rights: "© 2025 Alinari Campbell. All rights reserved."
+rights: "(c) 2025 Alinari Campbell. All rights reserved."
 identifier: "urn:isbn:9798280622265"
 publisher: "PixelPacific"
-cover-image: cover.jpg
+cover-image: "cover.jpg"
+description: |
+  Aru-Solien's journey carries him beyond Terra and into the Martian depths, where Spiral structures awaken beneath Olympus Mons and the Crimson Reliquary waits under ancient ice. Mars, Phobos, Deimos, and the forgotten Gate worlds hold the truth of past selves, recursion, and the collapse memory tried to bury.
 ---

@@ -1,1 +1,10 @@
 .DS_Store
+/output/*
+!/output/*.md
+/dist/
+/build/
+/.publisher-cache/
+*.aux
+*.log
+*.out
+*.toc

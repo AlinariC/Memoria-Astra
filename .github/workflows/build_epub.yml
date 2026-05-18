@@ -1,13 +1,12 @@
-name: Build and Release EPUBs and PDFs
+name: Build and Release Publishing Packages
 
 on:
   push:
     paths:
       - "**/Manuscript.md"
       - "**/cover.jpg"
+      - "**/metadata.yaml"
   workflow_dispatch:
-  repository_dispatch:
-    types: [cover-updated]
 
 permissions:
   contents: write
@@ -23,36 +22,26 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y pandoc zip unzip imagemagick texlive-xetex gh
+        sudo apt-get install -y pandoc zip unzip texlive-xetex gh
 
     - name: Build Books
       run: |
-        mkdir -p output
+        python3 scripts/publish.py inventory
+        python3 scripts/publish.py doctor
+        python3 scripts/publish.py build --all
+        python3 scripts/build_apple_itmsp.py --all --provider AlinariCampbell
+
         echo "### Books Published" > release_notes.md
         echo "" >> release_notes.md
-
-        for dir in */; do
-          if [ -f "$dir/Manuscript.md" ] && [ -f "$dir/cover.jpg" ]; then
-            echo "Processing $dir..."
-            cd "$dir"
-            bash ../scripts/build.sh
-            cd ..
-          fi
-        done
-
-        bash scripts/fix-and-polish-epub.sh
-
-        echo "## 📚 eBook Editions" >> release_notes.md
-        for file in output/*.epub; do
-          NAME=$(basename "$file" .epub | tr '_' ' ')
-          echo "- $NAME (eBook Edition)" >> release_notes.md
-        done
-
+        echo "Each ZIP contains Apple Books, Google Play Books, Amazon KDP upload folders, and Apple Transporter metadata packages." >> release_notes.md
         echo "" >> release_notes.md
-        echo "## 🖨️ Print Editions" >> release_notes.md
-        for file in output/*-Print.pdf; do
-          NAME=$(basename "$file" -Print.pdf | tr '_' ' ')
-          echo "- $NAME (Print Edition)" >> release_notes.md
+
+        for dir in output/*; do
+          if [ -d "$dir" ]; then
+            zip -r "${dir}.zip" "$dir"
+            NAME=$(basename "$dir" | tr '-' ' ')
+            echo "- $NAME publishing package" >> release_notes.md
+          fi
         done
 
     - name: Prepare release version and date
@@ -66,7 +55,6 @@ jobs:
         name: "Memoria Astra Cycle – v1.0.${{ github.run_number }} (${{ env.RELEASE_DATE }})"
         body_path: release_notes.md
         files: |
-          output/*.epub
-          output/*.pdf
+          output/*.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
