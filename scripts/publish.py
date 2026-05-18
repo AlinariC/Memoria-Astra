@@ -32,6 +32,7 @@ DEFAULT_OUTPUT = REPO_ROOT / "output"
 BOOK_DIR_RE = re.compile(r"^(?P<number>\d{2})_(?P<slug>.+)$")
 PAPERBACK_FRONT_ART_INSET_IN = 0.0
 HARDCOVER_FRONT_ART_INSET_IN = 0.0
+DEFAULT_HARDCOVER_FRONT_ART_SHIFT_LEFT_IN = 0.0
 PAPERBACK_BACK_SAFE_INSET_IN = 1.05
 HARDCOVER_BACK_SAFE_INSET_IN = 1.25
 MIN_EXTRA_SAFE_INSET_IN = 0.10
@@ -241,6 +242,18 @@ def metadata_for(book: Book) -> dict[str, object]:
     data.setdefault("publisher", "PixelPacific")
     data.setdefault("language", "en")
     return data
+
+
+def metadata_float(
+    metadata: dict[str, object], key: str, default: float = 0.0
+) -> float:
+    value = metadata.get(key)
+    if value is None or value == "":
+        return default
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
 
 
 def assemble_manuscript(book: Book, package_dir: Path) -> Path:
@@ -938,6 +951,11 @@ def write_kdp_print_covers(
 
     paperback = kdp_measurements("PAPERBACK", page_count)
     hardcover = kdp_measurements("CASE_LAMINATE", page_count)
+    hardcover_shift_left_in = metadata_float(
+        metadata,
+        "kdp-hardcover-front-shift-left-in",
+        DEFAULT_HARDCOVER_FRONT_ART_SHIFT_LEFT_IN,
+    )
     print_specs["paperback"] = paperback
     print_specs["hardcover"] = hardcover
     print_specs["front_cover_layout"] = {
@@ -945,13 +963,16 @@ def write_kdp_print_covers(
         "paperback_image_fit": "Full source cover art fills the paperback front panel with no generated border.",
         "hardcover_image_inset_in": HARDCOVER_FRONT_ART_INSET_IN,
         "hardcover_image_fit": "Full source cover art fills the hardcover front panel with no generated border.",
+        "hardcover_front_shift_left_in": hardcover_shift_left_in,
         "paperback_back_text_inset_in": PAPERBACK_BACK_SAFE_INSET_IN,
         "hardcover_back_text_inset_in": HARDCOVER_BACK_SAFE_INSET_IN,
         "note": (
             "Paperback and hardcover front artwork are kept full-size with no "
-            "added border. Generated back-cover copy is contained inside these "
-            "KDP-safe insets so story copy and barcode space stay away from trim, "
-            "bleed, hinge, and wrap guide lines."
+            "added border. Title-specific hardcover artwork shifts may be applied "
+            "with same-art edge fill when the source composition crowds a KDP "
+            "guide. Generated back-cover copy is contained inside these KDP-safe "
+            "insets so story copy and barcode space stay away from trim, bleed, "
+            "hinge, and wrap guide lines."
         ),
     }
 
@@ -1181,6 +1202,7 @@ def write_wrap_cover_pdf(
     width_pt = float(measurements["full_cover_width"]) * 72
     height_pt = float(measurements["full_cover_height"]) * 72
     spine_pt = float(measurements["spine_width"]) * 72
+    hardcover_shift_left_pt = 0.0
 
     if binding_label == "paperback":
         bleed_pt = float(measurements.get("bleed_width") or 0.125) * 72
@@ -1216,6 +1238,14 @@ def write_wrap_cover_pdf(
         back_area_h = front_area_h
         safe_margin_pt = HARDCOVER_FRONT_ART_INSET_IN * 72
         back_safe_margin_pt = HARDCOVER_BACK_SAFE_INSET_IN * 72
+        hardcover_shift_left_pt = (
+            metadata_float(
+                metadata,
+                "kdp-hardcover-front-shift-left-in",
+                DEFAULT_HARDCOVER_FRONT_ART_SHIFT_LEFT_IN,
+            )
+            * 72
+        )
 
     image_box_x = front_area_x + safe_margin_pt
     image_box_y = front_area_y + safe_margin_pt
@@ -1241,6 +1271,23 @@ def write_wrap_cover_pdf(
             "toward the next turning of the Spiral."
         )
 
+    image_commands = [
+        (
+            f"q {image_box_x:.2f} {image_box_y:.2f} {image_box_w:.2f} "
+            f"{image_box_h:.2f} re W n {image_w:.2f} 0 0 {image_h:.2f} "
+            f"{image_x:.2f} {image_y:.2f} cm /Im1 Do Q"
+        )
+    ]
+    if hardcover_shift_left_pt > 0:
+        shifted_image_x = image_x - hardcover_shift_left_pt
+        image_commands.append(
+            (
+                f"q {image_box_x:.2f} {image_box_y:.2f} {image_box_w:.2f} "
+                f"{image_box_h:.2f} re W n {image_w:.2f} 0 0 {image_h:.2f} "
+                f"{shifted_image_x:.2f} {image_y:.2f} cm /Im1 Do Q"
+            )
+        )
+
     content = [
         "0.035 0.035 0.045 rg",
         f"0 0 {width_pt:.2f} {height_pt:.2f} re f",
@@ -1253,11 +1300,7 @@ def write_wrap_cover_pdf(
         f"{front_x:.2f} 0 {front_w:.2f} {height_pt:.2f} re f",
         "0.12 0.08 0.035 rg",
         f"{front_area_x:.2f} {front_area_y:.2f} {front_area_w:.2f} {front_area_h:.2f} re f",
-        (
-            f"q {image_box_x:.2f} {image_box_y:.2f} {image_box_w:.2f} "
-            f"{image_box_h:.2f} re W n {image_w:.2f} 0 0 {image_h:.2f} "
-            f"{image_x:.2f} {image_y:.2f} cm /Im1 Do Q"
-        ),
+        *image_commands,
     ]
     content.extend(
         back_cover_text_commands(

@@ -8,6 +8,8 @@ Hardcover front correction added on 2026-05-18 after the published 00 hardcover 
 
 Live KDP follow-up completed on 2026-05-18 at 08:48 MST: 00 The First Spiral and 06 Harmonic Rebirth hardcover covers were re-uploaded from the regenerated full-panel PDFs, checked in KDP Print Previewer with guides on, approved, and saved as drafts/unpublished changes only.
 
+Harmonic Rebirth alignment follow-up completed on 2026-05-18 at 09:12 MST: added a 0.16 in title-specific hardcover front-art shift left with same-art edge fill, rebuilt the 06 hardcover cover, verified KDP Print Previewer with guides on, approved the improved proof, and saved the hardcover draft/unpublished changes only.
+
 | Package | Title | Kindle ID | Paperback ID | Ebook cover | Paperback cover | Hardcover eligible | Hardcover assets | Progress |
 |---|---|---|---|---|---|---|---|---|
 | 00 | The First Spiral | A2R67O6ZE1G9WV | JD0C286F3RB | `/tmp/memoria-kdp-upload-assets/00-the-first-spiral-ebook-cover.jpg` | `/tmp/memoria-kdp-upload-assets/00-the-first-spiral-paperback-cover.pdf` | Yes, 393 pages | `/tmp/memoria-kdp-upload-assets/00-the-first-spiral-hardcover-interior.pdf`, `/tmp/memoria-kdp-upload-assets/00-the-first-spiral-hardcover-cover.pdf` | Kindle, paperback, and hardcover refreshed and saved as drafts/unpublished changes. |
