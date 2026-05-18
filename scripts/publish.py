@@ -984,13 +984,13 @@ def count_pdf_pages(pdf: Path, packaged_md: Path) -> int:
     except Exception:
         pass
 
-    pdfkit_count = count_pdf_pages_with_pdfkit(pdf)
-    if pdfkit_count is not None:
-        return pdfkit_count
-
     intrinsic_count = count_pdf_pages_from_bytes(pdf)
     if intrinsic_count is not None:
         return intrinsic_count
+
+    pdfkit_count = count_pdf_pages_with_pdfkit(pdf)
+    if pdfkit_count is not None:
+        return pdfkit_count
 
     if shutil.which("mdls"):
         for _ in range(3):
@@ -1011,6 +1011,8 @@ def count_pdf_pages(pdf: Path, packaged_md: Path) -> int:
 
 
 def count_pdf_pages_with_pdfkit(pdf: Path) -> int | None:
+    if sys.platform != "darwin":
+        return None
     if not shutil.which("swift"):
         return None
     script = (
@@ -1018,13 +1020,16 @@ def count_pdf_pages_with_pdfkit(pdf: Path) -> int | None:
         "let url = URL(fileURLWithPath: CommandLine.arguments[1]); "
         "if let doc = PDFDocument(url: url) { print(doc.pageCount) }"
     )
-    result = subprocess.run(
-        ["swift", "-e", script, str(pdf)],
-        check=False,
-        capture_output=True,
-        text=True,
-        timeout=10,
-    )
+    try:
+        result = subprocess.run(
+            ["swift", "-e", script, str(pdf)],
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
     value = result.stdout.strip()
     if value.isdigit():
         return int(value)

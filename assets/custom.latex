@@ -35,9 +35,42 @@ $endif$
 \usepackage{amsmath,amssymb}
 \usepackage{fontspec}
 \defaultfontfeatures{Ligatures=TeX}
-\IfFontExistsTF{Georgia}{\setmainfont{Georgia}}{\setmainfont{TeX Gyre Schola}}
-\IfFontExistsTF{Arial}{\setsansfont{Arial}}{\setsansfont{TeX Gyre Heros}}
-\IfFontExistsTF{Courier New}{\setmonofont{Courier New}}{\setmonofont{TeX Gyre Cursor}}
+\IfFileExists{/System/Library/Fonts/Supplemental/Georgia.ttf}{
+  \setmainfont{Georgia}[
+    Path=/System/Library/Fonts/Supplemental/,
+    Extension=.ttf,
+    UprightFont=*,
+    BoldFont=Georgia Bold,
+    ItalicFont=Georgia Italic,
+    BoldItalicFont=Georgia Bold Italic
+  ]
+}{
+  \setmainfont{TeX Gyre Schola}
+}
+\IfFileExists{/System/Library/Fonts/Supplemental/Arial.ttf}{
+  \setsansfont{Arial}[
+    Path=/System/Library/Fonts/Supplemental/,
+    Extension=.ttf,
+    UprightFont=*,
+    BoldFont=Arial Bold,
+    ItalicFont=Arial Italic,
+    BoldItalicFont=Arial Bold Italic
+  ]
+}{
+  \setsansfont{TeX Gyre Heros}
+}
+\IfFileExists{/System/Library/Fonts/Supplemental/Courier New.ttf}{
+  \setmonofont{Courier New}[
+    Path=/System/Library/Fonts/Supplemental/,
+    Extension=.ttf,
+    UprightFont=*,
+    BoldFont=Courier New Bold,
+    ItalicFont=Courier New Italic,
+    BoldItalicFont=Courier New Bold Italic
+  ]
+}{
+  \setmonofont{TeX Gyre Cursor}
+}
 \usepackage[
   paperwidth=6in,
   paperheight=9in,
