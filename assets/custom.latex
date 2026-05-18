@@ -35,30 +35,9 @@ $endif$
 \usepackage{amsmath,amssymb}
 \usepackage{fontspec}
 \defaultfontfeatures{Ligatures=TeX}
-\setmainfont{Georgia}[
-  Path=/System/Library/Fonts/Supplemental/,
-  Extension=.ttf,
-  UprightFont=*,
-  BoldFont=Georgia Bold,
-  ItalicFont=Georgia Italic,
-  BoldItalicFont=Georgia Bold Italic
-]
-\setsansfont{Arial}[
-  Path=/System/Library/Fonts/Supplemental/,
-  Extension=.ttf,
-  UprightFont=*,
-  BoldFont=Arial Bold,
-  ItalicFont=Arial Italic,
-  BoldItalicFont=Arial Bold Italic
-]
-\setmonofont{Courier New}[
-  Path=/System/Library/Fonts/Supplemental/,
-  Extension=.ttf,
-  UprightFont=*,
-  BoldFont=Courier New Bold,
-  ItalicFont=Courier New Italic,
-  BoldItalicFont=Courier New Bold Italic
-]
+\IfFontExistsTF{Georgia}{\setmainfont{Georgia}}{\setmainfont{TeX Gyre Schola}}
+\IfFontExistsTF{Arial}{\setsansfont{Arial}}{\setsansfont{TeX Gyre Heros}}
+\IfFontExistsTF{Courier New}{\setmonofont{Courier New}}{\setmonofont{TeX Gyre Cursor}}
 \usepackage[
   paperwidth=6in,
   paperheight=9in,

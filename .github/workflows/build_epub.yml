@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y pandoc zip unzip texlive-xetex gh
+        sudo apt-get install -y pandoc zip unzip texlive-xetex fonts-texgyre gh
 
     - name: Build Books
       run: |
