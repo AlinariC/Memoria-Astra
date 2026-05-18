@@ -69,6 +69,54 @@
       "publication_date": "2026-05-17",
       "price_tier": 1,
       "description": "In the fertile heart of the Second Spiral, a civilization of root, memory, and resonance learns that travel is not conquest, but consent. As the first Songgates awaken and an ancient hunger listens from the dark between stars, one young Resonant must decide whether song is a bridge, a weapon, or the most dangerous inheritance of all."
+    },
+    "09-the-silent-accord": {
+      "vendor_id": "memoria_astra_09_the_silent_accord",
+      "publication_date": "2026-05-18",
+      "price_tier": 1,
+      "description": "Across the Silent Rivers, flame and song know one another only by restraint. As Ashforged scouts and Resonant gatekeepers begin to hear a third hunger hiding in the interval between them, both civilizations must decide whether silence is wisdom, fear, or the first fragile language of peace."
+    },
+    "10-starforged-thrones": {
+      "vendor_id": "memoria_astra_10_starforged_thrones",
+      "publication_date": "2026-05-18",
+      "price_tier": 1,
+      "description": "The Ashforged raise thrones from starfire to govern a growing empire of forge-worlds, while the Resonants answer their expansion with deeper songs of refusal. Rumor, ambition, and a listening dark turn restraint into a contest for the future of the Second Spiral."
+    },
+    "11-lament-of-the-shattered-gate": {
+      "vendor_id": "memoria_astra_11_lament_of_the_shattered_gate",
+      "publication_date": "2026-05-18",
+      "price_tier": 1,
+      "description": "First contact arrives not as triumph, but as rupture. When a Starforged fleet and a Resonant Songgate touch the same wounded current, the old hunger twists welcome into catastrophe, and both peoples must sing a lament over worlds broken by fear."
+    },
+    "12-resonance-of-ash-and-dream": {
+      "vendor_id": "memoria_astra_12_resonance_of_ash_and_dream",
+      "publication_date": "2026-05-18",
+      "price_tier": 1,
+      "description": "In the aftermath of the shattered gate, survivors meet first in dream and grief. Ashforged engineers and Resonant healers begin to learn one another without conquest, building a sanctuary where memory can ache without becoming a weapon."
+    },
+    "13-the-gathering-spiral": {
+      "vendor_id": "memoria_astra_13_the_gathering_spiral",
+      "publication_date": "2026-05-18",
+      "price_tier": 1,
+      "description": "Rebels, visionaries, and wounded keepers answer a call older than either empire. As the Ashforged and Resonants gather at the edge of the Loomheart, they discover that healing the Spiral will require more than alliance; it will require a new form of memory."
+    },
+    "14-the-weeping-crown": {
+      "vendor_id": "memoria_astra_14_the_weeping_crown",
+      "publication_date": "2026-05-18",
+      "price_tier": 1,
+      "description": "The final enemy offers both civilizations the same temptation: rule the Spiral before grief can unmake it. Beneath a crown that remembers every sorrow, flame and song must choose whether power will be inherited, surrendered, or transformed."
+    },
+    "15-the-final-loom": {
+      "vendor_id": "memoria_astra_15_the_final_loom",
+      "publication_date": "2026-05-18",
+      "price_tier": 1,
+      "description": "At the end of the Second Spiral, memory, breath, flame, and dream converge within the Loomheart. What survives will not be empire or gate, throne or song alone, but a creation brave enough to remember every ending and still begin."
+    },
+    "16-the-second-spiral": {
+      "vendor_id": "memoria_astra_16_the_second_spiral",
+      "publication_date": "2026-05-18",
+      "price_tier": 4,
+      "description": "After the First Spiral gives way to a universe of breath, memory, flame, and song, two civilizations rise from the same sacred cradle and mistake distance for destiny. The Ashforged carry survival in engines and thrones; the Resonants carry consent in roots and gates. When an old hunger learns to wear mercy's face, flame and song must cross the Silent Rivers, survive the Shattered Gate, and choose whether the Second Spiral will become another empire of grief or a living cosmos brave enough to begin again."
     }
   }
 }

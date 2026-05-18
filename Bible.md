@@ -52,6 +52,10 @@ The Traveler    An eternal being — fragment of the Spiral — observing, weavi
 
 # 🧩 Story Arcs (Broad View):
 
+Series structure note:
+- Books 1-6 complete the First Spiral, with Book 6 (*Harmonic Rebirth*) carrying the collapse into the birth of the Second Spiral.
+- Books 7-15 complete the Second Spiral, from the rise of flame and song through convergence at the Final Loom.
+
 ⸻
 
 ## 🌀 Age of Origins (Books 1–5)
@@ -128,4 +132,3 @@ The Loomheart    Deepest place in the Spiral; origin and end intertwined.
     •    Grand but emotional — human heart carried across cosmic canvases.
     •    Slow build toward moments of overwhelming emotion.
     •    Language rich in resonance, breath imagery, memory, and song.
-

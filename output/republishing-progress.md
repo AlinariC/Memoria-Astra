@@ -1,7 +1,7 @@
 # Memoria Astra Republishing Progress
 
 Started: 2026-05-16 23:45 MST.
-Last updated: 2026-05-17 21:36 MST.
+Last updated: 2026-05-18 09:46 MST.
 
 ## Local Packages
 
@@ -17,15 +17,15 @@ Last updated: 2026-05-17 21:36 MST.
 | KDP print | Removed numbered print headings and tightened section heading line breaking after KDP Previewer rejected `00` page 135 for a long chapter heading outside the margins | Complete |
 | KDP print | Replaced the old flat back-cover layout with an image-backed back panel, gold typography, barcode quiet zone, and safer spine treatment | Complete |
 | KDP print | Corrected hardback board-wrap/front-panel positioning and moved back-cover copy into explicit safe text boxes after KDP guide review showed the 00 hardback cover was misaligned | Complete |
-| KDP print | Preserved the approved hardback cover treatment; current generator uses full-panel/no-border paperback front art, 1.05 in paperback back-copy inset, and 0.72/1.25 in front/back hardcover insets | Complete |
+| KDP print | Updated the hardback cover generator so hardcover front panels now match paperback behavior: full-panel source art, no generated border, crop-to-fill front placement, optional title-specific left shift with same-art edge fill, and 1.25 in hardcover back-copy inset | Complete |
 | KDP print | Rebuilt paperback and hardcover wrap covers and refreshed `metadata/kdp-print-cover-specs.json` manifests | Complete |
-| KDP print | Ran `python3 scripts/publish.py audit-print` | Pass: all generated interiors match specs and all cover MediaBoxes match KDP sizes |
+| KDP print | Ran `python3 scripts/publish.py audit-print` after the Books 09-16 rebuild | Pass: all 34 generated paperback/hardcover packages match KDP page counts and cover MediaBoxes |
 | KDP print | Ran a PDFKit text-boundary scan for all generated paperback and hardcover interiors | Pass: 18 interiors checked, 0 pages outside KDP minimum safety margins |
-| KDP staging | Rebuilt `/tmp/memoria-kdp-upload-assets` with 54 real files, 0 symlinks, all 9 Kindle EPUBs ZIP-verified, and contact sheets rendered for paperback/hardcover wraps | Complete |
+| KDP staging | Rebuilt `/tmp/memoria-kdp-upload-assets` with 102 real files for Books 00-16; Books 09-16 were refreshed from the 2026-05-18 package rebuild and all 17 staged Kindle EPUBs were ZIP-verified | Complete |
 | KDP staging | Re-ran final local sanity checks after KDP audit: `python3 scripts/publish.py audit-print`, staging file/symlink/empty-file counts, and all 9 staged Kindle EPUB ZIP tests | Pass at 2026-05-17 21:17 MST |
 | Cleanup | Removed legacy `Books/`, ingested `covers/`, old `cover.png`/dated cover variants, and obsolete cover-generation scripts/workflows | Complete |
 
-Latest KDP print rebuild page counts: `00` 393, `01` 52, `02` 61, `03` 86, `04` 76, `05` 74, `06` 327, `07` 120, `08` 52.
+Latest KDP print rebuild page counts: `00` 393, `01` 52, `02` 61, `03` 86, `04` 76, `05` 74, `06` 327, `07` 120, `08` 52, `09` 53, `10` 65, `11` 58, `12` 52, `13` 62, `14` 63, `15` 51, `16` 471.
 
 ## Google Play Books
 
@@ -40,8 +40,16 @@ Latest KDP print rebuild page counts: `00` 393, `01` 52, `02` 61, `03` 86, `04` 
 | 06 | Harmonic Rebirth | Filled/verified listing details, uploaded refreshed EPUB/PDF/cover, set worldwide USD list price to $3.99, and clicked Publish after action-time confirmation | Live on Google Play |
 | 07 | Foundations of Flame | Created the Google Play Books listing with ISBN `9798281667579`, filled metadata, uploaded refreshed EPUB/PDF/cover, set worldwide USD list price to $1.99, and clicked Publish after action-time confirmation | Live on Google Play |
 | 08 | Inheritance of Song | Created a new Google Play Books ebook shell (`GGKEY:U06Z1PYBT8H`), filled metadata, skipped series association, uploaded refreshed EPUB/PDF/cover, set worldwide USD list price to $0.99, and clicked Publish after action-time confirmation | Live on Google Play |
+| 09 | The Silent Accord | Bulk-uploaded EPUB/PDF/cover, then uploaded `GoogleBooksList_Alinari_Campbell.en_US.final-17-googleplay.csv`; verified title, description, genres, `PixelPacific` publisher, EPUB/cover attachment, and worldwide USD list price `$0.99` under `GGKEY:HN9YSCWDB96` | In process |
+| 10 | Starforged Thrones | Bulk-uploaded EPUB/PDF/cover, then uploaded `GoogleBooksList_Alinari_Campbell.en_US.final-17-googleplay.csv`; verified title and worldwide USD list price `$0.99` under `GGKEY:9XBRBTPZ7SZ` in Partner Center catalog | In process |
+| 11 | Lament of the Shattered Gate | Bulk-uploaded EPUB/PDF/cover, then uploaded `GoogleBooksList_Alinari_Campbell.en_US.final-17-googleplay.csv`; verified title and worldwide USD list price `$0.99` under `GGKEY:PDLCU7TZTS6` in Partner Center catalog | In process |
+| 12 | Resonance of Ash and Dream | Bulk-uploaded EPUB/PDF/cover, then uploaded `GoogleBooksList_Alinari_Campbell.en_US.final-17-googleplay.csv`; verified title and worldwide USD list price `$0.99` under `GGKEY:5DLQLKQPB53` in Partner Center catalog | In process |
+| 13 | The Gathering Spiral | Bulk-uploaded EPUB/PDF/cover, then uploaded `GoogleBooksList_Alinari_Campbell.en_US.final-17-googleplay.csv`; verified title and worldwide USD list price `$0.99` under `GGKEY:1DZWFP2K7SZ` in Partner Center catalog | In process |
+| 14 | The Weeping Crown | Bulk-uploaded EPUB/PDF/cover, then uploaded `GoogleBooksList_Alinari_Campbell.en_US.final-17-googleplay.csv`; verified title and worldwide USD list price `$0.99` under `GGKEY:XXAXJXN4ZDH` in Partner Center catalog | In process |
+| 15 | The Final Loom | Bulk-uploaded EPUB/PDF/cover, then uploaded `GoogleBooksList_Alinari_Campbell.en_US.final-17-googleplay.csv`; verified title and worldwide USD list price `$0.99` under `GGKEY:25HXYCSR6N6` in Partner Center catalog | In process |
+| 16 | The Second Spiral | Bulk-uploaded EPUB/PDF/cover, then uploaded `GoogleBooksList_Alinari_Campbell.en_US.final-17-googleplay.csv`; verified title and worldwide USD list price `$3.99` under `GGKEY:WS9UW4FE0HP` in Partner Center catalog | In process |
 
-Google Play Books result: all 9 catalog entries were confirmed `Live on Google Play` in Partner Center on 2026-05-17.
+Google Play Books result: the 17-row metadata/pricing CSV upload completed in Partner Center on 2026-05-18 at 00:24 MST with 17 rows, 0 errors, and 0 warnings. Existing books `00`-`08` remained `Live on Google Play`; new books `09`-`16` had metadata and pricing accepted, but Google still showed them as `In process` while content processing continued.
 
 ## Amazon KDP
 
@@ -72,7 +80,7 @@ Amazon KDP result: final Bookshelf audit completed on 2026-05-17 21:11 MST. All 
 
 Post-submission update: on 2026-05-17 21:36 MST, the user reported that all KDP drafts had been manually published/submitted and are awaiting review.
 
-Remaining KDP work: wait for review results and address any KDP review issues if they appear.
+Remaining KDP work: create/upload/submit Amazon KDP entries for Books `09`-`16` from `/tmp/memoria-kdp-upload-assets`. Use Kindle and paperback assets for `09`-`15`; use Kindle, paperback, and hardcover assets for `16` unless KDP review/setup requires a different format choice.
 
 Live KDP upload state and the final Bookshelf audit table are tracked in `output/kdp-upload-checkpoint.md`.
 
@@ -90,6 +98,8 @@ Transporter provider and package status:
 - Transporter showed successful delivered states for all 9 Apple packages: `00`, `01`, `02`, `03`, `04`, `05`, `06`, `07`, and `08`.
 - `00 The First Spiral` and `08 Inheritance of Song` still have no ISBNs; Apple accepts ISBN-less books, but the underscore vendor IDs above are now the permanent Apple package IDs and must remain stable.
 - iTunes Connect picked up the deliveries and assigned/confirmed Apple IDs. Recent Activity shows most delivered packages as `Not on 1 Store` while Apple review/store processing catches up; `00 The First Spiral` detail page shows Review Status `Waiting for Review`, United States rights cleared for sale, DRM enabled, and Tier 4 ($3.99 USD).
+- Books `09`-`16` were delivered through Transporter on 2026-05-17 at 23:39 MST using provider `AlinariCampbell`. New delivery logs and upload IDs are tracked in `output/apple-books-delivery-09-16.md`.
+- Transporter showed successful delivered states for Books `09`-`16`; Apple Books / iTunes Connect processing and review may continue after delivery.
 
 ## Notes
 

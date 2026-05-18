@@ -1,6 +1,6 @@
 # KDP Upload Checkpoint
 
-Last updated: 2026-05-17 21:36 MST.
+Last updated: 2026-05-18 09:46 MST.
 
 Purpose: durable handoff for the live Amazon KDP asset-replacement run. Update this file after every KDP title/format so the exact state survives compaction, browser interruption, or session restart.
 
@@ -10,11 +10,12 @@ Purpose: durable handoff for the live Amazon KDP asset-replacement run. Update t
 - User explicitly wants every Amazon/KDP draft refreshed: all Kindle ebooks and paperbacks for titles `00` through `08`, plus hardcovers for the larger eligible titles, with drafts saved for manual final submission.
 - This pass is actively refreshing KDP drafts from the rebuilt and validated local upload assets.
 - Codex stopped at saved drafts. On 2026-05-17 21:36 MST, the user reported all KDP drafts had been manually published/submitted and are awaiting review.
+- 2026-05-18 prep scope: Books `09`-`16` are ready for the next Amazon KDP pass after the user manually completed Google Play series setup.
 
 ## Current Local Package State
 
 - Fixed the package generator so Kindle/digital covers are full-size front-cover art with no padded border.
-- Fixed paperback front wraps so the front cover uses the full source artwork with no generated border. Hardcover layout was left unchanged because it already looked good.
+- Fixed paperback and hardcover front wraps so the front cover uses the full source artwork with no generated border.
 - Rebuilt all 9 books with `python3 scripts/publish.py build --all`.
 - Ran `python3 scripts/publish.py audit-print`; all 18 print packages passed.
 - Ran a PDFKit text-boundary scan over all 18 paperback/hardcover interiors; all text stayed inside a 0.25 in safety margin.
@@ -22,12 +23,12 @@ Purpose: durable handoff for the live Amazon KDP asset-replacement run. Update t
 - Rendered a paperback cover contact sheet at `/tmp/memoria-paperback-contact-sheet.png`; all 9 front panels show full-size cover art without the previous generated border.
 - Rendered a hardcover cover contact sheet at `/tmp/memoria-hardcover-contact-sheet.png`; hardcover layouts remain visually intact.
 - Rebuilt upload staging files in `/tmp/memoria-kdp-upload-assets`.
-- Staging folder contains 54 real files, 0 symlinks, no empty files, and no ` 2`/copy-suffixed filenames.
+- Staging folder contains 102 real files, 0 symlinks, no empty files, and no ` 2`/copy-suffixed filenames after Books `09`-`16` were added on 2026-05-18.
 - Re-ran package sanity checks at 2026-05-17 21:17 MST after the final Bookshelf audit: `python3 scripts/publish.py audit-print` passed for all 18 print packages, `/tmp/memoria-kdp-upload-assets` still had 54 real files, 0 symlinks, no empty files, and all 9 EPUB ZIP tests passed.
 - Current print-wrap layout:
   - Paperback front artwork: full source cover art, no generated border.
   - Paperback back copy: 1.05 in safe inset.
-  - Hardcover front artwork: 0.72 in safe inset.
+  - Hardcover front artwork: full source cover art, no generated border, crop-to-fill front placement; title-specific left shifts currently apply only to `00` and `06`.
   - Hardcover back copy: 1.25 in safe inset.
 - Current back copy is centered within the safe panel and narrowed to 54% of panel width.
 
@@ -46,6 +47,14 @@ Use these exact file names from `/tmp/memoria-kdp-upload-assets`:
 | 06 | `06-harmonic-rebirth-ebook.epub` | `06-harmonic-rebirth-ebook-cover.jpg` | `06-harmonic-rebirth-paperback-interior.pdf` | `06-harmonic-rebirth-paperback-cover.pdf` | `06-harmonic-rebirth-hardcover-interior.pdf` | `06-harmonic-rebirth-hardcover-cover.pdf` |
 | 07 | `07-foundations-of-flame-ebook.epub` | `07-foundations-of-flame-ebook-cover.jpg` | `07-foundations-of-flame-paperback-interior.pdf` | `07-foundations-of-flame-paperback-cover.pdf` | `07-foundations-of-flame-hardcover-interior.pdf` | `07-foundations-of-flame-hardcover-cover.pdf` |
 | 08 | `08-inheritance-of-song-ebook.epub` | `08-inheritance-of-song-ebook-cover.jpg` | `08-inheritance-of-song-paperback-interior.pdf` | `08-inheritance-of-song-paperback-cover.pdf` | `08-inheritance-of-song-hardcover-interior.pdf` | `08-inheritance-of-song-hardcover-cover.pdf` |
+| 09 | `09-the-silent-accord-ebook.epub` | `09-the-silent-accord-ebook-cover.jpg` | `09-the-silent-accord-paperback-interior.pdf` | `09-the-silent-accord-paperback-cover.pdf` | `09-the-silent-accord-hardcover-interior.pdf` | `09-the-silent-accord-hardcover-cover.pdf` |
+| 10 | `10-starforged-thrones-ebook.epub` | `10-starforged-thrones-ebook-cover.jpg` | `10-starforged-thrones-paperback-interior.pdf` | `10-starforged-thrones-paperback-cover.pdf` | `10-starforged-thrones-hardcover-interior.pdf` | `10-starforged-thrones-hardcover-cover.pdf` |
+| 11 | `11-lament-of-the-shattered-gate-ebook.epub` | `11-lament-of-the-shattered-gate-ebook-cover.jpg` | `11-lament-of-the-shattered-gate-paperback-interior.pdf` | `11-lament-of-the-shattered-gate-paperback-cover.pdf` | `11-lament-of-the-shattered-gate-hardcover-interior.pdf` | `11-lament-of-the-shattered-gate-hardcover-cover.pdf` |
+| 12 | `12-resonance-of-ash-and-dream-ebook.epub` | `12-resonance-of-ash-and-dream-ebook-cover.jpg` | `12-resonance-of-ash-and-dream-paperback-interior.pdf` | `12-resonance-of-ash-and-dream-paperback-cover.pdf` | `12-resonance-of-ash-and-dream-hardcover-interior.pdf` | `12-resonance-of-ash-and-dream-hardcover-cover.pdf` |
+| 13 | `13-the-gathering-spiral-ebook.epub` | `13-the-gathering-spiral-ebook-cover.jpg` | `13-the-gathering-spiral-paperback-interior.pdf` | `13-the-gathering-spiral-paperback-cover.pdf` | `13-the-gathering-spiral-hardcover-interior.pdf` | `13-the-gathering-spiral-hardcover-cover.pdf` |
+| 14 | `14-the-weeping-crown-ebook.epub` | `14-the-weeping-crown-ebook-cover.jpg` | `14-the-weeping-crown-paperback-interior.pdf` | `14-the-weeping-crown-paperback-cover.pdf` | `14-the-weeping-crown-hardcover-interior.pdf` | `14-the-weeping-crown-hardcover-cover.pdf` |
+| 15 | `15-the-final-loom-ebook.epub` | `15-the-final-loom-ebook-cover.jpg` | `15-the-final-loom-paperback-interior.pdf` | `15-the-final-loom-paperback-cover.pdf` | `15-the-final-loom-hardcover-interior.pdf` | `15-the-final-loom-hardcover-cover.pdf` |
+| 16 | `16-the-second-spiral-ebook.epub` | `16-the-second-spiral-ebook-cover.jpg` | `16-the-second-spiral-paperback-interior.pdf` | `16-the-second-spiral-paperback-cover.pdf` | `16-the-second-spiral-hardcover-interior.pdf` | `16-the-second-spiral-hardcover-cover.pdf` |
 
 ## Last Confirmed Browser State
 
@@ -69,11 +78,20 @@ Use these exact file names from `/tmp/memoria-kdp-upload-assets`:
 | 06 | Harmonic Rebirth | `A2N4A7BQSO603J` | `PDNK4MXK62V` | Hardcover draft created from the paperback flow at `/print-setup/hardcover/PDNK4MXK62V/pricing`; free KDP ISBN `9798197416933`; current-pass hardcover content/pricing saved as draft at 18:42 MST |
 | 07 | Foundations of Flame | `A2U7QROVLLCKF3` | `Y7CC1VE403X` | Current-pass Kindle and paperback drafts saved at 19:13/19:19 MST; no hardcover per pricing/worklist plan |
 | 08 | Inheritance of Song | `A1NE6AVK1RIKL2` | `TEX2F46X5RR`; KDP ISBN `9798197426697` | Current-pass Kindle draft saved at 20:54 MST; current-pass paperback content/pricing saved as draft at 21:09 MST; not hardcover eligible at 52 pages; no hardcover draft created |
+| 09 | The Silent Accord | Not created yet | Not created yet | KDP next-pass title; 53 pages; Kindle/paperback only unless manuscript expands |
+| 10 | Starforged Thrones | Not created yet | Not created yet | KDP next-pass title; 65 pages; Kindle/paperback only unless manuscript expands |
+| 11 | Lament of the Shattered Gate | Not created yet | Not created yet | KDP next-pass title; 58 pages; Kindle/paperback only unless manuscript expands |
+| 12 | Resonance of Ash and Dream | Not created yet | Not created yet | KDP next-pass title; 52 pages; Kindle/paperback only unless manuscript expands |
+| 13 | The Gathering Spiral | Not created yet | Not created yet | KDP next-pass title; 62 pages; Kindle/paperback only unless manuscript expands |
+| 14 | The Weeping Crown | Not created yet | Not created yet | KDP next-pass title; 63 pages; Kindle/paperback only unless manuscript expands |
+| 15 | The Final Loom | Not created yet | Not created yet | KDP next-pass title; 51 pages; Kindle/paperback only unless manuscript expands |
+| 16 | The Second Spiral | Not created yet | Not created yet | KDP next-pass title; 471 pages; hardcover assets regenerated and staged |
 
 ## Immediate Next Steps
 
-1. No Codex action remaining for KDP; user manually submitted the drafts after the saved-draft pass.
-2. Wait for KDP review results and respond only if KDP flags an issue.
+1. Create/upload/submit Amazon KDP Kindle entries for Books `09`-`16` from the staged EPUB and cover files.
+2. Create/upload/submit Amazon KDP paperback entries for Books `09`-`16` from the staged paperback interior and cover PDFs.
+3. Create/upload/submit a KDP hardcover for Book `16`; do not create hardcovers for Books `09`-`15` unless KDP eligibility or the format plan changes.
 
 ## Final Bookshelf Audit
 
@@ -121,6 +139,7 @@ Post-submission note: on 2026-05-17 21:36 MST, the user reported that everything
 - 08 Inheritance of Song Kindle eBook created/current-pass refresh: created new Kindle draft `A1NE6AVK1RIKL2`, filled Details metadata and categories, skipped series association because the KDP series confirmation button said it would publish title/series changes, uploaded `08-inheritance-of-song-ebook.epub` and full-size no-border `08-inheritance-of-song-ebook-cover.jpg`, set DRM to no, confirmed AI disclosure for text/images with translations `None`, entered publisher `PixelPacific`, let KDP finish conversion and quality check, noted non-blocking `5` possible spelling errors, set KDP Select off, worldwide rights, 35% royalty, Amazon.com Kindle list price `$0.99`, and confirmed KDP showed `Save Successful!` after clicking **Save as Draft** only at 20:54 MST. Did not click **Publish Your Kindle eBook**.
 - 08 Inheritance of Song paperback created/current-pass refresh: created new paperback draft `TEX2F46X5RR`, assigned free KDP ISBN `9798197426697` with imprint `Independently published`, set black-and-white cream paper, 6 x 9 in, no bleed, glossy finish, uploaded `08-inheritance-of-song-paperback-interior.pdf` and no-border full-panel `08-inheritance-of-song-paperback-cover.pdf`, confirmed AI disclosure for text/images with translations `None`, launched KDP Print Previewer, verified `Cover / 52` with guides on and only the recurring font-embedding notice, approved the proof, verified summary page count `52`, Amazon.com print cost `$2.30`, worldwide rights, Amazon.com paperback list price `$5.99`, and confirmed KDP showed `Your changes have been saved as a draft.` after clicking **Save as Draft** only at 21:09 MST. Did not click **Publish Your Paperback Book**. No `08` hardcover draft was created because the local page count is below KDP hardcover eligibility.
 - 2026-05-17 21:17 MST final local recheck: re-ran `python3 scripts/publish.py audit-print` successfully for all 18 print packages, confirmed `/tmp/memoria-kdp-upload-assets` has 54 real files, 0 symlinks, no empty files, and re-tested all 9 staged Kindle EPUBs with `unzip -t`.
+- 2026-05-18 09:46 MST Books 09-16 local prep: rebuilt Books `09`-`16` with the current full-panel hardback cover generator, ran `python3 scripts/publish.py audit-print` successfully across all 34 print packages, refreshed `/tmp/memoria-kdp-upload-assets` to 102 real files, confirmed 0 symlinks and 0 empty files, and ZIP-tested all 17 staged Kindle EPUBs.
 
 ## Action-Time Confirmation Rule
 
