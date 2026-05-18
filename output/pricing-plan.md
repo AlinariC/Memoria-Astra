@@ -22,7 +22,7 @@ Generated for the May 2026 republishing pass. Prices are optimized for reader ac
 - Books 01-05 and 08 are short discovery reads. At $0.99, they are impulse buys and funnel readers toward the combined novel and later series entries.
 - Foundations of Flame is longer than the very short entries, but still short enough that $1.99 is a better acquisition price than $2.99.
 - Harmonic Rebirth is long enough to carry novel pricing, but should stay below the flagship so the combined book remains the obvious best-value purchase.
-- KDP hardcover should only be published for 00 and 06 in this pass. The other books remain short-form Kindle/paperback editions under the current format plan.
+- KDP hardcover should only be published for 00, 06, and 16 in the current format plan. The generated hardcover cover files for every title use the same 0.16 in front-art left shift, but the shorter books remain Kindle/paperback editions unless the format plan changes.
 
 ## Platform Notes
 

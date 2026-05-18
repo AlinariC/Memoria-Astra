@@ -14,6 +14,8 @@ The First Spiral alignment follow-up completed on 2026-05-18 at 09:32 MST: added
 
 Books 09-16 KDP prep completed on 2026-05-18 at 09:46 MST: rebuilt the late-series packages with the current full-panel hardcover generator, refreshed `/tmp/memoria-kdp-upload-assets`, and confirmed staged Kindle EPUBs for 09-16 unzip cleanly. Books 09-15 have valid local hardcover PDFs but remain below KDP's 75-page hardcover minimum; Book 16 is the only new hardcover candidate in this batch.
 
+Hardcover consistency correction completed on 2026-05-18 at 09:55 MST: the 0.16 in hardcover front-art shift is now the generator default, so every regenerated hardcover cover uses the same left-shifted full-panel front treatment instead of limiting the shift to 00 and 06.
+
 | Package | Title | Kindle ID | Paperback ID | Ebook cover | Paperback cover | Hardcover eligible | Hardcover assets | Progress |
 |---|---|---|---|---|---|---|---|---|
 | 00 | The First Spiral | A2R67O6ZE1G9WV | JD0C286F3RB | `/tmp/memoria-kdp-upload-assets/00-the-first-spiral-ebook-cover.jpg` | `/tmp/memoria-kdp-upload-assets/00-the-first-spiral-paperback-cover.pdf` | Yes, 393 pages | `/tmp/memoria-kdp-upload-assets/00-the-first-spiral-hardcover-interior.pdf`, `/tmp/memoria-kdp-upload-assets/00-the-first-spiral-hardcover-cover.pdf` | Kindle, paperback, and hardcover refreshed and saved as drafts/unpublished changes. |

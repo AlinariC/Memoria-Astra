@@ -1,6 +1,6 @@
 # KDP Upload Checkpoint
 
-Last updated: 2026-05-18 09:46 MST.
+Last updated: 2026-05-18 09:55 MST.
 
 Purpose: durable handoff for the live Amazon KDP asset-replacement run. Update this file after every KDP title/format so the exact state survives compaction, browser interruption, or session restart.
 
@@ -16,19 +16,18 @@ Purpose: durable handoff for the live Amazon KDP asset-replacement run. Update t
 
 - Fixed the package generator so Kindle/digital covers are full-size front-cover art with no padded border.
 - Fixed paperback and hardcover front wraps so the front cover uses the full source artwork with no generated border.
-- Rebuilt all 9 books with `python3 scripts/publish.py build --all`.
-- Ran `python3 scripts/publish.py audit-print`; all 18 print packages passed.
-- Ran a PDFKit text-boundary scan over all 18 paperback/hardcover interiors; all text stayed inside a 0.25 in safety margin.
-- Verified all 9 Kindle EPUBs with `unzip -t`.
-- Rendered a paperback cover contact sheet at `/tmp/memoria-paperback-contact-sheet.png`; all 9 front panels show full-size cover art without the previous generated border.
-- Rendered a hardcover cover contact sheet at `/tmp/memoria-hardcover-contact-sheet.png`; hardcover layouts remain visually intact.
+- Rebuilt all 17 books with `python3 scripts/publish.py build --all`.
+- Ran `python3 scripts/publish.py audit-print`; all 34 print packages passed.
+- Ran the earlier 00-08 PDFKit text-boundary scan over 18 paperback/hardcover interiors; all text stayed inside a 0.25 in safety margin.
+- Verified all 17 staged Kindle EPUBs with `unzip -t`.
+- Rendered paperback and hardcover contact sheets during the earlier 00-08 pass at `/tmp/memoria-paperback-contact-sheet.png` and `/tmp/memoria-hardcover-contact-sheet.png`.
 - Rebuilt upload staging files in `/tmp/memoria-kdp-upload-assets`.
-- Staging folder contains 102 real files, 0 symlinks, no empty files, and no ` 2`/copy-suffixed filenames after Books `09`-`16` were added on 2026-05-18.
+- Staging folder contains 102 real files, 0 symlinks, no empty files, and no ` 2`/copy-suffixed filenames after the global 0.16 in hardcover front-shift rebuild on 2026-05-18.
 - Re-ran package sanity checks at 2026-05-17 21:17 MST after the final Bookshelf audit: `python3 scripts/publish.py audit-print` passed for all 18 print packages, `/tmp/memoria-kdp-upload-assets` still had 54 real files, 0 symlinks, no empty files, and all 9 EPUB ZIP tests passed.
 - Current print-wrap layout:
   - Paperback front artwork: full source cover art, no generated border.
   - Paperback back copy: 1.05 in safe inset.
-  - Hardcover front artwork: full source cover art, no generated border, crop-to-fill front placement; title-specific left shifts currently apply only to `00` and `06`.
+  - Hardcover front artwork: full source cover art, no generated border, crop-to-fill front placement, and the standard 0.16 in left shift with same-art edge fill on every generated hardcover cover.
   - Hardcover back copy: 1.25 in safe inset.
 - Current back copy is centered within the safe panel and narrowed to 54% of panel width.
 
@@ -140,6 +139,7 @@ Post-submission note: on 2026-05-17 21:36 MST, the user reported that everything
 - 08 Inheritance of Song paperback created/current-pass refresh: created new paperback draft `TEX2F46X5RR`, assigned free KDP ISBN `9798197426697` with imprint `Independently published`, set black-and-white cream paper, 6 x 9 in, no bleed, glossy finish, uploaded `08-inheritance-of-song-paperback-interior.pdf` and no-border full-panel `08-inheritance-of-song-paperback-cover.pdf`, confirmed AI disclosure for text/images with translations `None`, launched KDP Print Previewer, verified `Cover / 52` with guides on and only the recurring font-embedding notice, approved the proof, verified summary page count `52`, Amazon.com print cost `$2.30`, worldwide rights, Amazon.com paperback list price `$5.99`, and confirmed KDP showed `Your changes have been saved as a draft.` after clicking **Save as Draft** only at 21:09 MST. Did not click **Publish Your Paperback Book**. No `08` hardcover draft was created because the local page count is below KDP hardcover eligibility.
 - 2026-05-17 21:17 MST final local recheck: re-ran `python3 scripts/publish.py audit-print` successfully for all 18 print packages, confirmed `/tmp/memoria-kdp-upload-assets` has 54 real files, 0 symlinks, no empty files, and re-tested all 9 staged Kindle EPUBs with `unzip -t`.
 - 2026-05-18 09:46 MST Books 09-16 local prep: rebuilt Books `09`-`16` with the current full-panel hardback cover generator, ran `python3 scripts/publish.py audit-print` successfully across all 34 print packages, refreshed `/tmp/memoria-kdp-upload-assets` to 102 real files, confirmed 0 symlinks and 0 empty files, and ZIP-tested all 17 staged Kindle EPUBs.
+- 2026-05-18 09:55 MST hardcover consistency correction: made the 0.16 in hardcover front-art shift the generator default, removed the former 00/06 metadata overrides, rebuilt all 17 books, confirmed every generated `kdp-print-cover-specs.json` reports `hardcover_front_shift_left_in` as `0.16`, re-ran `python3 scripts/publish.py audit-print`, refreshed all 102 flat staging files, and ZIP-tested all 17 staged Kindle EPUBs.
 
 ## Action-Time Confirmation Rule
 

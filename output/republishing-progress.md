@@ -1,7 +1,7 @@
 # Memoria Astra Republishing Progress
 
 Started: 2026-05-16 23:45 MST.
-Last updated: 2026-05-18 09:46 MST.
+Last updated: 2026-05-18 09:55 MST.
 
 ## Local Packages
 
@@ -17,10 +17,10 @@ Last updated: 2026-05-18 09:46 MST.
 | KDP print | Removed numbered print headings and tightened section heading line breaking after KDP Previewer rejected `00` page 135 for a long chapter heading outside the margins | Complete |
 | KDP print | Replaced the old flat back-cover layout with an image-backed back panel, gold typography, barcode quiet zone, and safer spine treatment | Complete |
 | KDP print | Corrected hardback board-wrap/front-panel positioning and moved back-cover copy into explicit safe text boxes after KDP guide review showed the 00 hardback cover was misaligned | Complete |
-| KDP print | Updated the hardback cover generator so hardcover front panels now match paperback behavior: full-panel source art, no generated border, crop-to-fill front placement, optional title-specific left shift with same-art edge fill, and 1.25 in hardcover back-copy inset | Complete |
-| KDP print | Rebuilt paperback and hardcover wrap covers and refreshed `metadata/kdp-print-cover-specs.json` manifests | Complete |
+| KDP print | Updated the hardback cover generator so every hardcover front panel uses full-panel source art, no generated border, crop-to-fill front placement, the standard 0.16 in left shift with same-art edge fill, and a 1.25 in hardcover back-copy inset | Complete |
+| KDP print | Rebuilt all paperback and hardcover wrap covers and refreshed `metadata/kdp-print-cover-specs.json` manifests; every generated hardcover spec now reports `hardcover_front_shift_left_in: 0.16` | Complete |
 | KDP print | Ran `python3 scripts/publish.py audit-print` after the Books 09-16 rebuild | Pass: all 34 generated paperback/hardcover packages match KDP page counts and cover MediaBoxes |
-| KDP print | Ran a PDFKit text-boundary scan for all generated paperback and hardcover interiors | Pass: 18 interiors checked, 0 pages outside KDP minimum safety margins |
+| KDP print | Ran the earlier 00-08 PDFKit text-boundary scan for paperback and hardcover interiors | Pass: 18 interiors checked, 0 pages outside KDP minimum safety margins |
 | KDP staging | Rebuilt `/tmp/memoria-kdp-upload-assets` with 102 real files for Books 00-16; Books 09-16 were refreshed from the 2026-05-18 package rebuild and all 17 staged Kindle EPUBs were ZIP-verified | Complete |
 | KDP staging | Re-ran final local sanity checks after KDP audit: `python3 scripts/publish.py audit-print`, staging file/symlink/empty-file counts, and all 9 staged Kindle EPUB ZIP tests | Pass at 2026-05-17 21:17 MST |
 | Cleanup | Removed legacy `Books/`, ingested `covers/`, old `cover.png`/dated cover variants, and obsolete cover-generation scripts/workflows | Complete |
