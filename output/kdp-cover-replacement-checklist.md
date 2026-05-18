@@ -6,6 +6,8 @@ Margin correction added on 2026-05-17 after the first 00 hardcover preview expos
 
 Hardcover front correction added on 2026-05-18 after the published 00 hardcover preview showed the front cover still using a generated inset/border. Hardcover front panels now match paperback behavior: the source cover art fills the KDP front-cover box with no generated border, clipped to the calculator dimensions so it aligns to the print guides. Back-cover copy remains centered inside explicit safe text boxes with 1.05 in paperback and 1.25 in hardcover safe insets.
 
+Live KDP follow-up completed on 2026-05-18 at 08:48 MST: 00 The First Spiral and 06 Harmonic Rebirth hardcover covers were re-uploaded from the regenerated full-panel PDFs, checked in KDP Print Previewer with guides on, approved, and saved as drafts/unpublished changes only.
+
 | Package | Title | Kindle ID | Paperback ID | Ebook cover | Paperback cover | Hardcover eligible | Hardcover assets | Progress |
 |---|---|---|---|---|---|---|---|---|
 | 00 | The First Spiral | A2R67O6ZE1G9WV | JD0C286F3RB | `/tmp/memoria-kdp-upload-assets/00-the-first-spiral-ebook-cover.jpg` | `/tmp/memoria-kdp-upload-assets/00-the-first-spiral-paperback-cover.pdf` | Yes, 393 pages | `/tmp/memoria-kdp-upload-assets/00-the-first-spiral-hardcover-interior.pdf`, `/tmp/memoria-kdp-upload-assets/00-the-first-spiral-hardcover-cover.pdf` | Kindle, paperback, and hardcover refreshed and saved as drafts/unpublished changes. |
