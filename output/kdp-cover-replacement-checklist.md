@@ -2,7 +2,9 @@
 
 Cover-first pass started and completed on 2026-05-17, with final local package checks rerun at 21:17 MST. Codex stopped at saved drafts; the user reported manual KDP publish/submission completion at 21:36 MST and all titles are awaiting review. Current live handoff is tracked in `output/kdp-upload-checkpoint.md`; update that file after every KDP title/format.
 
-Margin correction added on 2026-05-17 after the first 00 hardcover preview exposed that the front art/title block was outside KDP print guides. The 17:04 MST reset keeps hardcover front artwork in its approved 0.72 in safe inset, but paperback front panels now use the full source cover art with no generated border or inset. Back-cover copy is centered inside explicit safe text boxes with 1.05 in paperback and 1.25 in hardcover safe insets.
+Margin correction added on 2026-05-17 after the first 00 hardcover preview exposed that the front art/title block was outside KDP print guides. The 17:04 MST reset removed the generated paperback front-cover border/inset.
+
+Hardcover front correction added on 2026-05-18 after the published 00 hardcover preview showed the front cover still using a generated inset/border. Hardcover front panels now match paperback behavior: the source cover art fills the KDP front-cover box with no generated border, clipped to the calculator dimensions so it aligns to the print guides. Back-cover copy remains centered inside explicit safe text boxes with 1.05 in paperback and 1.25 in hardcover safe insets.
 
 | Package | Title | Kindle ID | Paperback ID | Ebook cover | Paperback cover | Hardcover eligible | Hardcover assets | Progress |
 |---|---|---|---|---|---|---|---|---|

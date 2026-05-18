@@ -31,7 +31,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = REPO_ROOT / "output"
 BOOK_DIR_RE = re.compile(r"^(?P<number>\d{2})_(?P<slug>.+)$")
 PAPERBACK_FRONT_ART_INSET_IN = 0.0
-HARDCOVER_FRONT_SAFE_INSET_IN = 0.72
+HARDCOVER_FRONT_ART_INSET_IN = 0.0
 PAPERBACK_BACK_SAFE_INSET_IN = 1.05
 HARDCOVER_BACK_SAFE_INSET_IN = 1.25
 MIN_EXTRA_SAFE_INSET_IN = 0.10
@@ -943,14 +943,15 @@ def write_kdp_print_covers(
     print_specs["front_cover_layout"] = {
         "paperback_image_inset_in": PAPERBACK_FRONT_ART_INSET_IN,
         "paperback_image_fit": "Full source cover art fills the paperback front panel with no generated border.",
-        "hardcover_image_inset_in": HARDCOVER_FRONT_SAFE_INSET_IN,
+        "hardcover_image_inset_in": HARDCOVER_FRONT_ART_INSET_IN,
+        "hardcover_image_fit": "Full source cover art fills the hardcover front panel with no generated border.",
         "paperback_back_text_inset_in": PAPERBACK_BACK_SAFE_INSET_IN,
         "hardcover_back_text_inset_in": HARDCOVER_BACK_SAFE_INSET_IN,
         "note": (
-            "Paperback front artwork is kept full-size with no added border. "
-            "Hardcover front artwork and generated back-cover copy are contained "
-            "inside these KDP-safe insets so title, author, story copy, and barcode "
-            "space stay away from trim, bleed, hinge, and wrap guide lines."
+            "Paperback and hardcover front artwork are kept full-size with no "
+            "added border. Generated back-cover copy is contained inside these "
+            "KDP-safe insets so story copy and barcode space stay away from trim, "
+            "bleed, hinge, and wrap guide lines."
         ),
     }
 
@@ -1213,16 +1214,20 @@ def write_wrap_cover_pdf(
         back_area_y = front_area_y
         back_area_w = front_area_w
         back_area_h = front_area_h
-        safe_margin_pt = HARDCOVER_FRONT_SAFE_INSET_IN * 72
+        safe_margin_pt = HARDCOVER_FRONT_ART_INSET_IN * 72
         back_safe_margin_pt = HARDCOVER_BACK_SAFE_INSET_IN * 72
 
-    image_x, image_y, image_w, image_h = contain_rect(
+    image_box_x = front_area_x + safe_margin_pt
+    image_box_y = front_area_y + safe_margin_pt
+    image_box_w = max(front_area_w - (safe_margin_pt * 2), 1)
+    image_box_h = max(front_area_h - (safe_margin_pt * 2), 1)
+    image_x, image_y, image_w, image_h = cover_rect(
         image_width,
         image_height,
-        front_area_x + safe_margin_pt,
-        front_area_y + safe_margin_pt,
-        max(front_area_w - (safe_margin_pt * 2), 1),
-        max(front_area_h - (safe_margin_pt * 2), 1),
+        image_box_x,
+        image_box_y,
+        image_box_w,
+        image_box_h,
     )
 
     title = str(metadata.get("title") or "Memoria Astra")
@@ -1248,15 +1253,12 @@ def write_wrap_cover_pdf(
         f"{front_x:.2f} 0 {front_w:.2f} {height_pt:.2f} re f",
         "0.12 0.08 0.035 rg",
         f"{front_area_x:.2f} {front_area_y:.2f} {front_area_w:.2f} {front_area_h:.2f} re f",
-        f"q {image_w:.2f} 0 0 {image_h:.2f} {image_x:.2f} {image_y:.2f} cm /Im1 Do Q",
+        (
+            f"q {image_box_x:.2f} {image_box_y:.2f} {image_box_w:.2f} "
+            f"{image_box_h:.2f} re W n {image_w:.2f} 0 0 {image_h:.2f} "
+            f"{image_x:.2f} {image_y:.2f} cm /Im1 Do Q"
+        ),
     ]
-    if binding_label != "paperback":
-        content.extend(
-            [
-                "0.78 0.55 0.22 RG 0.7 w",
-                f"{image_x - 5:.2f} {image_y - 5:.2f} {image_w + 10:.2f} {image_h + 10:.2f} re S",
-            ]
-        )
     content.extend(
         back_cover_text_commands(
             title,
@@ -1302,7 +1304,7 @@ def write_wrap_cover_pdf(
     print(f"-> KDP {binding_label} cover {rel(target)}")
 
 
-def contain_rect(
+def cover_rect(
     image_width: int,
     image_height: int,
     box_x: float,
@@ -1313,11 +1315,11 @@ def contain_rect(
     image_ratio = image_width / image_height
     box_ratio = box_w / box_h
     if image_ratio > box_ratio:
-        draw_w = box_w
-        draw_h = draw_w / image_ratio
-    else:
         draw_h = box_h
         draw_w = draw_h * image_ratio
+    else:
+        draw_w = box_w
+        draw_h = draw_w / image_ratio
     draw_x = box_x + (box_w - draw_w) / 2
     draw_y = box_y + (box_h - draw_h) / 2
     return draw_x, draw_y, draw_w, draw_h
@@ -1574,13 +1576,6 @@ def command_audit_print(args: argparse.Namespace) -> int:
                     float(binding_specs.get("margin_width") or 0),
                     float(binding_specs.get("margin_height") or 0),
                 )
-                if binding == "hardcover":
-                    safe_inset = HARDCOVER_FRONT_SAFE_INSET_IN
-                    if safe_inset < kdp_margin + MIN_EXTRA_SAFE_INSET_IN:
-                        problems.append(
-                            f"front safe inset {safe_inset:.2f}in is too close to "
-                            f"KDP margin {kdp_margin:.2f}in"
-                        )
                 back_safe_inset = (
                     PAPERBACK_BACK_SAFE_INSET_IN
                     if binding == "paperback"
@@ -1603,7 +1598,7 @@ def command_audit_print(args: argparse.Namespace) -> int:
             safe_text = (
                 f"full-panel/{PAPERBACK_BACK_SAFE_INSET_IN:.2f}in"
                 if binding == "paperback"
-                else f"{HARDCOVER_FRONT_SAFE_INSET_IN:.2f}/{HARDCOVER_BACK_SAFE_INSET_IN:.2f}in"
+                else f"full-panel/{HARDCOVER_BACK_SAFE_INSET_IN:.2f}in"
             )
             print(
                 f"{status:4} {package_dir.name:32} {binding:9} "
