@@ -30,6 +30,12 @@ Apple Transporter `.itmsp` packages were generated under:
 - `output/cinderwake-02-the-moon-below-the-world/apple-books/cinderwake_02_the_moon_below_the_world.itmsp`
 - `output/cinderwake-03-the-dragon-that-dreamed-death/apple-books/cinderwake_03_the_dragon_that_dreamed_death.itmsp`
 
+Transporter delivery completed on 2026-05-18:
+
+- `The Ash Beneath the Crown` delivered at 8:22 PM MST.
+- `The Moon Below the World` delivered at 8:22 PM MST.
+- `The Dragon That Dreamed Death` delivered at 8:23 PM MST.
+
 ## Store Setup Defaults
 
 - Series: `The Cinderwake Trilogy`
