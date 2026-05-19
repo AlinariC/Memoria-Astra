@@ -18,6 +18,7 @@ For each package:
 
 - Apple Books: `output/<slug>/apple-books/<slug>.epub`, `output/<slug>/apple-books/cover.jpg`, plus the generated `.itmsp` folder.
 - Google Play Books: `output/<slug>/google-play-books/<slug>.epub`, `output/<slug>/google-play-books/cover.jpg`, and `output/<slug>/google-play-books/<slug>.pdf` if Google asks for the PDF asset.
+- Google Play Books repair/replacement uploads: use the primary `GGKEY` as the filename prefix, send `<GGKEY>.epub`, `<GGKEY>_interior.pdf`, and `<GGKEY>_frontcover.png`, and use a high-resolution `3000 x 4500` front-cover PNG.
 - Amazon KDP ebook: `output/<slug>/amazon-kdp/ebook/<slug>.epub` and `output/<slug>/amazon-kdp/ebook/cover.jpg`.
 - Amazon KDP paperback: `output/<slug>/amazon-kdp/print/paperback/<slug>-paperback-interior.pdf` and `output/<slug>/amazon-kdp/print/paperback/<slug>-paperback-cover.pdf`.
 - Amazon KDP hardcover: `output/<slug>/amazon-kdp/print/hardcover/<slug>-hardcover-interior.pdf` and `output/<slug>/amazon-kdp/print/hardcover/<slug>-hardcover-cover.pdf`.
@@ -43,7 +44,11 @@ Google Play Books bulk upload completed on 2026-05-18:
 - `The Dragon That Dreamed Death`: primary Google row `GGKEY:EU9D90XDYUG`.
 - Initial content upload sent EPUB, PDF, and cover files. Covers were re-sent with GGKEY-prefixed filenames to attach them to the primary content rows.
 - Bulk metadata/pricing upload `cinderwake-google-play-bulk-metadata-2026-05-18.csv` completed with `3` rows, `0` errors, and `0` warnings.
-- Post-upload export confirms the three primary rows have title metadata, `The Cinderwake Trilogy` series data, worldwide `$4.99` USD pricing, and status `In process` while Google content processing continues.
+- Post-upload export confirms the three primary rows have title metadata, `The Cinderwake Trilogy` series data, and worldwide `$4.99` USD pricing.
+- Google later returned `Needs Action` on all three rows for `Internal processing error (001)` plus poor image quality. Repaired through Partner Center > Book catalog > Advanced options > Upload content files with nine files staged in `/tmp/cinderwake-google-repair`.
+- The repair set used primary-row filenames: `<GGKEY>.epub`, `<GGKEY>_interior.pdf`, and `<GGKEY>_frontcover.png`. The front covers are `3000 x 4500` PNGs at 300 dpi, and the replacement EPUBs embed the high-resolution covers.
+- Partner Center accepted the repair set with `Uploaded 9 content files`.
+- Partner Center Book catalog now shows all three primary Cinderwake rows as `Live on Google Play` with `$4.99` pricing.
 - Ignore the cover-only placeholder rows created by the first no-ISBN cover filename pass: `GGKEY:67UBUE7Q2B0`, `GGKEY:T7WL07YPJ7Z`, and `GGKEY:JU2YE1L46Q9`.
 
 ## Store Setup Defaults
@@ -74,3 +79,5 @@ Google Play Books bulk upload completed on 2026-05-18:
 - `python3 scripts/publish.py audit-print`: Cinderwake paperback/hardcover covers match generated KDP specs and page counts.
 - `unzip -t` on all three KDP ebook EPUBs: no archive errors.
 - Google Play Books Partner Center upload history: `cinderwake-google-play-bulk-metadata-2026-05-18.csv` completed with `3` rows, `0` errors, and `0` warnings.
+- `unzip -t` on the three Google repair EPUBs in `/tmp/cinderwake-google-repair`: no archive errors.
+- Google Play Books Partner Center Book catalog: the three Cinderwake primary rows are `Live on Google Play`.
