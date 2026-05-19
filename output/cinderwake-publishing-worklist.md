@@ -36,6 +36,16 @@ Transporter delivery completed on 2026-05-18:
 - `The Moon Below the World` delivered at 8:22 PM MST.
 - `The Dragon That Dreamed Death` delivered at 8:23 PM MST.
 
+Google Play Books bulk upload completed on 2026-05-18:
+
+- `The Ash Beneath the Crown`: primary Google row `GGKEY:YU9XS0DXEUE`.
+- `The Moon Below the World`: primary Google row `GGKEY:YZQ7FJBUABQ`.
+- `The Dragon That Dreamed Death`: primary Google row `GGKEY:EU9D90XDYUG`.
+- Initial content upload sent EPUB, PDF, and cover files. Covers were re-sent with GGKEY-prefixed filenames to attach them to the primary content rows.
+- Bulk metadata/pricing upload `cinderwake-google-play-bulk-metadata-2026-05-18.csv` completed with `3` rows, `0` errors, and `0` warnings.
+- Post-upload export confirms the three primary rows have title metadata, `The Cinderwake Trilogy` series data, worldwide `$4.99` USD pricing, and status `In process` while Google content processing continues.
+- Ignore the cover-only placeholder rows created by the first no-ISBN cover filename pass: `GGKEY:67UBUE7Q2B0`, `GGKEY:T7WL07YPJ7Z`, and `GGKEY:JU2YE1L46Q9`.
+
 ## Store Setup Defaults
 
 - Series: `The Cinderwake Trilogy`
@@ -63,3 +73,4 @@ Transporter delivery completed on 2026-05-18:
 - `python3 scripts/build_apple_itmsp.py --book ... --provider AlinariCampbell --strict`: all three `.itmsp` packages generated with no blockers; expected no-ISBN warnings remain.
 - `python3 scripts/publish.py audit-print`: Cinderwake paperback/hardcover covers match generated KDP specs and page counts.
 - `unzip -t` on all three KDP ebook EPUBs: no archive errors.
+- Google Play Books Partner Center upload history: `cinderwake-google-play-bulk-metadata-2026-05-18.csv` completed with `3` rows, `0` errors, and `0` warnings.
