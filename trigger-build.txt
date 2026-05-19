@@ -1,2 +1,0 @@
-This is a manual test trigger file for the EPUB build system.
-Timestamp: 2025-04-26 11:45 PM

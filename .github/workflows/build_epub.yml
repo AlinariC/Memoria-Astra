@@ -1,11 +1,20 @@
-name: Build and Release Publishing Packages
+name: PixelPacific Publishing Packages
 
 on:
   push:
     paths:
       - "**/Manuscript.md"
       - "**/cover.jpg"
+      - "**/cover-300dpi.jpg"
       - "**/metadata.yaml"
+      - "**/publishing.yaml"
+      - "**/series.yaml"
+      - "assets/**"
+      - "scripts/**"
+      - ".github/workflows/build_epub.yml"
+      - "!archive/**"
+      - "!archives/**"
+      - "!archived/**"
   workflow_dispatch:
 
 permissions:
@@ -28,12 +37,19 @@ jobs:
       run: |
         python3 scripts/publish.py inventory
         python3 scripts/publish.py doctor
-        python3 scripts/publish.py build --all
-        python3 scripts/build_apple_itmsp.py --all --provider AlinariCampbell
+        python3 scripts/publish.py build --all --allow-empty
 
-        echo "### Books Published" > release_notes.md
+        if find output -mindepth 1 -maxdepth 1 -type d | grep -q .; then
+          python3 scripts/build_apple_itmsp.py --all --provider AlinariCampbell
+          echo "HAS_PACKAGES=true" >> $GITHUB_ENV
+        else
+          echo "HAS_PACKAGES=false" >> $GITHUB_ENV
+        fi
+
+        echo "### PixelPacific Publishing Packages" > release_notes.md
         echo "" >> release_notes.md
         echo "Each ZIP contains Apple Books, Google Play Books, Amazon KDP upload folders, and Apple Transporter metadata packages." >> release_notes.md
+        echo "Archived projects are skipped by default." >> release_notes.md
         echo "" >> release_notes.md
 
         for dir in output/*; do
@@ -49,10 +65,11 @@ jobs:
         echo "RELEASE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
     - name: Create Release
+      if: env.HAS_PACKAGES == 'true'
       uses: softprops/action-gh-release@v2
       with:
         tag_name: "v1.0.${{ github.run_number }}"
-        name: "Memoria Astra Cycle – v1.0.${{ github.run_number }} (${{ env.RELEASE_DATE }})"
+        name: "PixelPacific Publishing - v1.0.${{ github.run_number }} (${{ env.RELEASE_DATE }})"
         body_path: release_notes.md
         files: |
           output/*.zip

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Memoria Astra publishing helper.
+"""PixelPacific Publishing package builder.
 
-One root command discovers book folders, validates manuscript assets, and builds
-the platform package tree needed for Apple Books, Google Play Books, and Amazon
-KDP ebook/print uploads.
+One root command discovers active book folders, validates manuscript assets, and
+builds the platform package tree needed for Apple Books, Google Play Books, and
+Amazon KDP ebook/print uploads.
 """
 
 from __future__ import annotations
@@ -30,6 +30,20 @@ from typing import Iterable
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = REPO_ROOT / "output"
 BOOK_DIR_RE = re.compile(r"^(?P<number>\d{2})_(?P<slug>.+)$")
+ARCHIVE_DIR_NAMES = {"archive", "archives", "archived"}
+SKIP_TOP_LEVEL_DIRS = {
+    ".git",
+    ".github",
+    ".publisher-cache",
+    "__pycache__",
+    "assets",
+    "build",
+    "dist",
+    "metadata",
+    "output",
+    "scripts",
+}
+PROJECT_METADATA_FILES = ("publishing.yaml", "series.yaml")
 PAPERBACK_FRONT_ART_INSET_IN = 0.0
 HARDCOVER_FRONT_ART_INSET_IN = 0.0
 DEFAULT_HARDCOVER_FRONT_ART_SHIFT_LEFT_IN = 0.16
@@ -47,6 +61,8 @@ class Book:
     manuscript: Path | None
     cover: Path | None
     metadata_file: Path | None
+    collection_path: Path | None = None
+    archived: bool = False
     legacy_source: Path | None = None
 
     @property
@@ -56,6 +72,12 @@ class Book:
     @property
     def title_guess(self) -> str:
         return self.slug.replace("_", " ")
+
+    @property
+    def collection_name(self) -> str | None:
+        if self.collection_path is None:
+            return None
+        return self.collection_path.name.replace("_", " ")
 
 
 @dataclass(frozen=True)
@@ -79,9 +101,14 @@ def slugify(value: str) -> str:
     return value.strip("-") or "book"
 
 
-def discover_books(root: Path = REPO_ROOT) -> list[Book]:
+def discover_books(root: Path = REPO_ROOT, include_archived: bool = False) -> list[Book]:
     books: list[Book] = []
-    for child in sorted(root.iterdir()):
+    for child in sorted(path for path in root.rglob("*") if path.is_dir()):
+        if should_skip_discovery_path(child):
+            continue
+        archived = is_archived_path(child)
+        if archived and not include_archived:
+            continue
         if not child.is_dir():
             continue
         match = BOOK_DIR_RE.match(child.name)
@@ -98,7 +125,7 @@ def discover_books(root: Path = REPO_ROOT) -> list[Book]:
             ]
         )
 
-        legacy_source = find_legacy_manuscript(child.name)
+        legacy_source = find_legacy_manuscript(child)
         books.append(
             Book(
                 number=int(match.group("number")),
@@ -107,19 +134,51 @@ def discover_books(root: Path = REPO_ROOT) -> list[Book]:
                 manuscript=manuscript if manuscript.exists() else None,
                 cover=cover,
                 metadata_file=metadata if metadata.exists() else None,
+                collection_path=collection_path_for(child),
+                archived=archived,
                 legacy_source=legacy_source,
             )
         )
     return books
 
 
-def find_legacy_manuscript(folder_name: str) -> Path | None:
-    legacy_root = REPO_ROOT / "Books" / "Memoria Astra"
+def should_skip_discovery_path(path: Path) -> bool:
+    try:
+        parts = path.relative_to(REPO_ROOT).parts
+    except ValueError:
+        return False
+    return bool(parts) and parts[0] in SKIP_TOP_LEVEL_DIRS
+
+
+def is_archived_path(path: Path) -> bool:
+    try:
+        parts = path.relative_to(REPO_ROOT).parts
+    except ValueError:
+        return False
+    return any(part.lower() in ARCHIVE_DIR_NAMES for part in parts)
+
+
+def collection_path_for(book_path: Path) -> Path | None:
+    parent = book_path.parent
+    if parent == REPO_ROOT:
+        return None
+    return parent
+
+
+def find_legacy_manuscript(book_dir: Path) -> Path | None:
+    for candidate in [
+        book_dir / "OEBPS" / "Manuscript.md",
+        book_dir / "OEBPS" / "output_md",
+    ]:
+        if candidate.exists():
+            return candidate
+
+    legacy_root = book_dir.parent / "Books"
     if not legacy_root.exists():
         return None
 
-    number = folder_name[:2]
-    normalized = folder_name[3:].replace("_", " ").lower()
+    number = book_dir.name[:2]
+    normalized = book_dir.name[3:].replace("_", " ").lower()
     candidates = sorted(legacy_root.glob(f"{number}.*"))
     for candidate in candidates:
         if normalized in candidate.name.lower().replace(".", ""):
@@ -224,7 +283,7 @@ def clean_scalar(value: str) -> str:
 
 
 def metadata_for(book: Book) -> dict[str, object]:
-    data: dict[str, object] = {}
+    data: dict[str, object] = project_metadata_for(book)
     if book.metadata_file:
         raw = book.metadata_file.read_text(encoding="utf-8")
         if raw.startswith("---"):
@@ -241,6 +300,22 @@ def metadata_for(book: Book) -> dict[str, object]:
     data.setdefault("author", "Alinari Campbell")
     data.setdefault("publisher", "PixelPacific")
     data.setdefault("language", "en")
+    return data
+
+
+def project_metadata_for(book: Book) -> dict[str, object]:
+    data: dict[str, object] = {}
+    paths = list(reversed(book.path.parents))
+    paths.append(book.path)
+    for parent in paths:
+        if parent != REPO_ROOT and REPO_ROOT not in parent.parents:
+            continue
+        if parent == book.path:
+            continue
+        for name in PROJECT_METADATA_FILES:
+            metadata_file = parent / name
+            if metadata_file.exists():
+                data.update(parse_simple_yaml(metadata_file.read_text(encoding="utf-8")))
     return data
 
 
@@ -262,9 +337,10 @@ def assemble_manuscript(book: Book, package_dir: Path) -> Path:
 
     metadata, body = read_frontmatter(book.manuscript)
     source = book.manuscript.read_text(encoding="utf-8")
-    colophon = (REPO_ROOT / "assets" / "Colophon.md").read_text(encoding="utf-8")
+    colophon_path = resolve_asset(book, "Colophon.md")
+    colophon = colophon_path.read_text(encoding="utf-8") if colophon_path else ""
 
-    if "# Colophon" not in source:
+    if colophon and "# Colophon" not in source:
         source = source.rstrip() + "\n\n" + colophon.strip() + "\n"
     elif not body.strip():
         # Book 8 began as metadata only; keep empty manuscripts visibly empty.
@@ -278,7 +354,37 @@ def assemble_manuscript(book: Book, package_dir: Path) -> Path:
 
 def platform_name(book: Book, metadata: dict[str, object]) -> str:
     title = str(metadata.get("title") or book.title_guess)
-    return f"{book.number:02d}-{slugify(title)}"
+    prefix = str(
+        metadata.get("package_prefix")
+        or metadata.get("package-prefix")
+        or metadata.get("project_slug")
+        or metadata.get("project-slug")
+        or ""
+    ).strip()
+    if not prefix and book.collection_path:
+        prefix = slugify(book.collection_path.name)
+    base = f"{book.number:02d}-{slugify(title)}"
+    return f"{slugify(prefix)}-{base}" if prefix else base
+
+
+def resolve_asset(book: Book, name: str) -> Path | None:
+    for parent in [book.path, *book.path.parents]:
+        if parent == REPO_ROOT.parent:
+            break
+        candidate = parent / "assets" / name
+        if candidate.exists():
+            return candidate
+        if parent == REPO_ROOT:
+            break
+    candidate = REPO_ROOT / "assets" / name
+    return candidate if candidate.exists() else None
+
+
+def require_asset(book: Book, name: str) -> Path:
+    asset = resolve_asset(book, name)
+    if asset is None:
+        raise FileNotFoundError(f"Missing shared asset: assets/{name}")
+    return asset
 
 
 def run(cmd: list[str], cwd: Path | None = None) -> None:
@@ -402,12 +508,13 @@ def build_book(book: Book, output_root: Path, skip_existing: bool = False) -> di
     ebook = package_dir / "source" / f"{name}.epub"
     fallbacks: list[str] = []
     if pandoc_available():
+        styles_css = require_asset(book, "styles.css")
         epub_cmd = [
             "pandoc",
             str(packaged_md),
             "--to=epub3",
             "--toc",
-            f"--css={REPO_ROOT / 'assets' / 'styles.css'}",
+            f"--css={styles_css}",
             f"--output={ebook}",
         ]
         if package_cover:
@@ -427,12 +534,14 @@ def build_book(book: Book, output_root: Path, skip_existing: bool = False) -> di
 
     common_pdf = package_dir / "source" / f"{name}.pdf"
     if pdf_available() and pandoc_available():
+        latex_template = require_asset(book, "custom.latex")
+        unnumber_filter = require_asset(book, "unnumber-specials.lua")
         pdf_cmd = [
             "pandoc",
             str(packaged_md),
             "--pdf-engine=xelatex",
-            f"--template={REPO_ROOT / 'assets' / 'custom.latex'}",
-            f"--lua-filter={REPO_ROOT / 'assets' / 'unnumber-specials.lua'}",
+            f"--template={latex_template}",
+            f"--lua-filter={unnumber_filter}",
             "--toc",
             "--toc-depth=1",
             "--variable=documentclass=book",
@@ -485,7 +594,7 @@ def write_internal_epub(source: Path, target: Path, metadata: dict[str, object],
     frontmatter, body = read_frontmatter(source)
     metadata = {**frontmatter, **metadata}
     sections = split_sections(body)
-    css = (REPO_ROOT / "assets" / "styles.css").read_text(encoding="utf-8")
+    css = require_asset(book, "styles.css").read_text(encoding="utf-8")
     title = str(metadata.get("title") or book.title_guess)
     author = str(metadata.get("author") or "Alinari Campbell")
     language = str(metadata.get("language") or "en")
@@ -1260,15 +1369,14 @@ def write_wrap_cover_pdf(
         image_box_h,
     )
 
-    title = str(metadata.get("title") or "Memoria Astra")
+    title = str(metadata.get("title") or "Untitled")
     subtitle = str(metadata.get("subtitle") or "")
     author = str(metadata.get("author") or "Alinari Campbell")
     description = str(metadata.get("description") or "")
     if not description.strip():
         description = (
-            "A sweeping installment in the Memoria Astra Cycle, where memory, "
-            "lost worlds, and the fragile inheritance of civilization bend "
-            "toward the next turning of the Spiral."
+            "A PixelPacific Publishing release prepared for ebook and print "
+            "distribution."
         )
 
     image_commands = [
@@ -1304,6 +1412,7 @@ def write_wrap_cover_pdf(
     ]
     content.extend(
         back_cover_text_commands(
+            metadata,
             title,
             subtitle,
             author,
@@ -1369,6 +1478,7 @@ def cover_rect(
 
 
 def back_cover_text_commands(
+    metadata: dict[str, object],
     title: str,
     subtitle: str,
     author: str,
@@ -1399,8 +1509,7 @@ def back_cover_text_commands(
         "0.965 0.84 0.52 rg",
     ]
     y = top - 42
-    label = "MEMORIA ASTRA CYCLE"
-    commands.append(pdf_text("F1", 9, label, left, y))
+    commands.append(pdf_text("F1", 9, back_cover_label(metadata), left, y))
     y -= 27
     title_size = 18 if len(title) > 18 else 20
     commands.append(pdf_text("F2", title_size, title.upper(), left, y))
@@ -1430,6 +1539,23 @@ def back_cover_text_commands(
     commands.append("0.965 0.86 0.62 rg")
     commands.append(pdf_text("F2", 15, author.upper(), left, author_y))
     return commands
+
+
+def back_cover_label(metadata: dict[str, object]) -> str:
+    for key in [
+        "back_cover_label",
+        "back-cover-label",
+        "series",
+        "series_title",
+        "series-title",
+        "project",
+        "imprint",
+        "publisher",
+    ]:
+        value = str(metadata.get(key) or "").strip()
+        if value:
+            return value.upper()
+    return "PIXELPACIFIC PUBLISHING"
 
 
 def normalized_paragraphs(text: str) -> list[str]:
@@ -1573,6 +1699,9 @@ def write_checklist(
 
 def command_audit_print(args: argparse.Namespace) -> int:
     output_root = Path(args.output).resolve()
+    if not output_root.exists():
+        print(f"No output directory found at {rel(output_root)}.")
+        return 0
     package_dirs = sorted(path for path in output_root.iterdir() if path.is_dir())
     failures = 0
 
@@ -1673,9 +1802,14 @@ def media_box_inches(pdf: Path) -> tuple[float, float] | None:
 
 
 def command_inventory(args: argparse.Namespace) -> int:
-    books = discover_books()
-    print("Memoria Astra inventory")
-    print("======================")
+    books = discover_books(include_archived=args.include_archived)
+    print("PixelPacific Publishing inventory")
+    print("=================================")
+    if not books:
+        print("No active books found.")
+        if not args.include_archived:
+            print("Archived projects are skipped; use --include-archived to inspect them.")
+        return 0
     for book in books:
         metadata = metadata_for(book)
         status = "ready" if book.manuscript and book.cover else "needs-attention"
@@ -1685,7 +1819,11 @@ def command_inventory(args: argparse.Namespace) -> int:
             status = "legacy-source-only"
         elif not book.manuscript:
             status = "missing-manuscript"
+        if book.archived:
+            status = f"archived/{status}"
         print(f"{book.number:02d}. {metadata.get('title', book.title_guess)} [{status}]")
+        if book.collection_name:
+            print(f"    collection: {book.collection_name}")
         print(f"    folder: {rel(book.path)}")
         print(f"    manuscript: {rel(book.manuscript)}")
         print(f"    cover: {rel(book.cover)}")
@@ -1718,10 +1856,14 @@ def command_build(args: argparse.Namespace) -> int:
     output_root = Path(args.output).resolve()
     output_root.mkdir(parents=True, exist_ok=True)
 
-    books = discover_books()
+    include_archived = args.include_archived or bool(args.book)
+    books = discover_books(include_archived=include_archived)
     selected = select_books(books, args)
     if not selected:
         print("No matching books found.")
+        if args.allow_empty:
+            print("Nothing to build. Archived projects are skipped by default.")
+            return 0
         return 1
 
     failures = 0
@@ -1755,21 +1897,36 @@ def select_books(books: list[Book], args: argparse.Namespace) -> list[Book]:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Build Memoria Astra publishing packages from Manuscript.md."
+        description="Build PixelPacific Publishing packages from active Manuscript.md folders."
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
     inventory = sub.add_parser("inventory", help="List discovered books and asset readiness.")
+    inventory.add_argument(
+        "--include-archived",
+        action="store_true",
+        help="Include books stored below archive/, archives/, or archived/ folders.",
+    )
     inventory.set_defaults(func=command_inventory)
 
     doctor = sub.add_parser("doctor", help="Check local publishing dependencies.")
     doctor.set_defaults(func=command_doctor)
 
-    build = sub.add_parser("build", help="Build one book or all books.")
-    build.add_argument("--all", action="store_true", help="Build every numbered book folder.")
+    build = sub.add_parser("build", help="Build one book or all active books.")
+    build.add_argument("--all", action="store_true", help="Build every active numbered book folder.")
     build.add_argument("--book", help="Path to a book folder or Manuscript.md.")
     build.add_argument("--number", type=int, help="Book number to build, such as 8.")
     build.add_argument("--output", default=str(DEFAULT_OUTPUT), help="Output directory.")
+    build.add_argument(
+        "--include-archived",
+        action="store_true",
+        help="Allow --all and --number to select books stored below archive/ folders.",
+    )
+    build.add_argument(
+        "--allow-empty",
+        action="store_true",
+        help="Exit successfully when no active books match; useful for archive-only repositories.",
+    )
     build.add_argument(
         "--skip-existing",
         action="store_true",

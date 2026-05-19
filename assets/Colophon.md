@@ -1,20 +1,9 @@
-
-
 # Colophon
 
-*The Memoria Astra Cycle* was written by Alinari Campbell.
+This title was prepared by PixelPacific Publishing.
 
-Cover design, typography, and layout were developed in-house by PixelPacific.
+Cover design, typography, and layout were developed in-house by PixelPacific Publishing unless otherwise noted in the book metadata.
 
-This series was typeset using the Garamond and Palatino font families to maintain a mythic, timeless aesthetic befitting the themes of memory, survival, and forging destiny.
-
-Memoria Astra and associated trademarks are property of Alinari Campbell. All rights reserved.
-
----
-
-(c) 2025 Alinari Campbell. All rights reserved.
-First digital edition published by PixelPacific.
+Copyright belongs to the credited author or rights holder. All rights reserved.
 
 No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form by any means without prior written permission from the publisher, except for brief quotations used in reviews or scholarly works.
-
----

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build Apple Books Transporter .itmsp packages from generated outputs."""
+"""Build Apple Books Transporter .itmsp packages from generated PixelPacific outputs."""
 
 from __future__ import annotations
 
@@ -57,7 +57,7 @@ def read_json(path: Path) -> dict[str, Any]:
 
 def load_catalog(path: Path) -> dict[str, Any]:
     if not path.exists():
-        raise FileNotFoundError(f"Apple Books catalog is missing: {rel(path)}")
+        return {"defaults": {}, "books": {}}
     catalog = read_json(path)
     catalog.setdefault("defaults", {})
     catalog.setdefault("books", {})
@@ -66,7 +66,7 @@ def load_catalog(path: Path) -> dict[str, Any]:
 
 def discover_package_dirs(output_root: Path) -> list[Path]:
     if not output_root.exists():
-        raise FileNotFoundError(f"Output directory is missing: {rel(output_root)}")
+        return []
     return sorted(
         child
         for child in output_root.iterdir()
@@ -485,7 +485,7 @@ def write_report(
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Build Apple Books Transporter .itmsp packages from output/*/apple-books assets."
+        description="Build Apple Books Transporter .itmsp packages from generated PixelPacific assets."
     )
     parser.add_argument(
         "--all",
@@ -522,8 +522,8 @@ def main(argv: list[str] | None = None) -> int:
     catalog = load_catalog(Path(args.catalog).resolve())
     package_dirs = select_package_dirs(discover_package_dirs(output_root), args.book)
     if not package_dirs:
-        print("No generated Apple Books folders found.", file=sys.stderr)
-        return 1
+        print("No generated Apple Books folders found; nothing to package.")
+        return 0
 
     packages: list[ApplePackage] = []
     failures = 0
