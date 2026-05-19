@@ -25,6 +25,15 @@ For each package:
 
 Flat upload staging was rebuilt at `/tmp/cinderwake-upload-assets` with 33 real, non-empty files and 0 symlinks. It mirrors the KDP, Apple Books, and Google Play Books assets for quick picker access.
 
+KDP-only retry staging was rebuilt at `/tmp/cinderwake-kdp-upload-assets` with 18 real, non-empty files for Kindle eBook, paperback, and hardcover upload:
+
+- `<slug>-kindle-ebook.epub`
+- `<slug>-kindle-cover.jpg`
+- `<slug>-paperback-interior.pdf`
+- `<slug>-paperback-cover.pdf`
+- `<slug>-hardcover-interior.pdf`
+- `<slug>-hardcover-cover.pdf`
+
 Apple Transporter `.itmsp` packages were generated under:
 
 - `output/cinderwake-01-the-ash-beneath-the-crown/apple-books/cinderwake_01_the_ash_beneath_the_crown.itmsp`
@@ -50,6 +59,12 @@ Google Play Books bulk upload completed on 2026-05-18:
 - Partner Center accepted the repair set with `Uploaded 9 content files`.
 - Partner Center Book catalog now shows all three primary Cinderwake rows as `Live on Google Play` with `$4.99` pricing.
 - Ignore the cover-only placeholder rows created by the first no-ISBN cover filename pass: `GGKEY:67UBUE7Q2B0`, `GGKEY:T7WL07YPJ7Z`, and `GGKEY:JU2YE1L46Q9`.
+
+Amazon KDP publish attempt on 2026-05-19:
+
+- KDP Bookshelf search for `Cinderwake` returned no existing title shells.
+- Creating a new Kindle eBook shell is blocked by KDP's account-side `Title creation limit exceeded` dialog: `The number of books that can be submitted for publishing has been exceeded by this account.`
+- No Cinderwake Amazon listings were submitted. Retry from `/tmp/cinderwake-kdp-upload-assets` after the KDP limit clears.
 
 ## Store Setup Defaults
 
@@ -81,3 +96,5 @@ Google Play Books bulk upload completed on 2026-05-18:
 - Google Play Books Partner Center upload history: `cinderwake-google-play-bulk-metadata-2026-05-18.csv` completed with `3` rows, `0` errors, and `0` warnings.
 - `unzip -t` on the three Google repair EPUBs in `/tmp/cinderwake-google-repair`: no archive errors.
 - Google Play Books Partner Center Book catalog: the three Cinderwake primary rows are `Live on Google Play`.
+- `unzip -t` on the three KDP Kindle EPUBs in `/tmp/cinderwake-kdp-upload-assets`: no archive errors.
+- KDP Bookshelf: no existing `Cinderwake` rows; new title creation currently blocked by Amazon's title creation limit.

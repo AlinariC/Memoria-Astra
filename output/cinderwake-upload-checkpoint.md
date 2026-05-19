@@ -3,6 +3,7 @@
 Prepared: 2026-05-19
 Apple delivery updated: 2026-05-18 20:23 MST
 Google Play Books bulk upload updated: 2026-05-18 21:57 MST
+Amazon KDP attempt updated: 2026-05-19 09:44 MST
 
 | Package | Title | Kindle | Paperback | Hardcover | Apple Books | Google Play Books |
 |---|---|---|---|---|---|---|
@@ -14,6 +15,8 @@ Google Play Books bulk upload updated: 2026-05-18 21:57 MST
 
 `/tmp/cinderwake-upload-assets` contains 33 real, non-empty upload files and 0 symlinks.
 
+`/tmp/cinderwake-kdp-upload-assets` contains the 18 current Amazon KDP upload files for the three Cinderwake titles.
+
 For each title it includes:
 
 - KDP ebook EPUB and cover JPG
@@ -21,6 +24,15 @@ For each title it includes:
 - KDP hardcover interior PDF and wrap-cover PDF
 - Google Play Books EPUB, PDF, and cover JPG
 - Apple Books EPUB and cover JPG
+
+For KDP retry, use:
+
+- `<slug>-kindle-ebook.epub`
+- `<slug>-kindle-cover.jpg`
+- `<slug>-paperback-interior.pdf`
+- `<slug>-paperback-cover.pdf`
+- `<slug>-hardcover-interior.pdf`
+- `<slug>-hardcover-cover.pdf`
 
 ## Next Update Rule
 
@@ -50,3 +62,12 @@ After each storefront step, update this checkpoint from the real portal state ra
 - Partner Center accepted the nine repair files and displayed `Uploaded 9 content files`.
 - Partner Center Book catalog now shows all three primary Cinderwake rows as `Live on Google Play` with `$4.99` pricing.
 - Do not use the cover-only placeholder rows from the first filename pass as live listings: `GGKEY:67UBUE7Q2B0`, `GGKEY:T7WL07YPJ7Z`, and `GGKEY:JU2YE1L46Q9`.
+
+## Amazon KDP Publishing Attempt
+
+- Rebuilt `/tmp/cinderwake-kdp-upload-assets` from the generated Cinderwake KDP outputs.
+- Verified the three Kindle EPUB archives with `unzip -t`.
+- Re-ran `python3 scripts/publish.py audit-print`; all three Cinderwake paperback and hardcover covers/interiors passed.
+- KDP Bookshelf search for `Cinderwake` returned no existing draft/live title shells.
+- Attempted to create the first Kindle eBook shell, but KDP blocked new title creation with `Title creation limit exceeded` and `The number of books that can be submitted for publishing has been exceeded by this account.`
+- No Cinderwake Amazon listings were submitted. Retry new-title creation after Amazon's account limit clears, then publish Kindle eBook, paperback, and hardcover formats from `/tmp/cinderwake-kdp-upload-assets`.
