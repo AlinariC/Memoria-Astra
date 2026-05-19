@@ -1,0 +1,31 @@
+title: "The Moon Below the World"
+series: "The Cinderwake Trilogy"
+book_number: 2
+genre:
+  - "Epic fantasy"
+  - "Secondary-world fantasy"
+status: "complete bespoke first revision"
+manuscript_file: "manuscript.md"
+target_page_count: "350-600"
+target_word_count: "105000-180000"
+produced_word_count: 104940
+estimated_print_pages:
+  at_300_words_per_page: 350
+  at_275_words_per_page: 382
+  at_250_words_per_page: 420
+current_form: "complete bespoke first revision with consistency polish and typesetting-readiness normalization"
+protagonist: "Mara Venn"
+primary_setting: "Lumenorath, Khar Veyl, Blackroot Road, Orrowen"
+primary_conflict: "Mara must stop a holy war between light and dark elves while preventing the dead of Orrowen from being enslaved."
+standalone_resolution: "The elven war is stopped, Serathiel falls, and the dead of Orrowen become witnesses rather than weapons."
+series_hook: "The dragon-moon beneath the world opens one eye, waking every cinder in Vael Taryn."
+themes:
+  - "Truth cannot heal while it is owned by rulers."
+  - "Beauty can preserve or imprison."
+  - "A symbol is useful only if the person inside it survives."
+continuity_sources:
+  - "../../series_bible/00-series-overview.md"
+  - "../../series_bible/01-world-and-magic.md"
+  - "../../series_bible/02-peoples-factions-creatures.md"
+  - "../../series_bible/03-character-bible.md"
+expansion_instruction: "Revise chapter-by-chapter for bespoke scene detail, continuity, and prose polish while preserving the full-length epic structure."

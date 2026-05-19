@@ -1,0 +1,48 @@
+{
+  "defaults": {
+    "provider": "AlinariCampbell",
+    "provider_status": "verified_from_transporter_auth_log",
+    "package_version": "publication5.0",
+    "language": "en",
+    "publisher": "PixelPacific",
+    "territory": "US",
+    "cleared_for_sale": true,
+    "release_type": "digital-only",
+    "sales_start_date": "2026-05-19",
+    "drm_free": false,
+    "subjects": [
+      {
+        "scheme": "BISAC",
+        "code": "FIC009020"
+      },
+      {
+        "scheme": "BISAC",
+        "code": "FIC009100"
+      },
+      {
+        "scheme": "BISAC",
+        "code": "FIC009120"
+      }
+    ]
+  },
+  "books": {
+    "cinderwake-01-the-ash-beneath-the-crown": {
+      "vendor_id": "cinderwake_01_the_ash_beneath_the_crown",
+      "publication_date": "2026-05-19",
+      "price_tier": 5,
+      "description": "Mara Venn has spent her life in the cinder vents beneath Kell Ashgate, small enough for lethal work and poor enough that no one asks whether she is afraid. When a royal inspection ends with missing miners, moving corpses, and a voice under the stone calling her by name, Mara discovers the kingdom's warmth is fed by the unnamed dead. Hunted by the crown and wanted by powers she does not understand, Mara flees into the Gloamfen with a disgraced knight, a goblin guide, and a secret that could burn cities awake. To save her city, Mara must do the one thing the powerful never expected from someone like her: make the invisible count."
+    },
+    "cinderwake-02-the-moon-below-the-world": {
+      "vendor_id": "cinderwake_02_the_moon_below_the_world",
+      "publication_date": "2026-05-19",
+      "price_tier": 5,
+      "description": "Mara Venn saved a city and became a symbol. That is far more dangerous than being a fugitive. As rebel banners rise in her name, light elves seek to sanctify her, dark elves seek to imprison her, and gnome engines trace a waking pattern beneath the continent. The road leads down into Orrowen, where dead courts still hold session and the buried moon of a dragon remembers the crime that split the elven world. To stop a holy war, Mara must uncover the truth both sides were built to hide."
+    },
+    "cinderwake-03-the-dragon-that-dreamed-death": {
+      "vendor_id": "cinderwake_03_the_dragon_that_dreamed_death",
+      "publication_date": "2026-05-19",
+      "price_tier": 5,
+      "description": "The dead rise in daylight. Dragons return as judges. Every kingdom wants Mara Venn to end the war by becoming its weapon. At the dead capital of Vael, the first dragon dreams of a world without grief, war, or choice. Its Choir promises mercy through perfect stillness, and after all she has lost, Mara understands the temptation. But the girl who was once treated as expendable will not save the world by deciding who else must be spent. To end the final war, Mara must free the cinders, break the covenant that made crowns stronger than people, and trust the living with the terrifying work of being free."
+    }
+  }
+}

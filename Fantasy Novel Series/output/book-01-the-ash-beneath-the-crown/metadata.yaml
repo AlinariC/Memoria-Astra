@@ -1,0 +1,31 @@
+title: "The Ash Beneath the Crown"
+series: "The Cinderwake Trilogy"
+book_number: 1
+genre:
+  - "Epic fantasy"
+  - "Secondary-world fantasy"
+status: "complete bespoke first revision"
+manuscript_file: "manuscript.md"
+target_page_count: "350-600"
+target_word_count: "105000-180000"
+produced_word_count: 106801
+estimated_print_pages:
+  at_300_words_per_page: 356
+  at_275_words_per_page: 388
+  at_250_words_per_page: 427
+current_form: "complete bespoke first revision with consistency polish and typesetting-readiness normalization"
+protagonist: "Mara Venn"
+primary_setting: "Kell Ashgate, the Gloamfen, the Seven Arches, Harrowmere"
+primary_conflict: "Mara exposes and destroys the royal cinder foundry using the unnamed dead as labor and soldiers."
+standalone_resolution: "Kell Ashgate is freed, Lord Cael Mordane is defeated, and the first foundry is destroyed."
+series_hook: "The shattered cinder beneath the foundry speaks with many dragon voices: You woke us too soon."
+themes:
+  - "Power must remain answerable to the powerless."
+  - "Names restore personhood to the erased."
+  - "Usefulness is not the same thing as worth."
+continuity_sources:
+  - "../../series_bible/00-series-overview.md"
+  - "../../series_bible/01-world-and-magic.md"
+  - "../../series_bible/02-peoples-factions-creatures.md"
+  - "../../series_bible/03-character-bible.md"
+expansion_instruction: "Revise chapter-by-chapter for bespoke scene detail, continuity, and prose polish while preserving the full-length epic structure."

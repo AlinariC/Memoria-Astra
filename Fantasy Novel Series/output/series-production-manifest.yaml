@@ -1,0 +1,38 @@
+series: "The Cinderwake Trilogy"
+typesetting_pass_date: "2026-05-18"
+source_status: "complete bespoke first revision"
+generated_by: "production/typesetting_readiness.py"
+books:
+  - book_number: 1
+    title: "The Ash Beneath the Crown"
+    folder: "book-01-the-ash-beneath-the-crown"
+    manuscript_file: "manuscript.md"
+    metadata_file: "metadata.yaml"
+    chapter_count: 36
+    produced_word_count: 106801
+    estimated_print_pages:
+      at_300_words_per_page: 356
+      at_275_words_per_page: 388
+      at_250_words_per_page: 427
+  - book_number: 2
+    title: "The Moon Below the World"
+    folder: "book-02-the-moon-below-the-world"
+    manuscript_file: "manuscript.md"
+    metadata_file: "metadata.yaml"
+    chapter_count: 31
+    produced_word_count: 104940
+    estimated_print_pages:
+      at_300_words_per_page: 350
+      at_275_words_per_page: 382
+      at_250_words_per_page: 420
+  - book_number: 3
+    title: "The Dragon That Dreamed Death"
+    folder: "book-03-the-dragon-that-dreamed-death"
+    manuscript_file: "manuscript.md"
+    metadata_file: "metadata.yaml"
+    chapter_count: 41
+    produced_word_count: 106158
+    estimated_print_pages:
+      at_300_words_per_page: 354
+      at_275_words_per_page: 386
+      at_250_words_per_page: 425

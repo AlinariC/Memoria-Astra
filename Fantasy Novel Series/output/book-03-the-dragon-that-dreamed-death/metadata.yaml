@@ -1,0 +1,31 @@
+title: "The Dragon That Dreamed Death"
+series: "The Cinderwake Trilogy"
+book_number: 3
+genre:
+  - "Epic fantasy"
+  - "Secondary-world fantasy"
+status: "complete bespoke first revision"
+manuscript_file: "manuscript.md"
+target_page_count: "350-600"
+target_word_count: "105000-180000"
+produced_word_count: 106158
+estimated_print_pages:
+  at_300_words_per_page: 354
+  at_275_words_per_page: 386
+  at_250_words_per_page: 425
+current_form: "complete bespoke first revision with consistency polish and typesetting-readiness normalization"
+protagonist: "Mara Venn"
+primary_setting: "The Storm Isles, the War of Every Road, the Dead Capital of Vael, Vorrakai's death-dream"
+primary_conflict: "Mara must defeat Vorrakai's Choir without becoming the ruler, martyr, or weapon every faction wants her to be."
+standalone_resolution: "The old covenant breaks, the cinder economy ends, the Choir falls, and Vael Taryn survives into a freer, harder age."
+series_hook: "The trilogy closes with Mara hearing no command under the earth, only room for the living to choose."
+themes:
+  - "Pain does not prove life failed; it proves life mattered."
+  - "No single throne, saint, dragon, or hero may decide freedom for everyone."
+  - "Memory without humility becomes tyranny."
+continuity_sources:
+  - "../../series_bible/00-series-overview.md"
+  - "../../series_bible/01-world-and-magic.md"
+  - "../../series_bible/02-peoples-factions-creatures.md"
+  - "../../series_bible/03-character-bible.md"
+expansion_instruction: "Revise chapter-by-chapter for bespoke scene detail, continuity, and prose polish while preserving the full-length epic structure."
