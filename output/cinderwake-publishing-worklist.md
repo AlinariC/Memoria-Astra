@@ -60,11 +60,14 @@ Google Play Books bulk upload completed on 2026-05-18:
 - Partner Center Book catalog now shows all three primary Cinderwake rows as `Live on Google Play` with `$4.99` pricing.
 - Ignore the cover-only placeholder rows created by the first no-ISBN cover filename pass: `GGKEY:67UBUE7Q2B0`, `GGKEY:T7WL07YPJ7Z`, and `GGKEY:JU2YE1L46Q9`.
 
-Amazon KDP publish attempt on 2026-05-19:
+Amazon KDP publish attempts:
 
 - KDP Bookshelf search for `Cinderwake` returned no existing title shells.
 - Creating a new Kindle eBook shell is blocked by KDP's account-side `Title creation limit exceeded` dialog: `The number of books that can be submitted for publishing has been exceeded by this account.`
 - No Cinderwake Amazon listings were submitted. Retry from `/tmp/cinderwake-kdp-upload-assets` after the KDP limit clears.
+- 2026-05-20 retry: the `Cinderwake` series shell existed in KDP with no description and no books. Book 1 Kindle eBook details were filled for `The Ash Beneath the Crown` with series slot `Cinderwake` book `1`, author, description, rights, categories, keywords, and release-now setting.
+- 2026-05-20 retry blocker: both `Save and Continue` and `Save as Draft` returned the same KDP account-side `Title creation limit exceeded` dialog, so the Book 1 shell could not be saved or advanced to content upload.
+- No Cinderwake Amazon listings were submitted on 2026-05-20. Retry from `/tmp/cinderwake-kdp-upload-assets` after the KDP title-creation throttle clears.
 
 ## Store Setup Defaults
 
@@ -97,4 +100,4 @@ Amazon KDP publish attempt on 2026-05-19:
 - `unzip -t` on the three Google repair EPUBs in `/tmp/cinderwake-google-repair`: no archive errors.
 - Google Play Books Partner Center Book catalog: the three Cinderwake primary rows are `Live on Google Play`.
 - `unzip -t` on the three KDP Kindle EPUBs in `/tmp/cinderwake-kdp-upload-assets`: no archive errors.
-- KDP Bookshelf: no existing `Cinderwake` rows; new title creation currently blocked by Amazon's title creation limit.
+- KDP Bookshelf: the `Cinderwake` series shell exists, but no Cinderwake book rows could be saved; new title creation is still blocked by Amazon's title creation limit.
