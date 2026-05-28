@@ -438,7 +438,7 @@ Not peace. Not yet. Perhaps not even close. But the first living body crossed wi
 
 Vorrakai watched from below.
 
-Mara could feel its grief, patient and immense, not defeated by one held field. The dragon-moon had shown one eye and closed it again. Serathiel still believed himself merciful. Vaura still had a city to defend and secrets to answer for. The Choir still waited at the edge of surrender. The old covenant was still only half read. The Glass Engine still pulsed behind them. Every victory in Orrowen came with filings attached.
+Mara could feel its grief, patient and immense, not defeated by one held field. The dragon-moon had shown one eye and closed it again. Serathiel still believed herself merciful. Vaura still had a city to defend and secrets to answer for. The Choir still waited at the edge of surrender. The old covenant was still only half read. The Glass Engine still pulsed behind them. Every victory in Orrowen came with filings attached.
 
 But the armies did not kill each other.
 
@@ -446,7 +446,7 @@ Not yet.
 
 For that hour, not yet was a country.
 
-Mara looked at the bridge where the first healers met, at Brakka bleeding vow-light into the stones, at Saelith standing in exile colors before the man who had made mercy cruel, at Maelin facing the mother who had loved her through chains, at Tavi holding grief together with engineering spite, at Kesh pretending the wetness in his eyes was battlefield humidity, at Caldus choosing guard duty even when his body had begun filing formal complaints.
+Mara looked at the bridge where the first healers met, at Brakka bleeding vow-light into the stones, at Saelith standing in exile colors before the woman who had made mercy cruel, at Maelin facing the mother who had loved her through chains, at Tavi holding grief together with engineering spite, at Kesh pretending the wetness in his eyes was battlefield humidity, at Caldus choosing guard duty even when his body had begun filing formal complaints.
 
 She understood something then that no prophecy had offered because prophecy preferred cleaner shapes.
 

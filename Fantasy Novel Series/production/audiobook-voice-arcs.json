@@ -1,0 +1,276 @@
+{
+  "notes": [
+    "These settings guide rendering only; they must never be prepended to spoken text.",
+    "The goal is emotional progression across the trilogy while preserving consistent actor identity.",
+    "If a model ignores a voice setting, keep the stage metadata in the manifest for later regeneration decisions."
+  ],
+  "default_voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.78,
+    "style": 0.35,
+    "use_speaker_boost": true
+  },
+  "role_arcs": {
+    "narrator": [
+      {
+        "stage": "book1_ashgate_intimate",
+        "book": 1,
+        "chapter_min": 1,
+        "chapter_max": 11,
+        "voice_settings": {
+          "stability": 0.62,
+          "similarity_boost": 0.82,
+          "style": 0.28,
+          "use_speaker_boost": true
+        },
+        "direction": "Close, bodily, soot-level narration. Let myth arrive as pressure under ordinary life."
+      },
+      {
+        "stage": "book1_road_rebellion",
+        "book": 1,
+        "chapter_min": 12,
+        "chapter_max": 28,
+        "voice_settings": {
+          "stability": 0.54,
+          "similarity_boost": 0.8,
+          "style": 0.38,
+          "use_speaker_boost": true
+        },
+        "direction": "Broader road energy and tactical urgency, but still grounded in bodies, weather, ledgers, and fear."
+      },
+      {
+        "stage": "book1_civic_mythic",
+        "book": 1,
+        "chapter_min": 29,
+        "chapter_max": 99,
+        "voice_settings": {
+          "stability": 0.48,
+          "similarity_boost": 0.78,
+          "style": 0.48,
+          "use_speaker_boost": true
+        },
+        "direction": "Public climax and dragon awe, with the emotional weight returning to names, soup, roads, and repair."
+      },
+      {
+        "stage": "book2_institutional_war",
+        "book": 2,
+        "chapter_min": 1,
+        "chapter_max": 31,
+        "voice_settings": {
+          "stability": 0.5,
+          "similarity_boost": 0.78,
+          "style": 0.46,
+          "use_speaker_boost": true
+        },
+        "direction": "Carry culture contrast clearly: Lumenorath beauty, Khar Veyl legal precision, Orrowen civic witness."
+      },
+      {
+        "stage": "book3_mythic_aftermath",
+        "book": 3,
+        "chapter_min": 1,
+        "chapter_max": 41,
+        "voice_settings": {
+          "stability": 0.46,
+          "similarity_boost": 0.78,
+          "style": 0.55,
+          "use_speaker_boost": true
+        },
+        "direction": "Mythic convergence without grandstanding. Apocalypse and lentils belong to the same emotional universe."
+      }
+    ],
+    "mara": [
+      {
+        "stage": "meek_ash_runner",
+        "book": 1,
+        "chapter_min": 1,
+        "chapter_max": 11,
+        "voice_settings": {
+          "stability": 0.66,
+          "similarity_boost": 0.82,
+          "style": 0.18,
+          "use_speaker_boost": true
+        },
+        "direction": "Small, guarded, practical, physically tired. Courage is present but not yet public."
+      },
+      {
+        "stage": "reluctant_local_leader",
+        "book": 1,
+        "chapter_min": 12,
+        "chapter_max": 28,
+        "voice_settings": {
+          "stability": 0.56,
+          "similarity_boost": 0.8,
+          "style": 0.32,
+          "use_speaker_boost": true
+        },
+        "direction": "Anger and command start to surface, but every strong line still feels earned against fear."
+      },
+      {
+        "stage": "ashgate_witness",
+        "book": 1,
+        "chapter_min": 29,
+        "chapter_max": 99,
+        "voice_settings": {
+          "stability": 0.5,
+          "similarity_boost": 0.78,
+          "style": 0.45,
+          "use_speaker_boost": true
+        },
+        "direction": "Public authority arrives. She still resists being made saint, weapon, or crown."
+      },
+      {
+        "stage": "commander_by_accident",
+        "book": 2,
+        "chapter_min": 1,
+        "chapter_max": 18,
+        "voice_settings": {
+          "stability": 0.52,
+          "similarity_boost": 0.78,
+          "style": 0.4,
+          "use_speaker_boost": true
+        },
+        "direction": "More authority, more exhaustion, and sharper refusal of being sanctified."
+      },
+      {
+        "stage": "answerable_commander",
+        "book": 2,
+        "chapter_min": 19,
+        "chapter_max": 31,
+        "voice_settings": {
+          "stability": 0.47,
+          "similarity_boost": 0.77,
+          "style": 0.52,
+          "use_speaker_boost": true
+        },
+        "direction": "She can command now, which frightens her. The refusal of better command is the spine."
+      },
+      {
+        "stage": "witness_founder",
+        "book": 3,
+        "chapter_min": 1,
+        "chapter_max": 41,
+        "voice_settings": {
+          "stability": 0.44,
+          "similarity_boost": 0.76,
+          "style": 0.6,
+          "use_speaker_boost": true
+        },
+        "direction": "Epic-hero scale without chosen-one polish. Powerful, exhausted, intimate, correctable."
+      }
+    ],
+    "caldus": [
+      {
+        "stage": "disgraced_shield",
+        "book": 1,
+        "chapter_min": 1,
+        "chapter_max": 99,
+        "voice_settings": {
+          "stability": 0.62,
+          "similarity_boost": 0.82,
+          "style": 0.28,
+          "use_speaker_boost": true
+        }
+      },
+      {
+        "stage": "guard_without_owning",
+        "book": 2,
+        "chapter_min": 1,
+        "chapter_max": 31,
+        "voice_settings": {
+          "stability": 0.56,
+          "similarity_boost": 0.8,
+          "style": 0.36,
+          "use_speaker_boost": true
+        }
+      },
+      {
+        "stage": "command_corrected",
+        "book": 3,
+        "chapter_min": 1,
+        "chapter_max": 41,
+        "voice_settings": {
+          "stability": 0.52,
+          "similarity_boost": 0.8,
+          "style": 0.45,
+          "use_speaker_boost": true
+        }
+      }
+    ],
+    "saelith": [
+      {
+        "stage": "beautiful_law",
+        "book": 1,
+        "chapter_min": 1,
+        "chapter_max": 99,
+        "voice_settings": {
+          "stability": 0.64,
+          "similarity_boost": 0.82,
+          "style": 0.32,
+          "use_speaker_boost": true
+        }
+      },
+      {
+        "stage": "law_breaking_to_save_people",
+        "book": 2,
+        "chapter_min": 1,
+        "chapter_max": 31,
+        "voice_settings": {
+          "stability": 0.5,
+          "similarity_boost": 0.78,
+          "style": 0.55,
+          "use_speaker_boost": true
+        }
+      },
+      {
+        "stage": "bad_song_survives",
+        "book": 3,
+        "chapter_min": 1,
+        "chapter_max": 41,
+        "voice_settings": {
+          "stability": 0.46,
+          "similarity_boost": 0.76,
+          "style": 0.62,
+          "use_speaker_boost": true
+        }
+      }
+    ],
+    "kesh": [
+      {
+        "stage": "jokes_as_armor",
+        "book": 1,
+        "chapter_min": 1,
+        "chapter_max": 99,
+        "voice_settings": {
+          "stability": 0.48,
+          "similarity_boost": 0.78,
+          "style": 0.55,
+          "use_speaker_boost": true
+        }
+      },
+      {
+        "stage": "debt_made_public",
+        "book": 2,
+        "chapter_min": 1,
+        "chapter_max": 31,
+        "voice_settings": {
+          "stability": 0.44,
+          "similarity_boost": 0.76,
+          "style": 0.65,
+          "use_speaker_boost": true
+        }
+      },
+      {
+        "stage": "road_law_loved_badly",
+        "book": 3,
+        "chapter_min": 1,
+        "chapter_max": 41,
+        "voice_settings": {
+          "stability": 0.43,
+          "similarity_boost": 0.76,
+          "style": 0.68,
+          "use_speaker_boost": true
+        }
+      }
+    ]
+  }
+}

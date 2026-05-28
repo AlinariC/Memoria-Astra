@@ -1,0 +1,116 @@
+{
+  "project": "The Cinderwake Trilogy audiobook",
+  "engine": "ElevenLabs",
+  "notes": [
+    "Voice IDs are not secrets; the API key remains outside the repo.",
+    "This initial cast uses voices available to the account on 2026-05-20.",
+    "Use ElevenLabs Text to Dialogue for ensemble scenes and Text to Speech for long single-narrator stretches."
+  ],
+  "roles": {
+    "narrator": {
+      "display_name": "Epic narrator",
+      "voice_name": "John Doe Intimate",
+      "voice_id": "7fbQ7yJuEo56rYjrYaEh",
+      "delivery_tag": "[intimate epic narration, grave wonder, emotionally present, cinematic restraint]",
+      "direction": "The narrator carries the world with warmth and pressure: ash in the lungs, old memory under stone, danger close to the skin. Avoid announcer energy; make grandeur feel lived-in."
+    },
+    "mara": {
+      "display_name": "Mara Venn",
+      "voice_name": "Sarah - Mature, Reassuring, Confident",
+      "voice_id": "EXAVITQu4vr4xnSDxMaL",
+      "delivery_tag": "[guarded young woman, fierce under exhaustion, practical, emotionally honest when it breaks through]",
+      "direction": "Mara begins small, wary, and unsentimental. Her power is listening before command. Let fear, anger, tenderness, and leadership arrive as discoveries she resists before owning."
+    },
+    "joryn": {
+      "display_name": "Joryn Venn",
+      "voice_name": "Chris - Charming, Down-to-Earth",
+      "voice_id": "iP95p4xoKVk53GoZ742B",
+      "delivery_tag": "[protective older brother, working-class warmth, fear hidden under dry humor]",
+      "direction": "Joryn should sound like home under strain: practical love, old jokes, and a painful need to keep Mara safe even when safety means making her smaller."
+    },
+    "caldus": {
+      "display_name": "Sir Caldus Renn",
+      "voice_name": "Brian - Deep, Resonant and Comforting",
+      "voice_id": "nPczCjzI2devNBz1zQrb",
+      "delivery_tag": "[low soldier's voice, disciplined, tired, grief held behind duty]",
+      "direction": "Caldus is restraint under moral injury. He should not sound theatrical; he should sound like a man who knows exactly how costly action is and acts anyway."
+    },
+    "ilyr": {
+      "display_name": "Ilyr Noct-Vey",
+      "voice_name": "Daniel - Steady Broadcaster",
+      "voice_id": "onwK4e9ZLuTAKqWW03F9",
+      "delivery_tag": "[precise, shadowed, controlled, dry intelligence with old shame underneath]",
+      "direction": "Ilyr is a blade and an archive. Keep him elegant and dangerous, but let exile and unfinished confession put hairline cracks in the polish."
+    },
+    "saelith": {
+      "display_name": "Saelith Dawnmere",
+      "voice_name": "Lily - Velvety Actress",
+      "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+      "delivery_tag": "[beautiful controlled voice, reverent, compassionate, afraid of disobedience]",
+      "direction": "Saelith should sound trained by hymn and law. Her arc is the sound of beauty becoming answerable to pain instead of replacing it."
+    },
+    "tavi": {
+      "display_name": "Tavi Quen",
+      "voice_name": "Laura - Enthusiast, Quirky Attitude",
+      "voice_id": "FGY2WhTYpPnrIDTdsKH5",
+      "delivery_tag": "[quick bright engineer, nervous humor, guilt behind the cleverness]",
+      "direction": "Tavi moves fast because stopping means remembering what her inventions have done. Keep the wit nimble, but never weightless."
+    },
+    "kesh": {
+      "display_name": "Kesh of the Kavik Road",
+      "voice_name": "Callum - Husky Trickster",
+      "voice_id": "N2lVS1w4EtoT3dr4eOWO",
+      "delivery_tag": "[raspy trickster, agile, amused, wounded loyalty hidden behind bargaining]",
+      "direction": "Kesh is comedy with invoices and a knife under it. He should charm, dodge, and then suddenly make guilt audible."
+    },
+    "brakka": {
+      "display_name": "Brakka of the Third Arch",
+      "voice_name": "Matilda - Knowledgable, Professional",
+      "voice_id": "XrExE9yKIg1WjnnlVkGX",
+      "delivery_tag": "[low firm oath-sister, stone patience, blunt warmth, no wasted words]",
+      "direction": "Brakka should sound like load-bearing law. Her tenderness is not softness; it is weight carried correctly."
+    },
+    "arveth": {
+      "display_name": "Arveth the Named",
+      "voice_name": "River - Relaxed, Neutral, Informative",
+      "voice_id": "SAz9YHcvj6GT2YYXdXww",
+      "delivery_tag": "[dry undead scholar, brittle wit, exhausted witness, precise and unsentimental]",
+      "direction": "Arveth is funny because despair failed to make him useless. Give him legal dryness, papery fatigue, and moments where the humanity suddenly hurts."
+    },
+    "vorrakai": {
+      "display_name": "Vorrakai / the cinder voice",
+      "voice_name": "George - Warm, Captivating Storyteller",
+      "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+      "delivery_tag": "[ancient dragon memory, vast, grief-heavy, intimate, almost merciful and therefore terrifying]",
+      "direction": "Vorrakai is not a roaring monster. The danger is tenderness without consent: a voice that makes stillness sound like mercy."
+    },
+    "mordane": {
+      "display_name": "Lord Cael Mordane / crown authority",
+      "voice_name": "Adam - Dominant, Firm",
+      "voice_id": "pNInz6obpgDQGcFmaJgB",
+      "delivery_tag": "[polished authority, cold certainty, power treating cruelty as arithmetic]",
+      "direction": "Mordane and crown officials should sound efficient, not cartoonish. Their horror is administrative confidence."
+    },
+    "sedge": {
+      "display_name": "Foreman Sedge / petty company authority",
+      "voice_name": "Adam - Dominant, Firm",
+      "voice_id": "pNInz6obpgDQGcFmaJgB",
+      "delivery_tag": "[impatient foreman, narrow authority, irritated by human cost]",
+      "direction": "Sedge is smaller than Mordane but made of the same ledger logic. Keep him pinched, practical, and ugly in ordinary ways."
+    },
+    "general_male": {
+      "display_name": "Shared male supporting roles",
+      "voice_name": "Roger - Laid-Back, Casual, Resonant",
+      "voice_id": "CwhRBWXzGAHq8TQ4Fs17",
+      "delivery_tag": "[grounded supporting voice, natural, scene-specific emotion]",
+      "direction": "Use for miners, soldiers, road witnesses, and one-scene men when a named lead voice is not needed."
+    },
+    "general_female": {
+      "display_name": "Shared female supporting roles",
+      "voice_name": "Bella - Professional, Bright, Warm",
+      "voice_id": "hpp4J3VqNfWAUOO0d1Us",
+      "delivery_tag": "[grounded supporting voice, warm but not polished beyond the scene]",
+      "direction": "Use for miners, witnesses, mothers, clerks, healers, and one-scene women when a named lead voice is not needed."
+    }
+  }
+}

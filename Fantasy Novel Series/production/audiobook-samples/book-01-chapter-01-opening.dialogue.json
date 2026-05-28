@@ -1,0 +1,50 @@
+{
+  "title": "Book 1 Chapter 1 Opening Ensemble Proof",
+  "book": "The Ash Beneath the Crown",
+  "chapter": "Chapter 1: The Girl in the Vent",
+  "source": "Fantasy Novel Series/output/book-01-the-ash-beneath-the-crown/chapters/chapter-001-the-girl-in-the-vent.md",
+  "model_id": "eleven_v3",
+  "output_format": "mp3_44100_128",
+  "segments": [
+    {
+      "role": "narrator",
+      "text": "The first rule of cinder work was never to answer anything you heard under the mountain.\n\nMara Venn had been told that before she was old enough to lace her own boots. Her mother had said it while rubbing lampblack out of Mara's hair with a rag soaked in vinegar. Her brother Joryn had said it the first time he took her downshaft and showed her where the stone sweated silver ash. Foremen said it without looking up from their ledgers. Priests said it after blessings, as if the warning were part of the prayer. Even the old runners, the ones with white burns webbed across their throats and coughs that sounded like gravel poured into a bucket, said it when the vents began to moan.\n\nNever answer. Never whistle back. Never speak your name where the stone can learn it."
+    },
+    {
+      "role": "narrator",
+      "text": "Mara had obeyed that rule for sixteen years, which was longer than most rules survived in Kell Ashgate. She obeyed it now with her cheek pressed to hot rock, her left shoulder wedged under a lip of black granite, and her right hand stretched into a crack barely wider than her wrist. Somewhere ahead, beyond the reach of her fingers, a valve chain clicked softly in the dark."
+    },
+    {
+      "role": "sedge",
+      "text": "You got it?"
+    },
+    {
+      "role": "narrator",
+      "text": "His voice came thin through thirty feet of vent, flattened by heat and distance. Behind him, Mara could hear the pay bell in the yard and the wet coughing of the next runner waiting his turn."
+    },
+    {
+      "role": "mara",
+      "text": "Almost."
+    },
+    {
+      "role": "narrator",
+      "text": "The vent breathed around her.\n\nThat was what the guild called it, anyway. Breathing. A miner's word for a miner's terror. Cinder vents opened when the buried hearts under Kell Ashgate warmed and closed when they cooled, though no one in the city agreed on whether those hearts were dragon, giant, god, or only stone with a furnace's temper. The crown scholars had their measurements. The chapel had its hymns. The miners had burns.\n\nMara trusted burns."
+    },
+    {
+      "role": "narrator",
+      "text": "Heat rolled over her in a slow pulse. The cloth over her mouth dampened at once. She counted through it because counting was better than thinking. Five heartbeats in. Three heartbeats holding. Seven heartbeats out. The rhythm had saved her more times than prayer. When the heat drew back, she shoved her shoulder hard against the rock, ignoring the scrape of skin, and caught the valve chain with the tips of two fingers."
+    },
+    {
+      "role": "narrator",
+      "text": "It slipped.\n\nShe bit down on a curse. Cursing wasted air. So did fear, but fear was quicker than she was.\n\nThe vent tightened behind her with a soft mineral groan."
+    },
+    {
+      "role": "sedge",
+      "text": "Mara?"
+    },
+    {
+      "role": "narrator",
+      "text": "She hated the way he said her name, already subtracting the cost of losing her from the value of the valve. A runner dead in the vent meant paperwork, a half-day delay, and maybe two pennies to the family if the company decided she had not been careless. The company loved that word. Careless. It could make a corpse guilty of anything."
+    }
+  ]
+}
