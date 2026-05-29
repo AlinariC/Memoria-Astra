@@ -49,8 +49,11 @@ HARDCOVER_FRONT_ART_INSET_IN = 0.0
 DEFAULT_HARDCOVER_FRONT_ART_SHIFT_LEFT_IN = 0.16
 PAPERBACK_BACK_SAFE_INSET_IN = 1.05
 HARDCOVER_BACK_SAFE_INSET_IN = 1.25
+HARDCOVER_BACK_OUTSIDE_SAFE_IN = 0.716
+HARDCOVER_BACK_SPINE_TEXT_CLEARANCE_IN = 0.4
 MIN_EXTRA_SAFE_INSET_IN = 0.10
 BACK_COPY_MAX_WIDTH_RATIO = 0.54
+BACK_TITLE_MAX_LINES = 3
 
 
 @dataclass(frozen=True)
@@ -1396,12 +1399,22 @@ def write_wrap_cover_pdf(
             )
         )
 
+    if binding_label == "paperback":
+        back_background_commands = [
+            f"q /GSBackArt gs {back_w:.2f} 0 0 {height_pt:.2f} 0 0 cm /Im1 Do Q",
+            "q /GSVeil gs 0.025 0.022 0.03 rg",
+            f"0 0 {back_w:.2f} {height_pt:.2f} re f Q",
+        ]
+    else:
+        back_background_commands = [
+            "0.014 0.013 0.018 rg",
+            f"0 0 {back_w:.2f} {height_pt:.2f} re f",
+        ]
+
     content = [
         "0.035 0.035 0.045 rg",
         f"0 0 {width_pt:.2f} {height_pt:.2f} re f",
-        f"q /GSBackArt gs {back_w:.2f} 0 0 {height_pt:.2f} 0 0 cm /Im1 Do Q",
-        "q /GSVeil gs 0.025 0.022 0.03 rg",
-        f"0 0 {back_w:.2f} {height_pt:.2f} re f Q",
+        *back_background_commands,
         "0.035 0.027 0.032 rg",
         f"{spine_x:.2f} 0 {spine_pt:.2f} {height_pt:.2f} re f",
         "0.018 0.016 0.020 rg",
@@ -1498,24 +1511,41 @@ def back_cover_text_commands(
     text_width = max(min(target_width, safe_width), min(120, safe_width))
     centered_left = area_x + (area_width - text_width) / 2
     left = min(max(centered_left, inner_left), inner_right - text_width)
-    wrap_width = max(34, min(58, int(text_width / 5.4)))
     author_y = bottom + 24
     body_bottom = author_y + 58
+    title_size, title_lines = fit_pdf_text_lines(
+        title.upper(),
+        text_width,
+        "F2",
+        18 if len(title) > 18 else 20,
+        12,
+        BACK_TITLE_MAX_LINES,
+    )
+    label_size = fit_pdf_text_size(
+        "F1", 9, 7, back_cover_label(metadata), text_width
+    )
+    subtitle_size = fit_pdf_text_size("F1", 10, 8, subtitle.upper(), text_width)
+    author_size = fit_pdf_text_size("F2", 15, 10, author.upper(), text_width)
+    rule_width = min(max(text_width * 0.78, 80), text_width)
+    author_rule_width = min(max(text_width * 0.60, 80), text_width)
+    body_box_left = max(inner_left, left - 14)
+    body_box_right = min(inner_right, left + text_width + 14)
 
     commands = [
         "q /GSSoft gs 0.70 0.47 0.18 rg",
-        f"{left:.2f} {top - 18:.2f} {max(text_width * 0.78, 80):.2f} 1.25 re f",
-        f"{left:.2f} {author_y - 18:.2f} {max(text_width * 0.60, 80):.2f} 1.25 re f Q",
+        f"{left:.2f} {top - 18:.2f} {rule_width:.2f} 1.25 re f",
+        f"{left:.2f} {author_y - 18:.2f} {author_rule_width:.2f} 1.25 re f Q",
         "0.965 0.84 0.52 rg",
     ]
     y = top - 42
-    commands.append(pdf_text("F1", 9, back_cover_label(metadata), left, y))
+    commands.append(pdf_text("F1", label_size, back_cover_label(metadata), left, y))
     y -= 27
-    title_size = 18 if len(title) > 18 else 20
-    commands.append(pdf_text("F2", title_size, title.upper(), left, y))
-    y -= 27
+    for title_line in title_lines:
+        commands.append(pdf_text("F2", title_size, title_line, left, y))
+        y -= title_size + 8
+    y -= 3
     if subtitle:
-        commands.append(pdf_text("F1", 10, subtitle.upper(), left, y))
+        commands.append(pdf_text("F1", subtitle_size, subtitle.upper(), left, y))
         y -= 42
     else:
         y -= 18
@@ -1523,13 +1553,15 @@ def back_cover_text_commands(
     commands.extend(
         [
             "q /GSSoft gs 0.03 0.025 0.033 rg",
-            f"{left - 14:.2f} {max(body_bottom - 12, y - 250):.2f} {text_width + 28:.2f} {max(y - body_bottom + 34, 80):.2f} re f Q",
+            f"{body_box_left:.2f} {max(body_bottom - 12, y - 250):.2f} "
+            f"{max(body_box_right - body_box_left, 1):.2f} "
+            f"{max(y - body_bottom + 34, 80):.2f} re f Q",
             "0.86 0.76 0.58 rg",
         ]
     )
     commands.append("0.88 0.79 0.62 rg")
     for paragraph in normalized_paragraphs(description):
-        for line in textwrap.wrap(paragraph.strip(), width=wrap_width):
+        for line in wrap_pdf_text(paragraph.strip(), text_width, 10, "F1"):
             if y < body_bottom:
                 break
             commands.append(pdf_text("F1", 10, line, left, y))
@@ -1537,8 +1569,72 @@ def back_cover_text_commands(
         y -= 8
 
     commands.append("0.965 0.86 0.62 rg")
-    commands.append(pdf_text("F2", 15, author.upper(), left, author_y))
+    commands.append(pdf_text("F2", author_size, author.upper(), left, author_y))
     return commands
+
+
+def fit_pdf_text_lines(
+    text: str,
+    max_width: float,
+    font: str,
+    preferred_size: int,
+    min_size: int,
+    max_lines: int,
+) -> tuple[int, list[str]]:
+    clean = pdf_safe_text(text)
+    for size in range(preferred_size, min_size - 1, -1):
+        lines = wrap_pdf_text(clean, max_width, size, font)
+        if lines and len(lines) <= max_lines:
+            return size, lines
+    return min_size, wrap_pdf_text(clean, max_width, min_size, font)[:max_lines]
+
+
+def fit_pdf_text_size(
+    font: str, preferred_size: int, min_size: int, text: str, max_width: float
+) -> int:
+    clean = pdf_safe_text(text)
+    for size in range(preferred_size, min_size - 1, -1):
+        if estimate_pdf_text_width(clean, size, font) <= max_width:
+            return size
+    return min_size
+
+
+def wrap_pdf_text(text: str, max_width: float, size: int, font: str) -> list[str]:
+    words = pdf_safe_text(text).split()
+    if not words:
+        return []
+
+    lines: list[str] = []
+    current = words[0]
+    for word in words[1:]:
+        candidate = f"{current} {word}"
+        if estimate_pdf_text_width(candidate, size, font) <= max_width:
+            current = candidate
+            continue
+        lines.append(current)
+        current = word
+    lines.append(current)
+    return lines
+
+
+def estimate_pdf_text_width(text: str, size: int, font: str) -> float:
+    width = 0.0
+    for char in text:
+        if char == " ":
+            width += 0.27
+        elif char in ".,:;!'|":
+            width += 0.22
+        elif char in "ijlI[]()":
+            width += 0.30
+        elif char in "MW":
+            width += 0.82
+        elif char in "ABCDEFGHKNOPQRSTUVXYZ":
+            width += 0.60
+        else:
+            width += 0.50
+    if font == "F2":
+        width *= 1.04
+    return width * size
 
 
 def back_cover_label(metadata: dict[str, object]) -> str:
@@ -1758,6 +1854,8 @@ def command_audit_print(args: argparse.Namespace) -> int:
                         f"back safe inset {back_safe_inset:.2f}in is too close to "
                         f"KDP margin {kdp_margin:.2f}in"
                     )
+                if binding == "hardcover":
+                    problems.extend(hardcover_back_text_safe_problems(cover, binding_specs))
 
             status = "ok" if not problems else "FAIL"
             if problems:
@@ -1770,7 +1868,11 @@ def command_audit_print(args: argparse.Namespace) -> int:
             safe_text = (
                 f"full-panel/{PAPERBACK_BACK_SAFE_INSET_IN:.2f}in"
                 if binding == "paperback"
-                else f"full-panel/{HARDCOVER_BACK_SAFE_INSET_IN:.2f}in"
+                else (
+                    f"full-panel/{HARDCOVER_BACK_SAFE_INSET_IN:.2f}in "
+                    f"kdp-back/{HARDCOVER_BACK_OUTSIDE_SAFE_IN:.3f}in "
+                    f"spine/{HARDCOVER_BACK_SPINE_TEXT_CLEARANCE_IN:.2f}in"
+                )
             )
             print(
                 f"{status:4} {package_dir.name:32} {binding:9} "
@@ -1785,6 +1887,69 @@ def command_audit_print(args: argparse.Namespace) -> int:
 def first_matching(directory: Path, pattern: str) -> Path | None:
     matches = sorted(directory.glob(pattern))
     return matches[0] if matches else None
+
+
+def hardcover_back_text_safe_problems(
+    cover: Path, binding_specs: dict[str, object]
+) -> list[str]:
+    words = pdf_text_words(cover)
+    if not words:
+        return []
+
+    page_width_pt = float(binding_specs.get("full_cover_width") or 0) * 72
+    page_height_pt = float(binding_specs.get("full_cover_height") or 0) * 72
+    spine_width_pt = float(binding_specs.get("spine_width") or 0) * 72
+    if page_width_pt <= 0 or page_height_pt <= 0 or spine_width_pt <= 0:
+        return []
+
+    spine_x = (page_width_pt - spine_width_pt) / 2
+    outside_safe_pt = HARDCOVER_BACK_OUTSIDE_SAFE_IN * 72
+    spine_safe_x = spine_x - (HARDCOVER_BACK_SPINE_TEXT_CLEARANCE_IN * 72)
+    problems: list[str] = []
+
+    for text, x_min, y_min, x_max, y_max in words:
+        if x_min >= spine_x:
+            continue
+        if (
+            x_min < outside_safe_pt
+            or x_max > spine_safe_x
+            or y_min < outside_safe_pt
+            or y_max > page_height_pt - outside_safe_pt
+        ):
+            problems.append(
+                f"hardcover back text '{text[:30]}' bbox "
+                f"{x_min / 72:.3f},{y_min / 72:.3f}-"
+                f"{x_max / 72:.3f},{y_max / 72:.3f}in outside KDP safe box "
+                f"{HARDCOVER_BACK_OUTSIDE_SAFE_IN:.3f}in from edges and "
+                f"{HARDCOVER_BACK_SPINE_TEXT_CLEARANCE_IN:.2f}in from spine"
+            )
+            if len(problems) == 3:
+                break
+
+    return problems
+
+
+def pdf_text_words(pdf: Path) -> list[tuple[str, float, float, float, float]]:
+    if not shutil.which("pdftotext"):
+        return []
+    result = subprocess.run(
+        ["pdftotext", "-bbox", str(pdf), "-"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        return []
+
+    words: list[tuple[str, float, float, float, float]] = []
+    pattern = re.compile(
+        r'<word xMin="([0-9.]+)" yMin="([0-9.]+)" '
+        r'xMax="([0-9.]+)" yMax="([0-9.]+)">(.+?)</word>'
+    )
+    for match in pattern.finditer(result.stdout):
+        x_min, y_min, x_max, y_max = (float(value) for value in match.groups()[:4])
+        words.append((html.unescape(match.group(5)), x_min, y_min, x_max, y_max))
+    return words
 
 
 def media_box_inches(pdf: Path) -> tuple[float, float] | None:
